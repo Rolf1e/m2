@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CaclTigran</string>
+    <string name="copyright_message">Copyright Tigran 2020-2021</string>
+
+    <string name="default_message_enter_input_box">enter une valeur</string>
+    <string name="result_box_message">Résultat</string>
+
+    <!--    Buttons fields-->
+    <string name="raz">Raz</string>
+    <string name="equal">=</string>
+    <string name="quit">Quitter</string>
+
+    <string name="addition_field">Ajouter</string>
+    <string name="subtraction_field">Soustraire</string>
+    <string name="multiplication_field">Multiplier</string>
+    <string name="division_field">Diviser</string>
+</resources>
