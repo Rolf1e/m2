@@ -1,0 +1,2 @@
+rootProject.name = "CalcTigran"
+include ':app'
