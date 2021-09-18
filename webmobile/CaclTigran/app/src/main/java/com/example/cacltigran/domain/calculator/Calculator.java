@@ -1,6 +1,6 @@
-package com.example.cacltigran.domain.calulator;
+package com.example.cacltigran.domain.calculator;
 
-public enum Calculator {
+enum Calculator {
     ADDITION {
         @Override
         public Number compute(int a, int b) {
