@@ -1,8 +1,8 @@
 package com.example.cacltigran.domain.calculator;
 
-import com.example.cacltigran.domain.service.Calculator;
-import com.example.cacltigran.domain.service.CalculatorService;
-import com.example.cacltigran.domain.service.CalculatorServiceImpl;
+import com.example.cacltigran.domain.calulator.Calculator;
+import com.example.cacltigran.domain.calulator.CalculatorService;
+import com.example.cacltigran.domain.calulator.CalculatorServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

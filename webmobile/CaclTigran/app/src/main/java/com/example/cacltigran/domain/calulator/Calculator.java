@@ -1,4 +1,4 @@
-package com.example.cacltigran.domain.service;
+package com.example.cacltigran.domain.calulator;
 
 public enum Calculator {
     ADDITION {
@@ -27,4 +27,20 @@ public enum Calculator {
     };
 
     abstract Number compute(final int a, final int b);
+
+    public static Calculator from(final String operation) {
+        switch (operation) {
+            case "Ajouter":
+                return ADDITION;
+            case "Soustraire":
+                return SUBTRACTION;
+            case "Multiplier":
+                return MULTIPLICATION;
+            case "Diviser":
+                return DIVISION;
+            default:
+                throw new IllegalStateException("Illegal operation name: " + operation);
+        }
+
+    }
 }

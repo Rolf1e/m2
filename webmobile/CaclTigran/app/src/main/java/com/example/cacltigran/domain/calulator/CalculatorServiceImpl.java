@@ -1,4 +1,4 @@
-package com.example.cacltigran.domain.service;
+package com.example.cacltigran.domain.calulator;
 
 public class CalculatorServiceImpl implements CalculatorService {
 
@@ -7,7 +7,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     @Override
-    public Number compute(int a, int b, Calculator operation) {
+    public Number compute(final int a, final int b, final Calculator operation) {
         return operation.compute(a, b);
     }
 }

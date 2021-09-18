@@ -1,4 +1,4 @@
-package com.example.cacltigran.domain.service;
+package com.example.cacltigran.domain.calulator;
 
 public interface CalculatorService {
 
