@@ -74,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/raz"
+                android:onClick="raz"
         />
         <Button
                 android:id="@+id/equal"
@@ -87,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/quit"
+                android:onClick="quit"
         />
     </LinearLayout>
     <TextView
