@@ -14,8 +14,12 @@ public class VehicleFactory {
         return new VehicleFactory();
     }
 
-    public Vehicle create(final String plate, final String brand, final Color color) {
+    public Vehicle newVehicle(final String plate, final String brand, final Color color) {
         return new Vehicle(plate, VehicleProperties.create(brand, color));
+    }
+
+    public Vehicle newVehicleFromProperties(final String plate, final VehicleProperties properties) {
+        return new Vehicle(plate, properties);
     }
 
 }

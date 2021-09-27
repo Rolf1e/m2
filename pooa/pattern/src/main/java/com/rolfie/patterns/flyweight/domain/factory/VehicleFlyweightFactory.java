@@ -18,28 +18,36 @@ import java.util.Optional;
 public class VehicleFlyweightFactory {
 
     private final List<VehicleProperties> existingProperties;
+    private final VehicleFactory factory;
 
     public static VehicleFlyweightFactory create() {
-        return new VehicleFlyweightFactory(new ArrayList<>());
+        return new VehicleFlyweightFactory(new ArrayList<>(), VehicleFactory.create());
     }
 
-    public Vehicle create(final String plate,
-                          final String brand,
-                          final Color color) {
+    public Vehicle newVehicle(final String plate,
+                              final String brand,
+                              final Color color) {
         final var props = findProperties(brand, color);
         if (props.isPresent()) {
-            return new Vehicle(plate, props.get());
+            return factory.newVehicleFromProperties(plate, props.get());
         }
-        final var properties = VehicleProperties.create(brand, color);
-        existingProperties.add(properties);
-        return new Vehicle(plate, properties);
+
+        final var vehicle = factory.newVehicle(plate, brand, color);
+        existingProperties.add(vehicle.properties());
+        return vehicle;
     }
 
     private Optional<VehicleProperties> findProperties(final String brand,
                                                        final Color color) {
         return existingProperties.stream()
-                .filter(property -> brand.equals(property.getBrand()) && color.equals(property.getColor()))
+                .filter(property -> isSameProperties(property, brand, color))
                 .findFirst();
+    }
+
+    private boolean isSameProperties(final VehicleProperties properties,
+                                     final String brand,
+                                     final Color color) {
+        return brand.equals(properties.getBrand()) && color.equals(properties.getColor());
     }
 
 

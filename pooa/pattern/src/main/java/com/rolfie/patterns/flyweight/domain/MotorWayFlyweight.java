@@ -29,7 +29,7 @@ public class MotorWayFlyweight {
                                  final Color color,
                                  final Coordinate coordinate) {
 
-        final var vehicle = factory.create(plate, brand, color);
+        final var vehicle = factory.newVehicle(plate, brand, color);
         vehicles.add(new MotorWayCell(vehicle, coordinate));
         return vehicle;
     }
