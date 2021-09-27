@@ -1,10 +1,10 @@
 package com.rolfie.patterns.flyweight.domain;
 
 import com.rolfie.patterns.flyweight.domain.dto.Vehicle;
-import com.rolfie.patterns.flyweight.domain.factory.VehicleFactory;
+import com.rolfie.patterns.flyweight.domain.factory.VehicleFlyweightFactory;
+import com.rolfie.patterns.flyweight.drawing.infra.CanvasDrawer;
 import com.rolfie.patterns.flyweight.drawing.dto.Color;
 import com.rolfie.patterns.flyweight.drawing.dto.Coordinate;
-import com.rolfie.patterns.flyweight.drawing.infra.CanvasDrawer;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class MotorWay {
+public class MotorWayFlyweight {
 
     private final List<MotorWayCell> vehicles;
     private final CanvasDrawer drawer;
-    private final VehicleFactory factory;
+    private final VehicleFlyweightFactory factory;
 
-    public static MotorWay create(final int weight,
-                                  final int heigth) {
+    public static MotorWayFlyweight create(final int weight,
+                                           final int heigth) {
 
-        return new MotorWay(new ArrayList<>(), CanvasDrawer.create(weight, heigth), VehicleFactory.create());
+        return new MotorWayFlyweight(new ArrayList<>(), CanvasDrawer.create(weight, heigth), VehicleFlyweightFactory.create());
     }
 
     public Vehicle insertVehicle(final String plate,
