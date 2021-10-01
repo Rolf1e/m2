@@ -1,0 +1,2 @@
+rootProject.name = "MasquesTigran"
+include ':app'
