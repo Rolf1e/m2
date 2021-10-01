@@ -27,10 +27,10 @@ public class NetflixServlet extends HttpServlet {
         this.netflixService = NetflixService.create(MockedSeasonDAO.create(), MockedSerieDAO.create());
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final List<SerieDTO> serieDTOS = netflixService.fetchSeries();
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+        final List<SerieDTO> series = netflixService.fetchSeries();
 
         response.setContentType(APPLICATION_JSON);
-        response.getWriter().append(new Gson().toJson(serieDTOS));
+        response.getWriter().append(new Gson().toJson(series));
     }
 }

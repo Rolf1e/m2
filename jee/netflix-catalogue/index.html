@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    fetch("http://localhost:8080/netflix_catalogue_war_exploded/series")
+        .then(response => {
+            let series = response.json()
+                .then(json => JSON.parse(json));
+
+            series.forEach(serie => {
+                console.log(serie);
+            })
+
+        });
+
+</script>
+
+</body>
+</html>

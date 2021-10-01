@@ -1,5 +1,9 @@
 package com.rolfie.netflixcatalogue.database.dao.season;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class MockedSeasonDAO implements SeasonDAO {
 
     public static SeasonDAO create() {

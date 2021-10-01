@@ -1,10 +1,13 @@
 package com.rolfie.netflixcatalogue.database.dao.serie;
 
 import com.rolfie.netflixcatalogue.database.entity.SerieDO;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import org.jboss.weld.util.collections.ImmutableList;
 
 import java.util.List;
 
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class MockedSerieDAO implements SerieDAO {
 
     public static SerieDAO create() {
