@@ -9,5 +9,6 @@ public class Constants {
     // Address
     public static final String STREET_NAME = "street_name";
     public static final String STREET_NUMBER = "street_number";
+    public static final String POSTAL_CODE = "postal_code";
     public static final String CITY = "city";
 }

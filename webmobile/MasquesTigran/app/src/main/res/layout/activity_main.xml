@@ -6,75 +6,80 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-    <TextView
-            android:text="Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/nameView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/updateIdentityButton"
-            tools:layout_editor_absoluteY="19dp"/>
-    <TextView
-            android:text="Firstname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/firstNameView"
-            app:layout_constraintStart_toStartOf="@+id/nameView"
-            app:layout_constraintTop_toBottomOf="@+id/nameView" android:layout_marginTop="10dp"/>
-    <TextView
-            android:text="Phone number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/phoneView"
-            app:layout_constraintStart_toStartOf="@+id/firstNameView"
-            app:layout_constraintTop_toBottomOf="@+id/firstNameView" android:layout_marginTop="10dp"/>
-    <Button
-            android:text="update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/updateIdentityButton"
-            tools:layout_editor_absoluteY="60dp"
-            app:layout_constraintStart_toEndOf="@+id/firstNameView" android:layout_marginStart="30dp"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="updateIdentity"/>
-    <TextView
-            android:text="Number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/streetNumberView"
-            app:layout_constraintStart_toStartOf="@+id/streetNameView"
-            app:layout_constraintTop_toBottomOf="@+id/updateIdentityButton" android:layout_marginTop="50dp"/>
-    <androidx.constraintlayout.widget.Group android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                            android:id="@+id/identityGroup"
-                                            app:constraint_referenced_ids="nameView,phoneView,firstNameView,updateIdentityButton"
-                                            app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintHorizontal_bias="0.5"
-                                            app:layout_constraintEnd_toEndOf="parent"/>
-    <TextView
-            android:text="Street name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/streetNameView"
-            app:layout_constraintStart_toStartOf="@+id/postalCodeView"
-            app:layout_constraintTop_toBottomOf="@+id/streetNumberView" android:layout_marginTop="10dp"/>
-    <TextView
-            android:text="Postal code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/postalCodeView"
-            app:layout_constraintStart_toStartOf="@+id/cityView"
-            app:layout_constraintTop_toBottomOf="@+id/streetNameView" android:layout_marginTop="10dp"/>
-    <TextView
-            android:text="City"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/cityView"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintEnd_toStartOf="@+id/updateAdresseButton"
-            app:layout_constraintTop_toBottomOf="@+id/postalCodeView" android:layout_marginTop="10dp"/>
-    <androidx.constraintlayout.widget.Group android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                            android:id="@+id/addressGroup"
-                                            app:constraint_referenced_ids="streetNameView,streetNumberView,postalCodeView,cityView"
-                                            app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintHorizontal_bias="0.5"
-                                            app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
-            android:text="Update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/updateAdresseButton"
-            app:layout_constraintStart_toEndOf="@+id/streetNameView"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/updateIdentityButton" android:layout_marginTop="200dp"/>
+
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/linearLayout2"
+                  android:orientation="vertical" app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/linearLayout">
+        <TextView
+                android:text="Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/nameView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/updateIdentityButton"
+                tools:layout_editor_absoluteY="19dp"/>
+        <TextView
+                android:text="Firstname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/firstNameView"
+                app:layout_constraintStart_toStartOf="@+id/nameView"
+                app:layout_constraintTop_toBottomOf="@+id/nameView" android:layout_marginTop="10dp"/>
+        <TextView
+                android:text="Phone number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/phoneView"
+                app:layout_constraintStart_toStartOf="@+id/firstNameView"
+                app:layout_constraintTop_toBottomOf="@+id/firstNameView" android:layout_marginTop="10dp"/>
+        <Button
+                android:text="update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/updateIdentityButton"
+                tools:layout_editor_absoluteY="60dp"
+                app:layout_constraintStart_toEndOf="@+id/firstNameView" android:layout_marginStart="30dp"
+                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="updateIdentity"/>
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/linearLayout"
+                  android:orientation="vertical"
+                  app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+                  app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        <TextView
+                android:text="Number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/streetNumberView"
+                app:layout_constraintStart_toStartOf="@+id/streetNameView"
+                app:layout_constraintTop_toBottomOf="@+id/updateIdentityButton" android:layout_marginTop="50dp"/>
+        <TextView
+                android:text="Street name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/streetNameView"
+                app:layout_constraintStart_toStartOf="@+id/postalCodeView"
+                app:layout_constraintTop_toBottomOf="@+id/streetNumberView" android:layout_marginTop="10dp"/>
+        <TextView
+                android:text="Postal code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/postalCodeView"
+                app:layout_constraintStart_toStartOf="@+id/cityView"
+                app:layout_constraintTop_toBottomOf="@+id/streetNameView" android:layout_marginTop="10dp"/>
+        <TextView
+                android:text="City"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/cityView"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintEnd_toStartOf="@+id/mainUpdateAddressButton"
+                app:layout_constraintTop_toBottomOf="@+id/postalCodeView" android:layout_marginTop="10dp"/>
+        <Button
+                android:text="Update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/mainUpdateAddressButton"
+                app:layout_constraintStart_toEndOf="@+id/streetNameView"
+                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/updateIdentityButton" android:layout_marginTop="200dp"
+                android:onClick="updateAddress"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

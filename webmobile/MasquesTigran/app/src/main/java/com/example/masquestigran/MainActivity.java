@@ -31,6 +31,17 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, UPDATE_IDENTITY);
     }
 
+    public void updateAddress(final View view) {
+        final Intent intent = new Intent(this, UpdateAddressActivity.class);
+
+        intent.putExtra(Constants.STREET_NAME, ActivityUtil.getContent(findViewById(R.id.streetNumberView)));
+        intent.putExtra(Constants.STREET_NUMBER, ActivityUtil.getContent(findViewById(R.id.streetNameView)));
+        intent.putExtra(Constants.POSTAL_CODE, ActivityUtil.getContent(findViewById(R.id.postalCodeView)));
+        intent.putExtra(Constants.CITY, ActivityUtil.getContent(findViewById(R.id.cityView)));
+
+        startActivityForResult(intent, UPDATE_ADDRESS);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -38,8 +49,18 @@ public class MainActivity extends AppCompatActivity {
             case UPDATE_IDENTITY:
                 updateIdentity(Objects.requireNonNull(data));
                 break;
+            case UPDATE_ADDRESS:
+                updateAddress(Objects.requireNonNull(data));
+                break;
             default: // nothing
         }
+    }
+
+    private void updateAddress(final Intent data) {
+        ActivityUtil.setContent(findViewById(R.id.streetNameView), data.getStringExtra(Constants.STREET_NAME));
+        ActivityUtil.setContent(findViewById(R.id.streetNumberView), data.getStringExtra(Constants.STREET_NUMBER));
+        ActivityUtil.setContent(findViewById(R.id.postalCodeView), data.getStringExtra(Constants.POSTAL_CODE));
+        ActivityUtil.setContent(findViewById(R.id.cityView), data.getStringExtra(Constants.CITY));
     }
 
     private void updateIdentity(final Intent data) {

@@ -9,6 +9,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.MasquesTigran">
+        <activity android:name=".UpdateAddressActivity">
+        </activity>
         <activity android:name=".UpdateIdentityActivity">
         </activity>
         <activity android:name=".MainActivity">

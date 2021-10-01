@@ -1,9 +1,9 @@
 package com.example.masquestigran;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.example.masquestigran.infra.ActivityUtil;
 import com.example.masquestigran.infra.Constants;
 
@@ -18,7 +18,6 @@ public class UpdateIdentityActivity extends AppCompatActivity {
         ActivityUtil.setContent(findViewById(R.id.editTextName), intent.getStringExtra(Constants.NAME));
         ActivityUtil.setContent(findViewById(R.id.editTextFirstName), intent.getStringExtra(Constants.FIRST_NAME));
         ActivityUtil.setContent(findViewById(R.id.editTextPhone), intent.getStringExtra(Constants.PHONE));
-
     }
 
     public void validateIdentity(final View view) {
