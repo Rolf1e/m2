@@ -30,4 +30,9 @@ public class UpdateIdentityActivity extends AppCompatActivity {
         setResult(RESULT_OK, data);
         finish();
     }
+
+    public void cancel(final View view) {
+        setResult(RESULT_CANCELED, getIntent());
+        finish();
+    }
 }

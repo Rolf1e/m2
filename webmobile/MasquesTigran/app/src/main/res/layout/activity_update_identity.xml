@@ -44,4 +44,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextPhone" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+            android:text="cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button" tools:layout_editor_absoluteY="576dp"
+            tools:layout_editor_absoluteX="274dp" android:onClick="cancel"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
