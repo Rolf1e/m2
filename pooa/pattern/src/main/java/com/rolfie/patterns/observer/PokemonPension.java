@@ -4,6 +4,7 @@ import com.rolfie.patterns.observer.domain.dto.Pokemon;
 import com.rolfie.patterns.observer.domain.dto.trainer.PokemonTrainer;
 import com.rolfie.patterns.observer.infra.JavaScheduler;
 import com.rolfie.patterns.observer.infra.Scheduler;
+import com.rolfie.patterns.observer.infra.job.PokemonScheduleJob;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -30,8 +31,8 @@ public class PokemonPension {
         suscribe(trainer);
     }
 
-    private Pokemon suscribe(final PokemonTrainer trainer) {
-        return scheduler.register();
+    private void suscribe(final PokemonTrainer trainer) {
+        scheduler.register(PokemonScheduleJob.create());
     }
 
     private static <E> List<E> addOneTo(final List<E> elements,
