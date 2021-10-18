@@ -1,5 +1,6 @@
 package drawing.pane;
 
+import drawing.handler.bar.Observer;
 import drawing.handler.mouse.MouseMoveHandler;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -16,15 +17,15 @@ import java.util.List;
 public class DrawingPane extends Pane implements Iterable<Shape> {
 
     private MouseMoveHandler mouseMoveHandler;
-
-    private List<Shape> shapes;
+    private final List<Shape> shapes;
+    private final List<Observer> observers;
 
     public DrawingPane() {
         clipChildren();
         shapes = new ArrayList<>();
         mouseMoveHandler = new MouseMoveHandler(this);
+        observers = new ArrayList<>();
     }
-
 
     /**
      * Clips the children of this {@link Region} to its current size.
@@ -41,14 +42,24 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
         });
     }
 
+    public void addObserver(final Observer observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(final Observer observer) {
+        observers.remove(observer);
+    }
+
     public void addShape(Shape shape) {
         shapes.add(shape);
         this.getChildren().add(shape);
+        observers.forEach(observer -> observer.update(shapes));
     }
 
     public void removeShape(Shape shape) {
         shapes.remove(shape);
         this.getChildren().remove(shape);
+        observers.forEach(observer -> observer.update(shapes));
     }
 
     public void clear() {
@@ -60,4 +71,5 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
     public Iterator<Shape> iterator() {
         return shapes.iterator();
     }
+
 }

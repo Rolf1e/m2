@@ -1,5 +1,6 @@
 package drawing;
 
+import drawing.handler.bar.StatusBar;
 import drawing.handler.button.ClearButtonHandler;
 import drawing.handler.button.EllipseButtonHandler;
 import drawing.handler.button.RectangleButtonHandler;
@@ -61,6 +62,12 @@ public class PaintApplication extends Application {
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");
         root.setTop(hBox);
+
+        final StatusBar statusBar = StatusBar.createEmpty();
+        statusBar.getStyleClass().add("status_bar");
+        root.setBottom(statusBar);
+        drawingPane.addObserver(statusBar);
+
 
         primaryStage.setTitle("Drawing");
         primaryStage.setScene(scene);

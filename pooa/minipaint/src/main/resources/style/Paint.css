@@ -4,6 +4,11 @@
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-color: darkgrey;
 }
+.status_bar{
+    -fx-border-style: solid;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: darkgrey;
+}
 
 .drawingPane {
     -fx-background-color: white;
