@@ -23,7 +23,12 @@ public class StatusBar extends HBox implements Observer {
 
     @Override
     public void update(final List<Shape> shapes) {
+        System.out.println(shapes);
         label.setText(shapes.size() + FORME_S);
+    }
+
+    public String getText() {
+        return label.getText();
     }
 }
 

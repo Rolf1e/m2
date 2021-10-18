@@ -1,8 +1,11 @@
 import drawing.PaintApplication;
+import drawing.handler.bar.Observer;
+import drawing.handler.bar.StatusBar;
 import drawing.handler.dto.Triangle;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -94,6 +97,27 @@ public class PaintTest extends ApplicationTest {
 
         // then:
         assertFalse(app.getDrawingPane().iterator().hasNext());
+    }
+
+    @Test
+    public void should_update_status_bar() {
+
+        should_draw_rectangle();
+        assertTextInStatusBar("1 forme(s)");
+
+        should_clear();
+        assertTextInStatusBar("0 forme(s)");
+
+    }
+
+    private void assertTextInStatusBar(String s) {
+        for (Iterator<Observer> it = app.getDrawingPane().getObservers(); it.hasNext(); ) {
+            final Observer observer = it.next();
+            if (observer instanceof StatusBar) {
+                final StatusBar statusBar = (StatusBar) observer;
+                Assert.assertEquals(s, statusBar.getText());
+            }
+        }
     }
 
 }
