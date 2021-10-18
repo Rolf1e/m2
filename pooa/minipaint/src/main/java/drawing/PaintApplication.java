@@ -3,6 +3,7 @@ package drawing;
 import drawing.handler.button.ClearButtonHandler;
 import drawing.handler.button.EllipseButtonHandler;
 import drawing.handler.button.RectangleButtonHandler;
+import drawing.handler.button.TriangleButtonHandler;
 import drawing.pane.DrawingPane;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ public class PaintApplication extends Application {
     private Button clearButton;
     private Button rectangleButton;
     private Button circleButton;
+    private Button triangleButton;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -47,9 +49,14 @@ public class PaintApplication extends Application {
 
         rectangleButton = new Button("Rectangle");
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
+
         circleButton = new Button("Circle");
         circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
-        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton);
+
+        triangleButton = new Button("Triangle");
+        triangleButton.addEventFilter(ActionEvent.ACTION, TriangleButtonHandler.create(drawingPane));
+
+        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton);
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");
@@ -59,6 +66,7 @@ public class PaintApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     public DrawingPane getDrawingPane() {
         return drawingPane;

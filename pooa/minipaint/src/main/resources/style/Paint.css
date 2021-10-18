@@ -20,3 +20,9 @@
     -fx-stroke: orange;
     -fx-stroke-width: 3;
 }
+
+.triangle {
+    -fx-fill: blue;
+    -fx-stroke: orange;
+    -fx-stroke-width: 3;
+}

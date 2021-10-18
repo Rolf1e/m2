@@ -7,26 +7,27 @@ import javafx.scene.shape.Shape;
 
 public class TriangleButtonHandler extends ShapeButtonHandler {
 
-    public TriangleButtonHandler(DrawingPane drawingPane) {
+    public static TriangleButtonHandler create(final DrawingPane drawingPane) {
+        return new TriangleButtonHandler(drawingPane);
+    }
+
+    private TriangleButtonHandler(final DrawingPane drawingPane) {
         super(drawingPane);
     }
 
     @Override
     protected Shape createShape() {
-
-        final var triangle = Triangle.create(
-                Point.at(originX, originY),
-                Point.at(destinationX, destinationY),
-                Point.at()
-
-        );
+        final Point a = Point.at(originX, originY);
+        final Point b = Point.at(destinationX, destinationY);
+        final var triangle = Triangle.create(a, b, resolveLastPoint(a, b));
 
         triangle.getStyleClass().add("triangle");
         return triangle;
     }
 
-    private Point resolveLastPoint(final Point a,
-                                   final Point b) {
-
+    private Point resolveLastPoint(final Point a, final Point b) {
+        return Point.at(a.getX() - b.getX() / 2, a.getY() - b.getY() / 2);
     }
+
+
 }
