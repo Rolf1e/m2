@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 public class MouseMoveHandler implements EventHandler<MouseEvent> {
 
     private final DrawingPane drawingPane;
-
     private double orgSceneX;
     private double orgSceneY;
 
@@ -25,36 +24,44 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
     public void handle(MouseEvent event) {
 
         if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
-            orgSceneX = event.getSceneX();
-            orgSceneY = event.getSceneY();
-
-            for (final var shape : drawingPane) {
-                if (shape.isOn(event.getX(), event.getY())) {
-                    shape.setSelected(true);
-                    break;
-                }
-            }
+            updateStateWhenMousePressed(event);
         }
 
         if (MouseEvent.MOUSE_DRAGGED.equals(event.getEventType())) {
-            for (final var shape : drawingPane) {
-                if (shape.isSelected()) {
-                    shape.setSelected(true);
-                    double offsetX = event.getSceneX() - orgSceneX;
-                    double offsetY = event.getSceneY() - orgSceneY;
-                    shape.offset(offsetX, offsetY);
-                    orgSceneX = event.getSceneX();
-                    orgSceneY = event.getSceneY();
-                }
-            }
+            translateWhenMouseDragged(event);
         }
 
         if (MouseEvent.MOUSE_RELEASED.equals(event.getEventType())) {
-            translateFigure(event);
+            translateWhenMouseReleased(event);
         }
     }
 
-    private void translateFigure(MouseEvent event) {
+    private void updateStateWhenMousePressed(MouseEvent event) {
+        orgSceneX = event.getSceneX();
+        orgSceneY = event.getSceneY();
+
+        for (final var shape : drawingPane) {
+            if (shape.isOn(event.getX(), event.getY())) {
+                shape.setSelected(true);
+                break;
+            }
+        }
+    }
+
+    private void translateWhenMouseDragged(final MouseEvent event) {
+        for (final var shape : drawingPane) {
+            if (shape.isSelected()) {
+                shape.setSelected(true);
+                double offsetX = event.getSceneX() - orgSceneX;
+                double offsetY = event.getSceneY() - orgSceneY;
+                shape.offset(offsetX, offsetY);
+                orgSceneX = event.getSceneX();
+                orgSceneY = event.getSceneY();
+            }
+        }
+    }
+
+    private void translateWhenMouseReleased(final MouseEvent event) {
         for (final var shape : drawingPane) {
             if (shape.isSelected()) {
                 shape.setSelected(false);
