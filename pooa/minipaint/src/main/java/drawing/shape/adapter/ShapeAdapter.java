@@ -26,6 +26,14 @@ public class ShapeAdapter implements IShape {
     @Override
     public void setSelected(final boolean selected) {
         this.selected = selected;
+        if (selected) {
+            shape.getStyleClass()
+                    .add(".selected");
+            return;
+        }
+
+        shape.getStyleClass()
+                .remove(".selected");
     }
 
     @Override

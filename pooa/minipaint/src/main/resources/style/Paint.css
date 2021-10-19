@@ -4,7 +4,8 @@
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-color: darkgrey;
 }
-.status_bar{
+
+.status_bar {
     -fx-border-style: solid;
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-color: darkgrey;
@@ -30,4 +31,8 @@
     -fx-fill: blue;
     -fx-stroke: orange;
     -fx-stroke-width: 3;
+}
+
+.selected {
+    -fx-effect: dropshadow(gaussian, cornflowerblue, 8, 0.7, 0, 0);
 }

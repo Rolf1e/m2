@@ -1,6 +1,7 @@
 package drawing.handler.mouse;
 
 import drawing.pane.DrawingPane;
+import drawing.shape.IShape;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -21,8 +22,7 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
     }
 
     @Override
-    public void handle(MouseEvent event) {
-
+    public void handle(final MouseEvent event) {
         if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
             updateStateWhenMousePressed(event);
         }
@@ -36,9 +36,8 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
         }
     }
 
-    private void updateStateWhenMousePressed(MouseEvent event) {
-        orgSceneX = event.getSceneX();
-        orgSceneY = event.getSceneY();
+    private void updateStateWhenMousePressed(final MouseEvent event) {
+        updateOrgSceneCoordinate(event);
 
         for (final var shape : drawingPane) {
             if (shape.isOn(event.getX(), event.getY())) {
@@ -51,12 +50,8 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
     private void translateWhenMouseDragged(final MouseEvent event) {
         for (final var shape : drawingPane) {
             if (shape.isSelected()) {
-                shape.setSelected(true);
-                double offsetX = event.getSceneX() - orgSceneX;
-                double offsetY = event.getSceneY() - orgSceneY;
-                shape.offset(offsetX, offsetY);
-                orgSceneX = event.getSceneX();
-                orgSceneY = event.getSceneY();
+                updateOffSet(event, shape);
+                updateOrgSceneCoordinate(event);
             }
         }
     }
@@ -65,10 +60,21 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
         for (final var shape : drawingPane) {
             if (shape.isSelected()) {
                 shape.setSelected(false);
-                double offsetX = event.getSceneX() - orgSceneX;
-                double offsetY = event.getSceneY() - orgSceneY;
-                shape.offset(offsetX, offsetY);
+                updateOffSet(event, shape);
             }
         }
+    }
+
+    private void updateOrgSceneCoordinate(final MouseEvent event) {
+        orgSceneX = event.getSceneX();
+        orgSceneY = event.getSceneY();
+    }
+
+    private void updateOffSet(final MouseEvent event,
+                              final IShape shape) {
+
+        final var offsetX = event.getSceneX() - orgSceneX;
+        final var offsetY = event.getSceneY() - orgSceneY;
+        shape.offset(offsetX, offsetY);
     }
 }
