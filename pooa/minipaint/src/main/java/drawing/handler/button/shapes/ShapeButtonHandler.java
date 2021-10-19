@@ -1,48 +1,47 @@
-package drawing.handler.button;
+package drawing.handler.button.shapes;
 
 import drawing.pane.DrawingPane;
+import drawing.shape.IShape;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Shape;
 
 /**
  * Created by lewandowski on 20/12/2020.
  */
 public abstract class ShapeButtonHandler implements EventHandler<Event> {
 
-    private DrawingPane drawingPane;
     protected double originX;
     protected double originY;
     protected double destinationX;
     protected double destinationY;
 
-    protected Shape shape;
+    private final DrawingPane drawingPane;
 
-    public ShapeButtonHandler(DrawingPane drawingPane) {
+    public ShapeButtonHandler(final DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
     }
 
     @Override
-    public void handle(Event event) {
+    public void handle(final Event event) {
 
         if (event instanceof ActionEvent) {
             drawingPane.addEventHandler(MouseEvent.MOUSE_PRESSED, this);
         }
 
         if (event instanceof MouseEvent) {
-            if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
+            if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
                 drawingPane.addEventHandler(MouseEvent.MOUSE_RELEASED, this);
                 originX = ((MouseEvent) event).getX();
                 originY = ((MouseEvent) event).getY();
             }
 
-            if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
+            if (MouseEvent.MOUSE_RELEASED.equals(event.getEventType())) {
                 destinationX = ((MouseEvent) event).getX();
                 destinationY = ((MouseEvent) event).getY();
-                shape = createShape();
-                drawingPane.addShape(shape);
+
+                drawingPane.addShape(createShape());
 
                 drawingPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, this);
                 drawingPane.removeEventHandler(MouseEvent.MOUSE_RELEASED, this);
@@ -50,6 +49,6 @@ public abstract class ShapeButtonHandler implements EventHandler<Event> {
         }
     }
 
-    protected abstract Shape createShape();
+    protected abstract IShape createShape();
 
 }

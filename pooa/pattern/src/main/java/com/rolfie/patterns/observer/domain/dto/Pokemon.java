@@ -1,11 +1,13 @@
 package com.rolfie.patterns.observer.domain.dto;
 
 import com.rolfie.patterns.observer.domain.exception.LevelMaxException;
+import lombok.Getter;
 
+@Getter
 public class Pokemon {
 
     private final String name;
-    private final String surname;
+    private final String nickname;
     private final PokemonType type;
     private int level;
 
@@ -15,10 +17,10 @@ public class Pokemon {
     }
 
     private Pokemon(final String name,
-                    final String surname,
+                    final String nickname,
                     final PokemonType type) {
         this.name = name;
-        this.surname = surname;
+        this.nickname = nickname;
         this.type = type;
         this.level = 0;
     }

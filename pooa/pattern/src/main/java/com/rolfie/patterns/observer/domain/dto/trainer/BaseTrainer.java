@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public abstract class BaseTrainer implements PokemonTrainer {
+public abstract class BaseTrainer implements PokemonTrainer, DelayAtPension {
 
-    public static final int MAX_TEAM_SIZE = 6;
+    private static final int MAX_TEAM_SIZE = 6;
+    private static final long ONE_MINUTE_DELAY_IN_SECONDS = 60;
+
     private static long UUID_COUNT = 0;
 
     private final long uuid;
@@ -35,6 +37,11 @@ public abstract class BaseTrainer implements PokemonTrainer {
             throw new ToMuchPokemonException();
         }
         this.pokemons[size] = pokemon;
+    }
+
+    @Override
+    public long getDelayPokemonUpAtPension() {
+        return ONE_MINUTE_DELAY_IN_SECONDS;
     }
 
     @Override

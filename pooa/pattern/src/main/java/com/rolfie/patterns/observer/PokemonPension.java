@@ -32,7 +32,7 @@ public class PokemonPension {
     }
 
     private void suscribe(final PokemonTrainer trainer) {
-        scheduler.register(PokemonScheduleJob.create());
+        scheduler.register(PokemonScheduleJob.create(trainer.getDelayPokemonUpAtPension()));
     }
 
     private static <E> List<E> addOneTo(final List<E> elements,

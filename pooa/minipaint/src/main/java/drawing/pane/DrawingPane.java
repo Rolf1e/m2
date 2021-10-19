@@ -2,10 +2,10 @@ package drawing.pane;
 
 import drawing.handler.bar.Observer;
 import drawing.handler.mouse.MouseMoveHandler;
+import drawing.shape.IShape;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by lewandowski on 20/12/2020.
  */
-public class DrawingPane extends Pane implements Iterable<Shape> {
+public class DrawingPane extends Pane implements Iterable<IShape> {
 
     private MouseMoveHandler mouseMoveHandler;
-    private final List<Shape> shapes;
+    private final List<IShape> shapes;
     private final List<Observer> observers;
 
     public DrawingPane() {
@@ -50,26 +50,26 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
         observers.remove(observer);
     }
 
-    public void addShape(Shape shape) {
+    public void addShape(final IShape shape) {
         shapes.add(shape);
-        this.getChildren().add(shape);
-        observers.forEach(observer -> observer.update(shapes));
+        shape.addShapeToPane(this);
+        observers.forEach(observer -> observer.update(shapes.size()));
     }
 
-    public void removeShape(Shape shape) {
+    public void removeShape(final IShape shape) {
         shapes.remove(shape);
-        this.getChildren().remove(shape);
-        observers.forEach(observer -> observer.update(shapes));
+        shape.removeShapeFromPane(this);
+        observers.forEach(observer -> observer.update(shapes.size()));
     }
 
     public void clear() {
-        this.getChildren().removeAll(shapes);
+        shapes.forEach(shape -> shape.removeShapeFromPane(this));
         shapes.clear();
-        observers.forEach(observer -> observer.update(shapes));
+        observers.forEach(observer -> observer.update(shapes.size()));
     }
 
     @Override
-    public Iterator<Shape> iterator() {
+    public Iterator<IShape> iterator() {
         return shapes.iterator();
     }
 

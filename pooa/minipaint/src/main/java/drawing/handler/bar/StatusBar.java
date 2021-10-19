@@ -2,9 +2,6 @@ package drawing.handler.bar;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Shape;
-
-import java.util.List;
 
 
 public class StatusBar extends HBox implements Observer {
@@ -22,9 +19,8 @@ public class StatusBar extends HBox implements Observer {
     }
 
     @Override
-    public void update(final List<Shape> shapes) {
-        System.out.println(shapes);
-        label.setText(shapes.size() + FORME_S);
+    public void update(final int size) {
+        label.setText(size + FORME_S);
     }
 
     public String getText() {

@@ -2,6 +2,7 @@ import drawing.PaintApplication;
 import drawing.handler.bar.Observer;
 import drawing.handler.bar.StatusBar;
 import drawing.handler.dto.Triangle;
+import drawing.shape.adapter.ShapeAdapter;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -31,9 +32,9 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_draw_circle_programmatically() {
         interact(() -> {
-            app.getDrawingPane().addShape(new Ellipse(20, 20, 30, 30));
+            app.getDrawingPane().addShape(ShapeAdapter.create(new Ellipse(20, 20, 30, 30)));
         });
-        Iterator it = app.getDrawingPane().iterator();
+        Iterator it = app.getDrawingPane().getChildren().iterator();
         assertTrue(it.next() instanceof Ellipse);
         assertFalse(it.hasNext());
     }
@@ -49,7 +50,7 @@ public class PaintTest extends ApplicationTest {
         //press(MouseButton.PRIMARY); moveBy(30,30); release(MouseButton.PRIMARY);
 
         // then:
-        var it = app.getDrawingPane().iterator();
+        var it = app.getDrawingPane().getChildren().iterator();
         assertTrue(it.next() instanceof Ellipse);
         assertFalse(it.hasNext());
     }
@@ -64,7 +65,7 @@ public class PaintTest extends ApplicationTest {
         drag().dropBy(70, 40);
 
         // then:
-        var it = app.getDrawingPane().iterator();
+        var it = app.getDrawingPane().getChildren().iterator();
         assertTrue(it.next() instanceof Rectangle);
         assertFalse(it.hasNext());
     }
@@ -79,7 +80,7 @@ public class PaintTest extends ApplicationTest {
         drag().dropBy(70, 40);
 
         // then:
-        var it = app.getDrawingPane().iterator();
+        var it = app.getDrawingPane().getChildren().iterator();
         assertTrue(it.next() instanceof Triangle);
         assertFalse(it.hasNext());
     }
@@ -96,7 +97,7 @@ public class PaintTest extends ApplicationTest {
         clickOn("Clear");
 
         // then:
-        assertFalse(app.getDrawingPane().iterator().hasNext());
+        assertFalse(app.getDrawingPane().getChildren().iterator().hasNext());
     }
 
     @Test
@@ -116,8 +117,11 @@ public class PaintTest extends ApplicationTest {
             if (observer instanceof StatusBar) {
                 final StatusBar statusBar = (StatusBar) observer;
                 Assert.assertEquals(s, statusBar.getText());
+                return;
             }
         }
+
+        Assert.fail("Status bar was not created");
     }
 
 }

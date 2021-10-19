@@ -2,12 +2,14 @@ package drawing;
 
 import drawing.handler.bar.StatusBar;
 import drawing.handler.button.ClearButtonHandler;
-import drawing.handler.button.EllipseButtonHandler;
-import drawing.handler.button.RectangleButtonHandler;
-import drawing.handler.button.TriangleButtonHandler;
+import drawing.handler.button.shapes.EllipseButtonHandler;
+import drawing.handler.button.shapes.RectangleButtonHandler;
+import drawing.handler.button.shapes.TriangleButtonHandler;
 import drawing.pane.DrawingPane;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -63,15 +65,28 @@ public class PaintApplication extends Application {
         hBox.getStyleClass().add("toolbar");
         root.setTop(hBox);
 
-        final StatusBar statusBar = StatusBar.createEmpty();
-        statusBar.getStyleClass().add("status_bar");
-        root.setBottom(statusBar);
-        drawingPane.addObserver(statusBar);
+
+        createStatusBar();
 
 
         primaryStage.setTitle("Drawing");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+
+    private Button createButton(final String label, final EventHandler<Event> action) {
+        final Button button = new Button(label);
+        button.addEventFilter(ActionEvent.ACTION, action);
+        return button;
+    }
+
+
+    private void createStatusBar() {
+        final StatusBar statusBar = StatusBar.createEmpty();
+        statusBar.getStyleClass().add("status_bar");
+        root.setBottom(statusBar);
+        drawingPane.addObserver(statusBar);
     }
 
 

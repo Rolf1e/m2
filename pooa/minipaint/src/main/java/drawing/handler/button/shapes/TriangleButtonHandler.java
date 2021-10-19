@@ -1,9 +1,10 @@
-package drawing.handler.button;
+package drawing.handler.button.shapes;
 
 import drawing.handler.dto.Point;
 import drawing.handler.dto.Triangle;
 import drawing.pane.DrawingPane;
-import javafx.scene.shape.Shape;
+import drawing.shape.IShape;
+import drawing.shape.adapter.ShapeAdapter;
 
 public class TriangleButtonHandler extends ShapeButtonHandler {
 
@@ -16,13 +17,14 @@ public class TriangleButtonHandler extends ShapeButtonHandler {
     }
 
     @Override
-    protected Shape createShape() {
-        final Point a = Point.at(originX, originY);
-        final Point b = Point.at(destinationX, destinationY);
+    protected IShape createShape() {
+        final var a = Point.at(originX, originY);
+        final var b = Point.at(destinationX, destinationY);
         final var triangle = Triangle.create(a, b, resolveLastPoint(a, b));
 
-        triangle.getStyleClass().add("triangle");
-        return triangle;
+        triangle.getStyleClass()
+                .add("triangle");
+        return ShapeAdapter.create(triangle);
     }
 
     private Point resolveLastPoint(final Point a, final Point b) {

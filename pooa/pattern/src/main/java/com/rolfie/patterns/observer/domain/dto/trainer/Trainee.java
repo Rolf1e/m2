@@ -24,8 +24,4 @@ public class Trainee extends BaseTrainer {
         addPokemon(pokemon);
     }
 
-    @Override
-    public final void notify(final Pokemon pokemon) {
-
-    }
 }
