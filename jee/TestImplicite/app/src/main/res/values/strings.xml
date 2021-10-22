@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TestImplicite</string>
+    <!--    Buttons content-->
+    <string name="button_sms_content">SMS</string>
+    <string name="button_mms_content">MMS</string>
+    <string name="button_call_content">Appel</string>
+    <string name="button_web_content">Web</string>
+    <string name="button_map_content">Map</string>
+</resources>
