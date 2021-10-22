@@ -15,18 +15,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openingSms(final View view) {
-        final Intent sms = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("sms", "0663061229", null));
+        final Intent sms = createIntentRedirectToAction(Intent.ACTION_SENDTO, "sms", "0663061229");
         sms.putExtra("sms_body", "Hello World !");
+
         startActivity(sms);
     }
 
     public void openingMms(final View view) {
-        final Intent mms = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mms", "0663061229", null));
-        startActivity(mms);
+        startActivity(createIntentRedirectToAction(Intent.ACTION_SENDTO, "mms", "0663061229"));
     }
 
     public void openingCalls(final View view) {
-        System.out.println("Opening calls !");
+        startActivity(createIntentRedirectToAction(Intent.ACTION_DIAL, "tel", "0663061229"));
     }
 
     public void openingWeb(final View view) {
@@ -35,5 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openingMap(final View view) {
         System.out.println("Opening Map !");
+    }
+
+    private Intent createIntentRedirectToAction(final String action,
+                                                final String scheme,
+                                                final String to) {
+        return new Intent(action, Uri.fromParts(scheme, to, null));
     }
 }
