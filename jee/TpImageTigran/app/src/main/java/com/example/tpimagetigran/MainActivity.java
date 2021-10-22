@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void flipImageHori(final ImageView image) {
         final Bitmap bitmap = getBitmap(image);
-
         final int width = bitmap.getWidth() - 1;
         for (int x = 0; x < width / 2; x++) {
             for (int y = 0; y < bitmap.getHeight() - 1; y++) {
@@ -55,9 +54,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void flipImageVerti(final View viewById) {
+    private void flipImageVerti(final ImageView image) {
+        final Bitmap bitmap = getBitmap(image);
+        final int height = bitmap.getHeight() - 1;
 
-
+        for (int x = 0; x < bitmap.getWidth() - 1; x++) {
+            for (int y = 0; y < height / 2; y++) {
+                final int pixel = bitmap.getPixel(x, y);
+                final int pixelOpposite = bitmap.getPixel(x, height - y);
+                bitmap.setPixel(x, y, pixelOpposite);
+                bitmap.setPixel(x, height - y, pixel);
+            }
+        }
     }
 
     @Override
