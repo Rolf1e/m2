@@ -17,26 +17,31 @@
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_sms"
                 android:text="@string/button_sms_content"
+                android:onClick="openingSms"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_mms"
                 android:text="@string/button_mms_content"
+                android:onClick="openingMms"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_call"
                 android:text="@string/button_call_content"
+                android:onClick="openingCalls"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_web"
                 android:text="@string/button_web_content"
+                android:onClick="openingWeb"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_map"
                 android:text="@string/button_map_content"
+                android:onClick="openingMap"
         />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
