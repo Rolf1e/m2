@@ -15,57 +15,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void callback(final View view) {
-        startActivity(getAction(view.getId()));
+        handleAction(view.getId());
     }
 
-    private Intent getAction(final int id) {
-        if (id == R.id.button_sms) {
-            return openingSms();
-        } else if (id == R.id.button_mms) {
-            return openingMms();
-        } else if (id == R.id.button_call) {
-            return openingCalls();
+    private void handleAction(final int id) {
+        if (id == R.id.button_sms || id == R.id.button_mms || id == R.id.button_call) {
+            final Intent intent = new Intent(this, PhoneActivity.class);
+            intent.putExtra("CallerType", phoningAction(id).name());
+            startActivity(intent);
         } else if (id == R.id.button_web) {
-            return openingWeb();
+            startActivity(openingWeb());
         } else if (id == R.id.button_map) {
-            return openingMap();
+            startActivity(openingMap());
         }
         throw new IllegalStateException("Action does not exist !");
     }
 
-
-    private Intent openingSms() {
-        final Intent sms = createIntentRedirectToAction(Intent.ACTION_SENDTO, "sms", "0663061229");
-        sms.putExtra("sms_body", "Hello World !");
-        return sms;
-    }
-
-    private Intent openingMms() {
-        return createIntentRedirectToAction(Intent.ACTION_SENDTO, "mms", "0663061229");
-    }
-
-    private Intent openingCalls() {
-        return createIntentRedirectToAction(Intent.ACTION_DIAL, "tel", "0663061229");
+    private static PhoneActivity.Type phoningAction(final int id) {
+        if (id == R.id.button_sms) {
+            return PhoneActivity.Type.SMS;
+        } else if (id == R.id.button_mms) {
+            return PhoneActivity.Type.MMS;
+        } else if (id == R.id.button_call) {
+            return PhoneActivity.Type.CALL;
+        }
+        throw new IllegalStateException("Action does not exist !");
     }
 
     private Intent openingWeb() {
-        return createIntentWthUri(Intent.ACTION_VIEW, Uri.parse("http://www-lisic.univ-littoral.fr"));
+        return Utils.createIntentWthUri(Intent.ACTION_VIEW, Uri.parse("http://www-lisic.univ-littoral.fr"));
     }
 
     private Intent openingMap() {
-        final Intent map = createIntentWthUri(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+CA+94043"));
+        final Intent map = Utils.createIntentWthUri(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+CA+94043"));
         map.setPackage("com.google.android.apps.maps");
         return map;
     }
 
-    private Intent createIntentRedirectToAction(final String action,
-                                                final String scheme,
-                                                final String to) {
-
-        return createIntentWthUri(action, Uri.fromParts(scheme, to, null));
-    }
-
-    private Intent createIntentWthUri(final String action, final Uri uri) {
-        return new Intent(action, uri);
-    }
 }
