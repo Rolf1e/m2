@@ -2,6 +2,7 @@ package drawing.pane;
 
 import drawing.handler.bar.Observer;
 import drawing.handler.mouse.MouseMoveHandler;
+import drawing.handler.selection.SelectionHandler;
 import drawing.shape.IShape;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -16,7 +17,8 @@ import java.util.List;
  */
 public class DrawingPane extends Pane implements Iterable<IShape> {
 
-    private MouseMoveHandler mouseMoveHandler;
+    private final MouseMoveHandler mouseMoveHandler;
+    private final SelectionHandler selectionHandler;
     private final List<IShape> shapes;
     private final List<Observer> observers;
 
@@ -24,6 +26,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         clipChildren();
         shapes = new ArrayList<>();
         mouseMoveHandler = new MouseMoveHandler(this);
+        selectionHandler = SelectionHandler.createAndRegisterEvents(this);
         observers = new ArrayList<>();
     }
 

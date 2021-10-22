@@ -11,10 +11,11 @@ import javafx.scene.input.MouseEvent;
 public class MouseMoveHandler implements EventHandler<MouseEvent> {
 
     private final DrawingPane drawingPane;
+
     private double orgSceneX;
     private double orgSceneY;
 
-    public MouseMoveHandler(DrawingPane drawingPane) {
+    public MouseMoveHandler(final DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
         drawingPane.addEventHandler(MouseEvent.MOUSE_PRESSED, this);
         drawingPane.addEventHandler(MouseEvent.MOUSE_DRAGGED, this);
