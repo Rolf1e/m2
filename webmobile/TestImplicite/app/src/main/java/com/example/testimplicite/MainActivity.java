@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -51,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Intent openingWeb() {
-        System.out.println("Opening web !");
         return createIntentWthUri(Intent.ACTION_VIEW, Uri.parse("http://www-lisic.univ-littoral.fr"));
     }
 
     private Intent openingMap() {
-        System.out.println("Opening Map !");
-        return Objects.requireNonNull(null);
+        final Intent map = createIntentWthUri(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+CA+94043"));
+        map.setPackage("com.google.android.apps.maps");
+        return map;
     }
 
     private Intent createIntentRedirectToAction(final String action,
