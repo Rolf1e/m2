@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Intent openingWeb() {
         System.out.println("Opening web !");
-        return Objects.requireNonNull(null);
+        return createIntentWthUri(Intent.ACTION_VIEW, Uri.parse("http://www-lisic.univ-littoral.fr"));
     }
 
     private Intent openingMap() {
@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
     private Intent createIntentRedirectToAction(final String action,
                                                 final String scheme,
                                                 final String to) {
-        return new Intent(action, Uri.fromParts(scheme, to, null));
+
+        return createIntentWthUri(action, Uri.fromParts(scheme, to, null));
+    }
+
+    private Intent createIntentWthUri(final String action, final Uri uri) {
+        return new Intent(action, uri);
     }
 }
