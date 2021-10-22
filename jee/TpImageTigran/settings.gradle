@@ -1,0 +1,2 @@
+rootProject.name = "TpImageTigran"
+include ':app'
