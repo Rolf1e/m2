@@ -46,10 +46,7 @@ public class MainActivity extends AppCompatActivity {
         final int width = bitmap.getWidth() - 1;
         for (int x = 0; x < width / 2; x++) {
             for (int y = 0; y < bitmap.getHeight() - 1; y++) {
-                final int pixel = bitmap.getPixel(x, y);
-                final int pixelOpposite = bitmap.getPixel(width - x, y);
-                bitmap.setPixel(x, y, pixelOpposite);
-                bitmap.setPixel(width - x, y, pixel);
+                invert(bitmap, x, y, width - x, y);
             }
         }
     }
@@ -60,10 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int x = 0; x < bitmap.getWidth() - 1; x++) {
             for (int y = 0; y < height / 2; y++) {
-                final int pixel = bitmap.getPixel(x, y);
-                final int pixelOpposite = bitmap.getPixel(x, height - y);
-                bitmap.setPixel(x, y, pixelOpposite);
-                bitmap.setPixel(x, height - y, pixel);
+                invert(bitmap, x, y, x, height - y);
             }
         }
     }
@@ -92,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void invert(final Bitmap bitmap,
+                        final int x,
+                        final int y,
+                        final int x2,
+                        final int y2) {
+
+        final int pixel = bitmap.getPixel(x, y);
+        final int pixelOppoiste = bitmap.getPixel(x2, y2);
+        bitmap.setPixel(x, y, pixelOppoiste);
+        bitmap.setPixel(x2, y2, pixel);
     }
 
     private static Bitmap getBitmap(final ImageView image) {
