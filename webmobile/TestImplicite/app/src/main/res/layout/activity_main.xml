@@ -17,31 +17,31 @@
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_sms"
                 android:text="@string/button_sms_content"
-                android:onClick="openingSms"
+                android:onClick="callback"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_mms"
                 android:text="@string/button_mms_content"
-                android:onClick="openingMms"
+                android:onClick="callback"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_call"
                 android:text="@string/button_call_content"
-                android:onClick="openingCalls"
+                android:onClick="callback"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_web"
                 android:text="@string/button_web_content"
-                android:onClick="openingWeb"
+                android:onClick="callback"
         />
         <Button
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/button_map"
                 android:text="@string/button_map_content"
-                android:onClick="openingMap"
+                android:onClick="callback"
         />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
