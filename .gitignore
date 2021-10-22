@@ -3,6 +3,8 @@
 
 /pooa/*/.idea/
 /pooa/*/target/
+/pooa/pattern/build
+/pooa/Monopoly/.scannerwork
 
 /webmobile/*/.idea/
 /webmobile/*/target/
