@@ -1,5 +1,7 @@
 package com.example.testimplicite;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +15,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openingSms(final View view) {
-        System.out.println("Opening SMS !");
+        final Intent sms = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("sms", "0663061229", null));
+        sms.putExtra("sms_body", "Hello World !");
+        startActivity(sms);
     }
 
     public void openingMms(final View view) {
