@@ -1,5 +1,7 @@
 server/server.iml
 server/target
+server/src/main/resources/application-local.properties
+
 web/web.iml
 web/node_modules
 
