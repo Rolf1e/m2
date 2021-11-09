@@ -1,0 +1,9 @@
+<div *ngFor="let deal of deals | async">
+  <div class="deal">
+    <img src="{{ deal.imgUrl}}" alt="{{ deal.description}}" class="deal-img"/>
+    <p> {{ deal.temperature }} </p>
+    <p> {{ deal.title }} </p>
+    <p> {{ deal.creator }} | <a href="{{deal.shopLink}}"> {{ deal.shopName}} </a></p>
+    <p> {{ deal.date }} </p>
+  </div>
+</div>

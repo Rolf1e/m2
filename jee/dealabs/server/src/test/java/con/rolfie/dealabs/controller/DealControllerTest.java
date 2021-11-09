@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ContextConfiguration(classes = {DealConfig.class, TestConfig.class, DealController.class})
 public class DealControllerTest {
 
-    @Test
+//    @Test
     public void should_fetch_all_ordered() throws Exception {
         final String expected = "{" +
                 "\"title\": \"Mémoire RAM G.Skill Trident Z Neo (F4-4000C18D-32GTZN) - 32 Go (2x16 Go), DDR4, 4000 MHz\"," +
