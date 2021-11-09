@@ -25,7 +25,7 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(final MouseEvent event) {
         if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
-            updateStateWhenMousePressed(event);
+            updateOrgSceneCoordinate(event);
         }
 
         if (MouseEvent.MOUSE_DRAGGED.equals(event.getEventType())) {
@@ -37,33 +37,19 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
         }
     }
 
-    private void updateStateWhenMousePressed(final MouseEvent event) {
-        updateOrgSceneCoordinate(event);
-
-        for (final var shape : drawingPane) {
-            if (shape.isOn(event.getX(), event.getY())) {
-                shape.setSelected(true);
-                break;
-            }
-        }
-    }
 
     private void translateWhenMouseDragged(final MouseEvent event) {
-        for (final var shape : drawingPane) {
-            if (shape.isSelected()) {
-                updateOffSet(event, shape);
-                updateOrgSceneCoordinate(event);
-            }
-        }
+        drawingPane.getSelectedShapes()
+                .forEach(shape -> {
+                            updateOffSet(event, shape);
+                            updateOrgSceneCoordinate(event);
+                        }
+                );
     }
 
     private void translateWhenMouseReleased(final MouseEvent event) {
-        for (final var shape : drawingPane) {
-            if (shape.isSelected()) {
-                shape.setSelected(false);
-                updateOffSet(event, shape);
-            }
-        }
+        drawingPane.getSelectedShapes()
+                .forEach(shape -> updateOffSet(event, shape));
     }
 
     private void updateOrgSceneCoordinate(final MouseEvent event) {

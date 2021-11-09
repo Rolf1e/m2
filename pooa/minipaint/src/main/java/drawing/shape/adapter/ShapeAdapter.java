@@ -61,4 +61,12 @@ public class ShapeAdapter implements IShape {
     public void removeShapeFromPane(final Pane pane) {
         pane.getChildren().remove(shape);
     }
+
+    @Override
+    public String toString() {
+        return "ShapeAdapter{" +
+                "shape=" + shape +
+                ", selected=" + selected +
+                '}';
+    }
 }
