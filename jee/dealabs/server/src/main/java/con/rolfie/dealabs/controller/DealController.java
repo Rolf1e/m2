@@ -5,10 +5,7 @@ import con.rolfie.dealabs.model.dto.DealDetailsDTO;
 import con.rolfie.dealabs.service.deal.DealService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,14 +22,25 @@ public class DealController {
         return ResponseEntity.ok(dealService.fetchOrderedDeals());
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/details/{id}")
     public final ResponseEntity<DealDetailsDTO> fetchDetails(@PathVariable("id") final long id) {
-        final var dealDetailsDTO = dealService.fetchDetails(id);
-        if (dealDetailsDTO.isEmpty()) {
+        final var dealDetails = dealService.fetchDetails(id);
+        if (dealDetails.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok(dealDetailsDTO.get());
+        return ResponseEntity.ok(dealDetails.get());
     }
+
+    @GetMapping(value = "/{id}")
+    public final ResponseEntity<DealDTO> refresh(@PathVariable("id") final long id) {
+        final var deal = dealService.fetchDeal(id);
+        if (deal.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(deal.get());
+    }
+
 
 }

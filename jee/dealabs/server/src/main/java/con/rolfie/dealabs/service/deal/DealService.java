@@ -10,5 +10,7 @@ public interface DealService {
 
     List<DealDTO> fetchOrderedDeals();
 
+    Optional<DealDTO> fetchDeal(final long id);
+
     Optional<DealDetailsDTO> fetchDetails(final long id);
 }

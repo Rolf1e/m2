@@ -30,6 +30,12 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
+    public Optional<DealDTO> fetchDeal(final long id) {
+        return dealRepository.findById(id)
+                .map(DealDTO::from);
+    }
+
+    @Override
     public Optional<DealDetailsDTO> fetchDetails(final long id) {
         return dealRepository.findById(id)
                 .map(DealDetailsDTO::from);
