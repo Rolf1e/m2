@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-deal-details',
+  selector: 'deal-details',
   templateUrl: './deal-details.component.html',
   styleUrls: ['./deal-details.component.css']
 })

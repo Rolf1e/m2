@@ -5,17 +5,21 @@ import {DealShopComponent} from './components/deal-shop/deal-shop.component';
 import {HttpClientModule} from "@angular/common/http";
 import {DealDetailsComponent} from './components/deal-details/deal-details.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {DealFormComponent} from './components/deal-form/deal-form.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     DealShopComponent,
     DealDetailsComponent,
+    DealFormComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

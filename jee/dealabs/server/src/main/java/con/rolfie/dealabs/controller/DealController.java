@@ -36,7 +36,7 @@ public class DealController {
     public final ResponseEntity<DealDto> refresh(@PathVariable("id") final long id) {
         final var deal = dealService.fetchDeal(id);
         if (deal.isEmpty()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(deal.get());

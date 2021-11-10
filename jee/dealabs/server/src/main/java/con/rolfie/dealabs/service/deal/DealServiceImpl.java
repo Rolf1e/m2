@@ -60,6 +60,7 @@ public class DealServiceImpl implements DealService {
         toBeSaved.setPromoCode(newDeal.getPromoCode());
         toBeSaved.setShopName(newDeal.getShopName());
         toBeSaved.setImgUrl(newDeal.getImgUrl());
+        toBeSaved.setTemperature(0);
         return toBeSaved;
     }
 
