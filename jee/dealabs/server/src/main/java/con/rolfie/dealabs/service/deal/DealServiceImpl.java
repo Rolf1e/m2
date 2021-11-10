@@ -1,11 +1,14 @@
 package con.rolfie.dealabs.service.deal;
 
 import con.rolfie.dealabs.model.database.dao.DealRepository;
-import con.rolfie.dealabs.model.dto.DealDTO;
-import con.rolfie.dealabs.model.dto.DealDetailsDTO;
+import con.rolfie.dealabs.model.database.entity.DealDo;
+import con.rolfie.dealabs.model.dto.DealDetailsDto;
+import con.rolfie.dealabs.model.dto.DealDto;
+import con.rolfie.dealabs.model.dto.NewDealDto;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -21,24 +24,43 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public List<DealDTO> fetchOrderedDeals() {
+    public List<DealDto> fetchOrderedDeals() {
         return dealRepository.findAll()
                 .stream()
-                .map(DealDTO::from)
-                .sorted(Comparator.comparing(DealDTO::getDate))
+                .map(DealDto::from)
+                .sorted(Comparator.comparing(DealDto::getDate))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<DealDTO> fetchDeal(final long id) {
+    public Optional<DealDto> fetchDeal(final long id) {
         return dealRepository.findById(id)
-                .map(DealDTO::from);
+                .map(DealDto::from);
     }
 
     @Override
-    public Optional<DealDetailsDTO> fetchDetails(final long id) {
+    public Optional<DealDetailsDto> fetchDetails(final long id) {
         return dealRepository.findById(id)
-                .map(DealDetailsDTO::from);
+                .map(DealDetailsDto::from);
+    }
+
+    @Override
+    public DealDto createAndSave(final NewDealDto newDeal) {
+        return DealDto.from(dealRepository.save(createFromInput(newDeal)));
+    }
+
+    private DealDo createFromInput(final NewDealDto newDeal) {
+        final DealDo toBeSaved = new DealDo();
+        toBeSaved.setTitle(newDeal.getTitle());
+        toBeSaved.setDescription(newDeal.getDescription());
+        toBeSaved.setCreator(newDeal.getCreator());
+        toBeSaved.setDate(LocalDate.now());
+        toBeSaved.setPriceNew(newDeal.getPriceNew());
+        toBeSaved.setPriceOld(newDeal.getPriceOld());
+        toBeSaved.setPromoCode(newDeal.getPromoCode());
+        toBeSaved.setShopName(newDeal.getShopName());
+        toBeSaved.setImgUrl(newDeal.getImgUrl());
+        return toBeSaved;
     }
 
 }

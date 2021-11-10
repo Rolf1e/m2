@@ -1,0 +1,13 @@
+<div *ngIf="deal; else noDealFound">
+  <p>{{ deal.title }}</p>
+  <img src="{{ deal.imgUrl }}" alt="{{ deal.description}}" class="deal-img"/>
+</div>
+<div *ngIf="(details | async)">
+  <p>{{ (details | async)?.priceOld }}</p>
+  <p>{{ (details | async)?.priceNew }}</p>
+  <p>{{ (details | async)?.promoCode }}</p>
+</div>
+<ng-template #noDealFound>
+  Deal not found
+</ng-template>
+

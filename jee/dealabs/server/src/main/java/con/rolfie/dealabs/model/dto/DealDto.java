@@ -2,7 +2,7 @@ package con.rolfie.dealabs.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import con.rolfie.dealabs.model.database.entity.DealDO;
+import con.rolfie.dealabs.model.database.entity.DealDo;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class DealDTO {
+public class DealDto {
 
     private final Long id;
     private final String title;
@@ -23,8 +23,8 @@ public class DealDTO {
     private final String imgUrl;
     private final String description;
 
-    public static DealDTO from(final DealDO deal) {
-        return DealDTO.create(
+    public static DealDto from(final DealDo deal) {
+        return DealDto.create(
                 deal.getId(),
                 deal.getTitle(),
                 deal.getShopName(),
@@ -38,7 +38,7 @@ public class DealDTO {
     }
 
     @JsonCreator()
-    public static DealDTO create(@JsonProperty("id") final Long id,
+    public static DealDto create(@JsonProperty("id") final Long id,
                                  @JsonProperty("title") final String title,
                                  @JsonProperty("shop_name") final String shopName,
                                  @JsonProperty("shop_link") final String shopLink,
@@ -48,7 +48,7 @@ public class DealDTO {
                                  @JsonProperty("img_url") final String imgUrl,
                                  @JsonProperty("description") final String description) {
 
-        return new DealDTO(id, title, shopName, shopLink, temperature, creator, date, imgUrl, description);
+        return new DealDto(id, title, shopName, shopLink, temperature, creator, date, imgUrl, description);
     }
 
 }

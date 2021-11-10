@@ -1,6 +1,8 @@
 package con.rolfie.dealabs.model.database.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,7 +10,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tbl_deal")
 @Data
-public class DealDO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class DealDo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
