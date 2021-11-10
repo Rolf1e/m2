@@ -1,1 +1,5 @@
+###
 GET http://localhost:8080/deals/all
+
+###
+GET http://localhost:8080/deals/1

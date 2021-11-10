@@ -1,5 +1,6 @@
 export class Deal {
 
+  private readonly _id: number;
   private readonly _title: string;
   private readonly _temperature: number;
   private readonly _creator: string;
@@ -9,7 +10,8 @@ export class Deal {
   private readonly _shopLink: string;
   private readonly _imgUrl: string;
 
-  constructor(title: string, temperature: number, creator: string, date: Date, description: string, shopName: string, shopLink: string, imgUrl: string) {
+  constructor(id: number, title: string, temperature: number, creator: string, date: Date, description: string, shopName: string, shopLink: string, imgUrl: string) {
+    this._id = id;
     this._title = title;
     this._temperature = temperature;
     this._creator = creator;
@@ -20,6 +22,9 @@ export class Deal {
     this._imgUrl = imgUrl;
   }
 
+  get id(): number {
+    return this._id;
+  }
 
   get title(): string {
     return this._title;

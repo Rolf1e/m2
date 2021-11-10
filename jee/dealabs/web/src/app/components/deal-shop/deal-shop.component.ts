@@ -14,15 +14,15 @@ export class DealShopComponent implements OnInit {
   private _deals: Observable<Deal[]>;
 
   constructor(private _rest: HttpClient) {
-    this._deals = this.fetchDeals();
+    this._deals = DealShopComponent.fetchDeals(this._rest);
   }
 
   ngOnInit(): void {
-    this._deals = this.fetchDeals();
+    this._deals = DealShopComponent.fetchDeals(this._rest);
   }
 
-  private fetchDeals(): Observable<Deal[]> {
-    return this._rest.get<Deal[]>(DEALS_ROUTE);
+  public static fetchDeals(rest: HttpClient): Observable<Deal[]> {
+    return rest.get<Deal[]>(DEALS_ROUTE);
   }
 
   get deals(): Observable<Deal[]> {
