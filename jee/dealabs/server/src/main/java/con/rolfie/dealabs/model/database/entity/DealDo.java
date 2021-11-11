@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tbl_deal")
@@ -37,12 +39,6 @@ public class DealDo {
     @Column(name = "promo_code")
     private String promoCode;
 
-    @Column(name = "temperature")
-    private Integer temperature;
-
-    @Column(name = "creator")
-    private String creator;
-
     @Column(name = "date")
     private LocalDate date;
 
@@ -52,4 +48,17 @@ public class DealDo {
     @Column(name = "description")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_creator")
+    private UserDo creator;
+
+    @OneToMany(mappedBy = "deal")
+    private List<TemperatureDo> temperatures;
+
+    public Integer getTemperature() {
+        return this.temperatures
+                .stream()
+                .mapToInt(TemperatureDo::getValue)
+                .sum();
+    }
 }

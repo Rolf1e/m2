@@ -16,7 +16,7 @@ public class NewDealDto {
     private final Integer priceNew;
     private final String shopName;
     private final String promoCode;
-    private final String creator;
+    private final Long creatorId;
     private final String imgUrl;
 
     @JsonCreator()
@@ -26,9 +26,9 @@ public class NewDealDto {
                                     @JsonProperty("priceNew") final Integer priceNew,
                                     @JsonProperty("shopName") final String shopName,
                                     @JsonProperty("promoCode") final String promoCode,
-                                    @JsonProperty("creator") final String creator,
+                                    @JsonProperty("creatorId") final Long creatorId,
                                     @JsonProperty("imgUrl") final String imgUrl) {
-        return new NewDealDto(title, description, priceOld, priceNew, shopName, promoCode, creator, imgUrl);
+        return new NewDealDto(title, description, priceOld, priceNew, shopName, promoCode, creatorId, imgUrl);
     }
 
 }

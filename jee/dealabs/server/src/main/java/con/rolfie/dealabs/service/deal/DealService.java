@@ -1,5 +1,7 @@
 package con.rolfie.dealabs.service.deal;
 
+import con.rolfie.dealabs.exception.UserNotFoundException;
+import con.rolfie.dealabs.model.database.entity.DealDo;
 import con.rolfie.dealabs.model.dto.DealDetailsDto;
 import con.rolfie.dealabs.model.dto.DealDto;
 import con.rolfie.dealabs.model.dto.NewDealDto;
@@ -15,5 +17,9 @@ public interface DealService {
 
     Optional<DealDetailsDto> fetchDetails(final long id);
 
-    DealDto createAndSave(final NewDealDto newDeal);
+    /**
+     * This method should checkout user informations and if it exists,
+     * creates the {@link DealDo} and save in database
+     */
+    DealDto createAndSave(final NewDealDto newDeal) throws UserNotFoundException;
 }

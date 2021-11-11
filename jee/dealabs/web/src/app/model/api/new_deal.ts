@@ -6,17 +6,33 @@ export class NewDealDto {
   private priceNew: number;
   private shopName: string;
   private promoCode: string;
-  private creator: string;
+  private creatorId: number;
   private imgUrl: string;
 
-  constructor(title: string, description: string, priceOld: number, priceNew: number, shopName: string, promoCode: string, creator: string, imgUrl: string) {
+  public static from(data: any): NewDealDto {
+    if (undefined === data) {
+      throw new Error("Failed to create new deal");
+    }
+    return new NewDealDto(
+      data.title,
+      data.description,
+      data.priceOld,
+      data.priceNew,
+      data.shopName,
+      data.promoCode,
+      data.creatorId,
+      data.imgUrl
+    );
+  }
+
+  constructor(title: string, description: string, priceOld: number, priceNew: number, shopName: string, promoCode: string, creatorId: number, imgUrl: string) {
     this.title = title;
     this.description = description;
     this.priceOld = priceOld;
     this.priceNew = priceNew;
     this.shopName = shopName;
     this.promoCode = promoCode;
-    this.creator = creator;
+    this.creatorId = creatorId;
     this.imgUrl = imgUrl;
   }
 }

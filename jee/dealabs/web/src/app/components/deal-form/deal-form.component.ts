@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {CREATE_DEAL_ROUTE, DEAL_ROUTE} from "../../config/path/api_paths";
 import {Router} from "@angular/router";
 import {Deal} from "../../model/api/deals";
+import {NewDealDto} from "../../model/api/new_deal";
 
 @Component({
   selector: 'deal-form',
@@ -32,7 +33,7 @@ export class DealFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this._rest.post<Deal>(CREATE_DEAL_ROUTE, this.createDealForm.value)
+    this._rest.post<Deal>(CREATE_DEAL_ROUTE, NewDealDto.from(this.createDealForm.value))
       .subscribe(deal => this.navigateOnSuccess(deal));
   }
 

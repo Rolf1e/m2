@@ -1,14 +1,18 @@
 package con.rolfie.dealabs.service.deal;
 
+import con.rolfie.dealabs.exception.UserNotFoundException;
 import con.rolfie.dealabs.model.database.dao.DealRepository;
 import con.rolfie.dealabs.model.database.entity.DealDo;
+import con.rolfie.dealabs.model.database.entity.UserDo;
 import con.rolfie.dealabs.model.dto.DealDetailsDto;
 import con.rolfie.dealabs.model.dto.DealDto;
 import con.rolfie.dealabs.model.dto.NewDealDto;
+import con.rolfie.dealabs.service.user.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +22,11 @@ import java.util.stream.Collectors;
 public class DealServiceImpl implements DealService {
 
     private final DealRepository dealRepository;
+    private final UserService userService;
 
-    public static DealService create(final DealRepository dealRepository) {
-        return new DealServiceImpl(dealRepository);
+    public static DealService create(final DealRepository dealRepository,
+                                     final UserService userService) {
+        return new DealServiceImpl(dealRepository, userService);
     }
 
     @Override
@@ -45,23 +51,26 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public DealDto createAndSave(final NewDealDto newDeal) {
-        return DealDto.from(dealRepository.save(createFromInput(newDeal)));
+    public DealDto createAndSave(final NewDealDto newDeal) throws UserNotFoundException {
+        final UserDo byId = userService.findById(newDeal.getCreatorId());
+        return DealDto.from(dealRepository.save(createFromInput(newDeal, byId)));
     }
 
-    private DealDo createFromInput(final NewDealDto newDeal) {
+    private DealDo createFromInput(final NewDealDto newDeal,
+                                   final UserDo user) {
         final DealDo toBeSaved = new DealDo();
         toBeSaved.setTitle(newDeal.getTitle());
         toBeSaved.setDescription(newDeal.getDescription());
-        toBeSaved.setCreator(newDeal.getCreator());
+        toBeSaved.setCreator(user);
         toBeSaved.setDate(LocalDate.now());
         toBeSaved.setPriceNew(newDeal.getPriceNew());
         toBeSaved.setPriceOld(newDeal.getPriceOld());
         toBeSaved.setPromoCode(newDeal.getPromoCode());
         toBeSaved.setShopName(newDeal.getShopName());
         toBeSaved.setImgUrl(newDeal.getImgUrl());
-        toBeSaved.setTemperature(0);
+        toBeSaved.setTemperatures(Collections.emptyList());
         return toBeSaved;
     }
+
 
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -30,7 +31,7 @@ public class DealDto {
                 deal.getShopName(),
                 deal.getShopLink(),
                 deal.getTemperature(),
-                deal.getCreator(),
+                Objects.requireNonNull(deal.getCreator()).getFirstName(),
                 deal.getDate(),
                 deal.getImgUrl(),
                 deal.getDescription()

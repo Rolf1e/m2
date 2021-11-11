@@ -2,7 +2,7 @@
 GET http://localhost:8080/deals/all
 
 ###
-GET http://localhost:8080/deals/96
+GET http://localhost:8080/deals/6
 
 ###
 POST http://localhost:8080/deals
@@ -15,6 +15,6 @@ Content-Type: application/json
   "priceNew": 1,
   "shopName": "shop",
   "promoCode": "ccc",
-  "creator": "moi",
+  "creatorId": 3,
   "imgUrl": "img"
 }
