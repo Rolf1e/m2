@@ -20,9 +20,10 @@ public class DealController {
 
     private final DealService dealService;
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/all", produces = "application/json")
     public final ResponseEntity<List<DealDto>> fetchDeals() {
-        return ResponseEntity.ok(dealService.fetchOrderedDeals());
+        final List<DealDto> body = dealService.fetchOrderedDeals();
+        return ResponseEntity.ok(body);
     }
 
     @GetMapping(value = "/details/{id}")

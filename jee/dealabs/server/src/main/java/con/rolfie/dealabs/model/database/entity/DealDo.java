@@ -5,14 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tbl_deal")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class DealDo {
 
@@ -31,16 +29,16 @@ public class DealDo {
     private String shopLink;
 
     @Column(name = "price_old")
-    private Integer priceOld;
+    private Float priceOld;
 
     @Column(name = "price_new")
-    private Integer priceNew;
+    private Float priceNew;
 
     @Column(name = "promo_code")
     private String promoCode;
 
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column(name = "img_url")
     private String imgUrl;

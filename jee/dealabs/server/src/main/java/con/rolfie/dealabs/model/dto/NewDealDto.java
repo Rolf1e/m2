@@ -12,8 +12,8 @@ public class NewDealDto {
 
     private final String title;
     private final String description;
-    private final Integer priceOld;
-    private final Integer priceNew;
+    private final Float priceOld;
+    private final Float priceNew;
     private final String shopName;
     private final String promoCode;
     private final Long creatorId;
@@ -22,8 +22,8 @@ public class NewDealDto {
     @JsonCreator()
     public static NewDealDto create(@JsonProperty("title") final String title,
                                     @JsonProperty("description") final String description,
-                                    @JsonProperty("priceOld") final Integer priceOld,
-                                    @JsonProperty("priceNew") final Integer priceNew,
+                                    @JsonProperty("priceOld") final Float priceOld,
+                                    @JsonProperty("priceNew") final Float priceNew,
                                     @JsonProperty("shopName") final String shopName,
                                     @JsonProperty("promoCode") final String promoCode,
                                     @JsonProperty("creatorId") final Long creatorId,

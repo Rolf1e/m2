@@ -11,7 +11,7 @@ import con.rolfie.dealabs.service.user.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -62,7 +62,7 @@ public class DealServiceImpl implements DealService {
         toBeSaved.setTitle(newDeal.getTitle());
         toBeSaved.setDescription(newDeal.getDescription());
         toBeSaved.setCreator(user);
-        toBeSaved.setDate(LocalDate.now());
+        toBeSaved.setDate(LocalDateTime.now());
         toBeSaved.setPriceNew(newDeal.getPriceNew());
         toBeSaved.setPriceOld(newDeal.getPriceOld());
         toBeSaved.setPromoCode(newDeal.getPromoCode());

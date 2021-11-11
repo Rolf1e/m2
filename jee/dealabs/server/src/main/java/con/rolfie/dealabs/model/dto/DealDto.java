@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -20,10 +21,11 @@ public class DealDto {
     private final String shopLink;
     private final Integer temperature;
     private final String creator;
-    private final LocalDate date;
+    private final LocalDateTime date;
     private final String imgUrl;
     private final String description;
 
+    @JsonCreator
     public static DealDto from(final DealDo deal) {
         return DealDto.create(
                 deal.getId(),
@@ -45,7 +47,7 @@ public class DealDto {
                                  @JsonProperty("shop_link") final String shopLink,
                                  @JsonProperty("temperature") final Integer temperature,
                                  @JsonProperty("creator") final String creator,
-                                 @JsonProperty("date") final LocalDate date,
+                                 @JsonProperty("date") final LocalDateTime date,
                                  @JsonProperty("img_url") final String imgUrl,
                                  @JsonProperty("description") final String description) {
 
