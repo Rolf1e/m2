@@ -5,3 +5,5 @@ server/src/main/resources/application-local.properties
 web/web.iml
 web/node_modules
 
+/server/src/main/resources/application-local.yml
+/authorization-server/authorization-server.iml

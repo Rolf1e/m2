@@ -1,15 +1,16 @@
 ###
-GET http://localhost:8080/deals/all
+GET http://localhost:8080/public/deals/all
 
 ###
-GET http://localhost:8080/deals/6
+GET http://localhost:8080/public/deals/6
 
 ###
 POST http://localhost:8080/deals
+Authorization: Basic emma a
 Content-Type: application/json
 
 {
-  "title": "aaa",
+  "title": "withCredentials",
   "description": "bbb",
   "priceOld": 2,
   "priceNew": 1,
