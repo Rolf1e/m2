@@ -1,4 +1,4 @@
-package con.rolfie.dealabs.model.dto;
+package con.rolfie.dealabs.model.dto.input;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

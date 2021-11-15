@@ -4,9 +4,10 @@ import con.rolfie.dealabs.exception.UserNotFoundException;
 import con.rolfie.dealabs.model.database.dao.DealRepository;
 import con.rolfie.dealabs.model.database.entity.DealDo;
 import con.rolfie.dealabs.model.database.entity.UserDo;
-import con.rolfie.dealabs.model.dto.DealDetailsDto;
-import con.rolfie.dealabs.model.dto.DealDto;
-import con.rolfie.dealabs.model.dto.NewDealDto;
+import con.rolfie.dealabs.model.dto.output.DealDetailsDto;
+import con.rolfie.dealabs.model.dto.output.DealDto;
+import con.rolfie.dealabs.model.dto.input.NewDealDto;
+import con.rolfie.dealabs.model.dto.output.UserDto;
 import con.rolfie.dealabs.service.user.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +20,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class DealServiceImpl implements DealService {
+public class SqlDealServiceImpl implements DealService {
 
     private final DealRepository dealRepository;
     private final UserService userService;
 
     public static DealService create(final DealRepository dealRepository,
                                      final UserService userService) {
-        return new DealServiceImpl(dealRepository, userService);
+        return new SqlDealServiceImpl(dealRepository, userService);
     }
 
     @Override
@@ -52,16 +53,16 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public DealDto createAndSave(final NewDealDto newDeal) throws UserNotFoundException {
-        final UserDo byId = userService.findById(newDeal.getCreatorId());
+        final var byId = userService.findById(newDeal.getCreatorId());
         return DealDto.from(dealRepository.save(createFromInput(newDeal, byId)));
     }
 
     private DealDo createFromInput(final NewDealDto newDeal,
-                                   final UserDo user) {
-        final DealDo toBeSaved = new DealDo();
+                                   final UserDto user) {
+        final var toBeSaved = new DealDo();
         toBeSaved.setTitle(newDeal.getTitle());
         toBeSaved.setDescription(newDeal.getDescription());
-        toBeSaved.setCreator(user);
+        toBeSaved.setCreator(user.getUserDo());
         toBeSaved.setDate(LocalDateTime.now());
         toBeSaved.setPriceNew(newDeal.getPriceNew());
         toBeSaved.setPriceOld(newDeal.getPriceOld());
@@ -69,6 +70,7 @@ public class DealServiceImpl implements DealService {
         toBeSaved.setShopName(newDeal.getShopName());
         toBeSaved.setImgUrl(newDeal.getImgUrl());
         toBeSaved.setTemperatures(Collections.emptyList());
+
         return toBeSaved;
     }
 

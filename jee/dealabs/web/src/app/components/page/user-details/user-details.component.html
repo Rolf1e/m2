@@ -1,0 +1,9 @@
+<div *ngIf="(user | async); else userNotFound ">
+    <p>{{ (user | async)?.pseudo}}</p>
+    <p>{{ (user | async)?.firstName}}</p>
+    <p>{{ (user | async)?.lastName}}</p>
+</div>
+
+<ng-template #userNotFound>
+    User was not found
+</ng-template>

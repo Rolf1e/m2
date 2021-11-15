@@ -2,7 +2,7 @@ package con.rolfie.dealabs.controller;
 
 import con.rolfie.dealabs.config.DealConfig;
 import con.rolfie.dealabs.config.UserConfig;
-import con.rolfie.dealabs.model.dto.NewDealDto;
+import con.rolfie.dealabs.model.dto.input.NewDealDto;
 import con.rolfie.dealabs.service.deal.DealService;
 import org.junit.Assert;
 import org.junit.Before;

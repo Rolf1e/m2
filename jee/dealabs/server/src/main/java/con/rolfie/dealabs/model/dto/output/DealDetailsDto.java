@@ -1,4 +1,4 @@
-package con.rolfie.dealabs.model.dto;
+package con.rolfie.dealabs.model.dto.output;
 
 import con.rolfie.dealabs.model.database.entity.DealDo;
 import lombok.AccessLevel;

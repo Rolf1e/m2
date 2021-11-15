@@ -1,9 +1,9 @@
 package con.rolfie.dealabs.controller;
 
 import con.rolfie.dealabs.exception.UserNotFoundException;
-import con.rolfie.dealabs.model.dto.DealDetailsDto;
-import con.rolfie.dealabs.model.dto.DealDto;
-import con.rolfie.dealabs.model.dto.NewDealDto;
+import con.rolfie.dealabs.model.dto.output.DealDetailsDto;
+import con.rolfie.dealabs.model.dto.output.DealDto;
+import con.rolfie.dealabs.model.dto.input.NewDealDto;
 import con.rolfie.dealabs.service.deal.DealService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,10 +38,10 @@ public class DealController {
     }
 
     @PostMapping(value = "/deals")
-    public final ResponseEntity<DealDto> create(@RequestBody final NewDealDto deal) {
+    public final ResponseEntity<String> create(@RequestBody final NewDealDto deal) {
         try {
-            final DealDto createdDeal = dealService.createAndSave(deal);
-            return ResponseEntity.created(URI.create("http://localhost:8080/deals/" + createdDeal.getId()))
+            final var createdDeal = dealService.createAndSave(deal);
+            return ResponseEntity.created(URI.create("/deals/" + createdDeal.getId()))
                     .build();
         } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
