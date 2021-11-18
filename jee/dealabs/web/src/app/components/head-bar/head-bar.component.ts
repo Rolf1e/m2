@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CookieService} from "ngx-cookie-service";
-import {LoginFormComponent} from "../page/login-form/login-form.component";
+import {LoginService} from "../../services/login_service";
 
 @Component({
     selector: 'app-head-bar',
@@ -11,7 +10,7 @@ export class HeadBarComponent implements OnInit {
 
     private _title = 'ULCO - Dealabs';
 
-    constructor(private _cookiesService: CookieService) {
+    constructor(private _loginService: LoginService) {
     }
 
     get title(): string {
@@ -22,12 +21,15 @@ export class HeadBarComponent implements OnInit {
     }
 
     public isLogged(): boolean {
-        return this._cookiesService.check(LoginFormComponent.COOKIE_BASIC_CREDENTIALS);
+        return this._loginService.isLogged();
+    }
+
+    public getNickName(): string {
+        return this._loginService.nickname;
     }
 
     public disconnect() {
-        this._cookiesService.delete(LoginFormComponent.COOKIE_BASIC_CREDENTIALS);
-
+        this._loginService.disconnect();
     }
 
 }

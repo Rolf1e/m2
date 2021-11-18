@@ -4,9 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {User} from "../../../model/api/user/user";
 import {LOGIN_USER_ROUTE} from "../../../config/path/api_paths";
 import {Login} from "../../../model/api/user/login";
-import {CookieService} from "ngx-cookie-service";
-import {BasicAuthService} from "../../../services/auth_service";
-import {Credentials} from "../../../infra/auth";
+import {LoginService} from "../../../services/login_service";
 
 @Component({
     selector: 'app-login-form',
@@ -24,8 +22,7 @@ export class LoginFormComponent implements OnInit {
 
     constructor(private _formBuilder: FormBuilder,
                 private _rest: HttpClient,
-                private _cookiesService: CookieService,
-                private _authService: BasicAuthService) {
+                private _loginService: LoginService) {
     }
 
     ngOnInit(): void {
@@ -40,7 +37,6 @@ export class LoginFormComponent implements OnInit {
 
     private onSuccess() {
         let data = this.loginUserForm.value;
-        let authorization = this._authService.getAuthorization(Credentials.create(data.nickname, data.password));
-        this._cookiesService.set(LoginFormComponent.COOKIE_BASIC_CREDENTIALS, authorization);
+        this._loginService.login(data.nickname, data.password);
     }
 }
