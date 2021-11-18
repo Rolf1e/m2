@@ -10,17 +10,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class NewUserDto {
 
-    private final String pseudo;
+    private final String nickname;
     private final String firstName;
     private final String lastName;
     private final String password;
 
     @JsonCreator
-    public static NewUserDto create(@JsonProperty("pseudo") final String pseudo,
+    public static NewUserDto create(@JsonProperty("nickname") final String nickname,
                                     @JsonProperty("first_name") final String firstName,
                                     @JsonProperty("last_name") final String lastName,
                                     @JsonProperty("password") final String password) {
 
-        return new NewUserDto(pseudo, firstName, lastName, password);
+        return new NewUserDto(nickname, firstName, lastName, password);
     }
 }

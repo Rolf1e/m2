@@ -11,7 +11,7 @@ public interface UserService {
 
     UserDto findById(final Long id) throws UserNotFoundException;
 
-    UserDto findByFirstName(final String name) throws UserNotFoundException;
+    UserDto findByNickNameAndPassword(final String nickname, final String password) throws UserNotFoundException;
 
     UserDto createAndSave(final NewUserDto user);
 }

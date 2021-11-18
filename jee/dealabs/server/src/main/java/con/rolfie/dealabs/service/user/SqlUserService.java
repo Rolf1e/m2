@@ -27,8 +27,8 @@ public class SqlUserService implements UserService {
     }
 
     @Override
-    public UserDto findByFirstName(final String name) throws UserNotFoundException {
-        return userRepository.findByFirstName(name)
+    public UserDto findByNickNameAndPassword(final String nickname, final String password) throws UserNotFoundException {
+        return userRepository.findByNicknameAndPassword(nickname, password)
                 .map(UserDto::from)
                 .orElseThrow(UserNotFoundException::new);
     }
@@ -40,7 +40,7 @@ public class SqlUserService implements UserService {
 
     private UserDo createFromInput(final NewUserDto user) {
         final var tobeSaved = new UserDo();
-        tobeSaved.setPseudo(user.getPseudo());
+        tobeSaved.setNickname(user.getNickname());
         tobeSaved.setLastName(user.getLastName());
         tobeSaved.setFirstName(user.getFirstName());
         tobeSaved.setPassword(user.getPassword());

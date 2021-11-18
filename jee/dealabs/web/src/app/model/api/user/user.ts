@@ -1,13 +1,13 @@
 export class User {
 
     private readonly _id: number;
-    private readonly _pseudo: string;
+    private readonly _nickname: string;
     private readonly _firstName: string;
     private readonly _lastName: string;
 
-    constructor(id: number, pseudo: string, firstName: string) {
+    constructor(id: number, nickname: string, firstName: string) {
         this._id = id;
-        this._pseudo = pseudo;
+        this._nickname = nickname;
         this._firstName = firstName;
     }
 
@@ -15,8 +15,8 @@ export class User {
         return this._id;
     }
 
-    get pseudo(): string {
-        return this._pseudo;
+    get nickname(): string {
+        return this._nickname;
     }
 
     get firstName(): string {

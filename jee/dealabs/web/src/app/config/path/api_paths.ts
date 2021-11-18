@@ -7,4 +7,5 @@ export const DEALS_DETAILS_ROUTE: string = PUBLIC_ROUTE + "/deals/details/{id}";
 export const CREATE_DEAL_ROUTE: string = BASE_API_ROUTE + "/deals";
 
 export const CREATE_USER_ROUTE: string = PUBLIC_ROUTE + "/users";
+export const LOGIN_USER_ROUTE: string = PUBLIC_ROUTE + "/users/login";
 export const USERS_DETAILS_ROUTE: string = BASE_API_ROUTE + "/users/{id}";

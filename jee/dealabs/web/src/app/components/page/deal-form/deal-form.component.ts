@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {CREATE_DEAL_ROUTE} from "../../../config/path/api_paths";
 import {Router} from "@angular/router";
-import {Deal} from "../../../model/api/deals";
-import {NewDealDto} from "../../../model/api/new_deal";
+import {Deal} from "../../../model/api/deal/deals";
+import {NewDealDto} from "../../../model/api/deal/new_deal";
 import {BasicHttpClient} from "../../../infra/http_client";
-import {Credentials} from "../../../infra/auth";
 import {Objects} from "../../../utils/objects";
 
 @Component({
@@ -35,7 +34,7 @@ export class DealFormComponent implements OnInit {
     }
 
     onSubmit(): void {
-        this._rest.post<Deal, NewDealDto>(CREATE_DEAL_ROUTE, NewDealDto.from(this.createDealForm.value), Credentials.create('tigran', 'a'))
+        this._rest.post<Deal, NewDealDto>(CREATE_DEAL_ROUTE, NewDealDto.from(this.createDealForm.value))
             .subscribe(response => this.navigateOnSuccess(Objects.requireNonNull(response.headers.get('Location'))));
     }
 

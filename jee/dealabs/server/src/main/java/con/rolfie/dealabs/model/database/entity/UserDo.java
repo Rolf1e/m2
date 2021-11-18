@@ -14,8 +14,8 @@ public class UserDo {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "pseudo")
-    private String pseudo;
+    @Column(name = "nickname")
+    private String nickname;
 
     @Column(name = "first_name")
     private String firstName;

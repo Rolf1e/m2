@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {map, Observable} from "rxjs";
-import {User} from "../../../model/api/user";
+import {User} from "../../../model/api/user/user";
 import {BasicHttpClient} from "../../../infra/http_client";
 import {ActivatedRoute} from "@angular/router";
 import {USERS_DETAILS_ROUTE} from "../../../config/path/api_paths";
-import {Credentials} from "../../../infra/auth";
 import {Objects} from "../../../utils/objects";
 
 @Component({
@@ -35,10 +34,8 @@ export class UserDetailsComponent implements OnInit {
     }
 
     private fetchUser(id: number): Observable<User> {
-        return this._rest.get<User>(
-            USERS_DETAILS_ROUTE.replace('{id}', String(id)),
-            Credentials.create('tigran', 'a') // TODO read from cache
-        ).pipe(map(response => Objects.requireNonNull(response.body)));
+        return this._rest.get<User>(USERS_DETAILS_ROUTE.replace('{id}', String(id)))
+            .pipe(map(response => Objects.requireNonNull(response.body)));
     }
 
 }

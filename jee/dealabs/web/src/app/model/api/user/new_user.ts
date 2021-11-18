@@ -1,6 +1,6 @@
 export class NewUser {
 
-    private pseudo: string;
+    private nickname: string;
     private firstName: string;
     private lastName: string;
     private password: string;
@@ -10,15 +10,15 @@ export class NewUser {
             throw new Error("Failed to create new user");
         }
         return new NewUser(
-            data.pseudo,
+            data.nickname,
             data.first_name,
             data.last_name,
             data.password
         );
     }
 
-    private constructor(pseudo: string, firstName: string, lastName: string, password: string) {
-        this.pseudo = pseudo;
+    private constructor(nickname: string, firstName: string, lastName: string, password: string) {
+        this.nickname = nickname;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

@@ -1,6 +1,7 @@
 package con.rolfie.dealabs.controller;
 
 import con.rolfie.dealabs.exception.UserNotFoundException;
+import con.rolfie.dealabs.model.dto.input.LoginDto;
 import con.rolfie.dealabs.model.dto.input.NewUserDto;
 import con.rolfie.dealabs.model.dto.output.UserDto;
 import con.rolfie.dealabs.service.user.UserService;
@@ -21,6 +22,16 @@ public class UserController {
         final var createdUser = userService.createAndSave(user);
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId()))
                 .build();
+    }
+
+    @PostMapping("/public/users/login")
+    public final ResponseEntity<UserDto> login(@RequestBody final LoginDto login) {
+        try {
+            return ResponseEntity.ok(userService.findByNickNameAndPassword(login.getNickname(), login.getPassword()));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.notFound()
+                    .build();
+        }
     }
 
     @GetMapping("/users/{id}")

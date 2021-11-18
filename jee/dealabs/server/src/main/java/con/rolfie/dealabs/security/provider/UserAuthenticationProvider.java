@@ -1,7 +1,6 @@
 package con.rolfie.dealabs.security.provider;
 
 import con.rolfie.dealabs.exception.UserNotFoundException;
-import con.rolfie.dealabs.model.dto.output.UserDto;
 import con.rolfie.dealabs.model.security.AppUser;
 import con.rolfie.dealabs.service.user.UserService;
 import lombok.AccessLevel;
@@ -30,9 +29,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         final var name = authentication.getName();
         try {
             final var credentials = (String) authentication.getCredentials();
-            final var byFirstName = userService.findByFirstName(name);
+            final var user = userService.findByNickNameAndPassword(name, credentials);
             return new UsernamePasswordAuthenticationToken(
-                    AppUser.create(byFirstName.getFirstName(), credentials, getAuthorities()),
+                    AppUser.create(user.getFirstName(), credentials, getAuthorities()),
                     credentials,
                     getAuthorities()
             );

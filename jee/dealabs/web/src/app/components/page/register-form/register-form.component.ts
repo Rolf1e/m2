@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {User} from "../../../model/api/user";
+import {User} from "../../../model/api/user/user";
 import {CREATE_USER_ROUTE} from "../../../config/path/api_paths";
-import {NewUser} from "../../../model/api/new_user";
+import {NewUser} from "../../../model/api/user/new_user";
 import {Router} from "@angular/router";
 import {Objects} from "../../../utils/objects";
 
@@ -15,7 +15,7 @@ import {Objects} from "../../../utils/objects";
 export class RegisterFormComponent implements OnInit {
 
     createUserForm = this._formBuilder.group({
-        'pseudo': '',
+        'nickname': '',
         'first_name': '',
         'last_name': '',
         'password': '',
@@ -33,8 +33,6 @@ export class RegisterFormComponent implements OnInit {
     onSubmit(): void {
         let data = this.createUserForm.value;
         if (data.password !== data.password2) {
-            console.log(data.password);
-            console.log(data.password2);
             throw new Error("Passwords are different");
         }
 

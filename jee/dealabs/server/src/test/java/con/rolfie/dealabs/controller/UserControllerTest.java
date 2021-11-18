@@ -52,7 +52,7 @@ public class UserControllerTest {
 
         final var user = Objects.requireNonNull(response.getBody());
 
-        Assert.assertEquals("rolfie", user.getPseudo());
+        Assert.assertEquals("rolfie", user.getNickname());
         Assert.assertEquals("tigran", user.getFirstName());
         Assert.assertEquals("tigran", user.getLastName());
     }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Deal} from "../../../model/api/deals";
+import {Deal} from "../../../model/api/deal/deals";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {DEALS_ROUTE} from "../../../config/path/api_paths";

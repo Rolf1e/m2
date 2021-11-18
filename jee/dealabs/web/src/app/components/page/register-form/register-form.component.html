@@ -1,10 +1,11 @@
+<app-head-bar></app-head-bar>
 <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
 
     <div>
-        <label for="pseudo">
+        <label for="nickname">
             Pseudo
         </label>
-        <input id="pseudo" type="text" formControlName="pseudo">
+        <input id="nickname" type="text" formControlName="nickname">
     </div>
 
     <div>

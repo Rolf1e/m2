@@ -9,7 +9,7 @@ create table tbl_user
     first_name varchar(255) null,
     last_name  varchar(255) null,
     password   varchar(255) null,
-    pseudo     varchar(255) null
+    nickname     varchar(255) null
 );
 
 -- DEAL

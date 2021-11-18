@@ -1,5 +1,7 @@
+<app-head-bar></app-head-bar>
+
 <div *ngIf="(user | async); else userNotFound ">
-    <p>{{ (user | async)?.pseudo}}</p>
+    <p>{{ (user | async)?.nickname}}</p>
     <p>{{ (user | async)?.firstName}}</p>
     <p>{{ (user | async)?.lastName}}</p>
 </div>

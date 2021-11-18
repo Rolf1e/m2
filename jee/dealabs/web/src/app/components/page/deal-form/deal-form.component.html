@@ -1,61 +1,62 @@
+<app-head-bar></app-head-bar>
 <form [formGroup]="createDealForm" (ngSubmit)="onSubmit()">
 
-  <div>
-    <label for="title">
-      Title
-    </label>
-    <input id="title" type="text" formControlName="title">
-  </div>
+    <div>
+        <label for="title">
+            Title
+        </label>
+        <input id="title" type="text" formControlName="title">
+    </div>
 
-  <div>
-    <label for="description">
-      Description
-    </label>
-    <input id="description" type="text" formControlName="description">
-  </div>
+    <div>
+        <label for="description">
+            Description
+        </label>
+        <input id="description" type="text" formControlName="description">
+    </div>
 
-  <div>
-    <label for="priceOld">
-      Old price
-    </label>
-    <input id="priceOld" type="text" formControlName="priceOld">
-  </div>
+    <div>
+        <label for="priceOld">
+            Old price
+        </label>
+        <input id="priceOld" type="text" formControlName="priceOld">
+    </div>
 
-  <div>
-    <label for="priceNew">
-      New price
-    </label>
-    <input id="priceNew" type="text" formControlName="priceNew">
-  </div>
+    <div>
+        <label for="priceNew">
+            New price
+        </label>
+        <input id="priceNew" type="text" formControlName="priceNew">
+    </div>
 
-  <div>
-    <label for="shopName">
-      Shop name
-    </label>
-    <input id="shopName" type="text" formControlName="shopName">
-  </div>
+    <div>
+        <label for="shopName">
+            Shop name
+        </label>
+        <input id="shopName" type="text" formControlName="shopName">
+    </div>
 
-  <div>
-    <label for="promoCode">
-      Code promo
-    </label>
-    <input id="promoCode" type="text" formControlName="promoCode">
-  </div>
+    <div>
+        <label for="promoCode">
+            Code promo
+        </label>
+        <input id="promoCode" type="text" formControlName="promoCode">
+    </div>
 
-  <div>
-    <label for="creatorId">
-      Creator id
-    </label>
-    <input id="creatorId" type="text" formControlName="creatorId">
-  </div>
+    <div>
+        <label for="creatorId">
+            Creator id
+        </label>
+        <input id="creatorId" type="text" formControlName="creatorId">
+    </div>
 
-  <div>
-    <label for="imgUrl">
-      Image url
-    </label>
-    <input id="imgUrl" type="text" formControlName="imgUrl">
-  </div>
+    <div>
+        <label for="imgUrl">
+            Image url
+        </label>
+        <input id="imgUrl" type="text" formControlName="imgUrl">
+    </div>
 
-  <button class="button" type="submit">Create</button>
+    <button class="button" type="submit">Create</button>
 
 </form>

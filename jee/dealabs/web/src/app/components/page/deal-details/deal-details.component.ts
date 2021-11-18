@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Deal} from "../../../model/api/deals";
+import {Deal} from "../../../model/api/deal/deals";
 import {Observable} from "rxjs";
 import {DEAL_ROUTE, DEALS_DETAILS_ROUTE} from "../../../config/path/api_paths";
-import {DealDetails} from "../../../model/api/details";
+import {DealDetails} from "../../../model/api/deal/details";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 
