@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,19 +64,18 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     public void removeShape(final IShape shape) {
         shapes.remove(shape);
         shape.removeShapeFromPane(this);
-        final ObserverParameters parameters = getParameters();
-        observers.forEach(observer -> observer.update(parameters));
+        updateObservers();
     }
 
     public void clear() {
         shapes.forEach(shape -> shape.removeShapeFromPane(this));
         shapes.clear();
-        final ObserverParameters parameters = getParameters();
-        observers.forEach(observer -> observer.update(parameters));
+        updateObservers();
     }
 
-    private ObserverParameters getParameters() {
-        return ObserverParameters.create(shapes.size(), getSelectedShapes().size());
+    public void updateObservers() {
+        final ObserverParameters parameters = getParameters();
+        observers.forEach(observer -> observer.update(parameters));
     }
 
     @Override
@@ -89,7 +87,11 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         return observers.iterator();
     }
 
-    public Collection<IShape> getSelectedShapes() {
-        return selectionHandler.getSelectedShapes();
+    public List<IShape> getSelectedShapes() {
+        return new ArrayList<>(selectionHandler.getSelectedShapes());
+    }
+
+    private ObserverParameters getParameters() {
+        return ObserverParameters.create(shapes.size(), getSelectedShapes().size());
     }
 }

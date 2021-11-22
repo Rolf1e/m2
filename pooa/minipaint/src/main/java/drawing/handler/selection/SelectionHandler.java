@@ -39,18 +39,24 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
 
         if (selected.isEmpty()) { // Clicked on nothing => we remove all
             removeAllFromSelected();
-            return;
+        } else {
+            updateSelectionWhenClickOnShape(event, selected.get());
         }
 
-        if (isSelected(selected.get())) {
+        drawingPane.updateObservers();
+    }
+
+    private void updateSelectionWhenClickOnShape(final MouseEvent event,
+                                                 final IShape selected) {
+        if (isSelected(selected)) {
             if (event.isShiftDown()) {
-                toggleSelection(selected.get());
+                toggleSelection(selected);
             }
         } else {
             if (!event.isShiftDown()) {
                 removeAllFromSelected();
             }
-            addToSelected(selected.get());
+            addToSelected(selected);
         }
     }
 

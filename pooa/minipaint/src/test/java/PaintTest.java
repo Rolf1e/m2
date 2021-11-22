@@ -10,10 +10,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class PaintTest extends ApplicationTest {
 
@@ -101,22 +102,30 @@ public class PaintTest extends ApplicationTest {
     }
 
     @Test
-    public void should_update_status_bar() {
-
+    public void should_select_rectange() {
         should_draw_rectangle();
-        assertTextInStatusBar("1 forme(s)");
+        clickOn(".rectangle");
+
+        final var selectedShapes = app.getDrawingPane().getSelectedShapes();
+        assertEquals(1, selectedShapes.size());
+    }
+
+    @Test
+    public void should_update_status_bar() {
+        should_select_rectange();
+        assertTextInStatusBar(Arrays.asList("1 forme(s)", "1 selected forme(s)"));
 
         should_clear();
-        assertTextInStatusBar("0 forme(s)");
+        assertTextInStatusBar(Arrays.asList("0 forme(s)", "0 selected forme(s)"));
 
     }
 
-    private void assertTextInStatusBar(String s) {
+    private void assertTextInStatusBar(final List<String> expectedTextInStatusBar) {
         for (Iterator<Observer> it = app.getDrawingPane().getObservers(); it.hasNext(); ) {
             final Observer observer = it.next();
             if (observer instanceof StatusBarShapesObserver) {
                 final StatusBarShapesObserver statusBarShapesObserver = (StatusBarShapesObserver) observer;
-                Assert.assertEquals(s, statusBarShapesObserver.getText());
+                Assert.assertEquals(expectedTextInStatusBar, statusBarShapesObserver.getText());
                 return;
             }
         }
