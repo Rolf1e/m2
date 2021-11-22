@@ -43,7 +43,7 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
         }
 
         if (isSelected(selected.get())) {
-            if (event.isShiftDown()) { // If already selected
+            if (event.isShiftDown()) {
                 toggleSelection(selected.get());
             }
         } else {
@@ -52,9 +52,8 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
             }
             addToSelected(selected.get());
         }
-
-        System.out.println("Selected shapes: " + selectedShapes);
     }
+
     private void toggleSelection(final IShape shape) {
         if (isSelected(shape)) {
             removeFromSelected(shape);
@@ -78,7 +77,6 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
     }
 
     private void removeAllFromSelected() {
-        System.out.println("Remove all !");
         selectedShapes.forEach(shape -> shape.setSelected(false));
         selectedShapes.clear();
     }
