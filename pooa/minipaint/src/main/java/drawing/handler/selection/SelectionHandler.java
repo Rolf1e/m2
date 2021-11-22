@@ -8,6 +8,7 @@ import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.StreamSupport;
 
 public class SelectionHandler implements EventHandler<MouseEvent> {
 
@@ -32,39 +33,28 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(final MouseEvent event) {
-        if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
-            selectShapes(event);
+        final var selected = StreamSupport.stream(drawingPane.spliterator(), false)
+                .filter(shape -> shape.isOn(event.getX(), event.getY()))
+                .findFirst();
+
+        if (selected.isEmpty()) { // Clicked on nothing => we remove all
+            removeAllFromSelected();
+            return;
+        }
+
+        if (isSelected(selected.get())) {
+            if (event.isShiftDown()) { // If already selected
+                toggleSelection(selected.get());
+            }
+        } else {
+            if (!event.isShiftDown()) {
+                removeAllFromSelected();
+            }
+            addToSelected(selected.get());
         }
 
         System.out.println("Selected shapes: " + selectedShapes);
     }
-
-    private void selectShapes(final MouseEvent event) {
-        for (final var shape : drawingPane) {
-            selectShapes(event, shape);
-        }
-    }
-
-    private void selectShapes(final MouseEvent event,
-                              final IShape shape) {
-
-        if (shape.isOn(event.getX(), event.getY())) {
-            selectShapesWhenUnderCursor(event, shape);
-        } else {
-            removeAllFromSelected();
-        }
-    }
-
-    private void selectShapesWhenUnderCursor(final MouseEvent event,
-                                             final IShape shape) {
-
-        if (!event.isShiftDown()) { // Shift is not pressed
-            removeAllFromSelected();
-        }
-
-        toggleSelection(shape);
-    }
-
     private void toggleSelection(final IShape shape) {
         if (isSelected(shape)) {
             removeFromSelected(shape);
