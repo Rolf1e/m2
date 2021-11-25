@@ -1,6 +1,6 @@
 import drawing.PaintApplication;
-import drawing.handlers.bar.Observer;
-import drawing.handlers.bar.StatusBarShapesObserver;
+import drawing.handlers.bar.observers.Observer;
+import drawing.handlers.bar.observers.StatusBar;
 import drawing.handlers.dto.Triangle;
 import drawing.shapes.adapter.ShapeAdapter;
 import javafx.scene.shape.Ellipse;
@@ -131,9 +131,9 @@ public class PaintTest extends ApplicationTest {
     private void assertTextInStatusBar(final List<String> expectedTextInStatusBar) {
         for (Iterator<Observer> it = app.getDrawingPane().getObservers(); it.hasNext(); ) {
             final Observer observer = it.next();
-            if (observer instanceof StatusBarShapesObserver) {
-                final StatusBarShapesObserver statusBarShapesObserver = (StatusBarShapesObserver) observer;
-                Assert.assertEquals(expectedTextInStatusBar, statusBarShapesObserver.getText());
+            if (observer instanceof StatusBar) {
+                final StatusBar statusBar = (StatusBar) observer;
+                Assert.assertEquals(expectedTextInStatusBar, statusBar.getText());
                 return;
             }
         }

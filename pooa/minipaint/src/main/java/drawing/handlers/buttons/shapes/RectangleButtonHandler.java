@@ -3,6 +3,8 @@ package drawing.handlers.buttons.shapes;
 import drawing.panes.DrawingPane;
 import drawing.shapes.IShape;
 import drawing.shapes.adapter.ShapeAdapter;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -10,7 +12,11 @@ import javafx.scene.shape.Rectangle;
  */
 public class RectangleButtonHandler extends ShapeButtonHandler {
 
-    public RectangleButtonHandler(DrawingPane drawingPane) {
+    public static EventHandler<Event> create(final DrawingPane drawingPane) {
+        return new RectangleButtonHandler(drawingPane);
+    }
+
+    private RectangleButtonHandler(DrawingPane drawingPane) {
         super(drawingPane);
     }
 

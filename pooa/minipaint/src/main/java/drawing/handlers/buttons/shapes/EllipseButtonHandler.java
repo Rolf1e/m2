@@ -3,6 +3,8 @@ package drawing.handlers.buttons.shapes;
 import drawing.panes.DrawingPane;
 import drawing.shapes.IShape;
 import drawing.shapes.adapter.ShapeAdapter;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.shape.Ellipse;
 
 /**
@@ -10,7 +12,11 @@ import javafx.scene.shape.Ellipse;
  */
 public class EllipseButtonHandler extends ShapeButtonHandler {
 
-    public EllipseButtonHandler(DrawingPane drawingPane) {
+    public static EventHandler<Event> create(final DrawingPane drawingPane) {
+        return new EllipseButtonHandler(drawingPane);
+    }
+
+    private EllipseButtonHandler(DrawingPane drawingPane) {
         super(drawingPane);
     }
 

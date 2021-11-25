@@ -1,4 +1,4 @@
-package drawing.handlers.bar;
+package drawing.handlers.bar.observers;
 
 import lombok.Getter;
 
