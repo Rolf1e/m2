@@ -2,6 +2,7 @@ package drawing;
 
 import drawing.handler.bar.StatusBarShapesObserver;
 import drawing.handler.button.ClearButtonHandler;
+import drawing.handler.button.DeleteButtonHandler;
 import drawing.handler.button.shapes.EllipseButtonHandler;
 import drawing.handler.button.shapes.RectangleButtonHandler;
 import drawing.handler.button.shapes.TriangleButtonHandler;
@@ -31,6 +32,7 @@ public class PaintApplication extends Application {
     private Button rectangleButton;
     private Button circleButton;
     private Button triangleButton;
+    private Button deleteButton;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -46,7 +48,7 @@ public class PaintApplication extends Application {
 
         HBox hBox = new HBox();
         clearButton = new Button("Clear");
-        clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(drawingPane));
+        clearButton.addEventFilter(ActionEvent.ACTION, ClearButtonHandler.create(drawingPane));
 
         rectangleButton = new Button("Rectangle");
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
@@ -57,7 +59,10 @@ public class PaintApplication extends Application {
         triangleButton = new Button("Triangle");
         triangleButton.addEventFilter(ActionEvent.ACTION, TriangleButtonHandler.create(drawingPane));
 
-        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton);
+        deleteButton = new Button("Delete selection");
+        deleteButton.addEventFilter(ActionEvent.ACTION, DeleteButtonHandler.create(drawingPane));
+
+        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton, deleteButton);
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");

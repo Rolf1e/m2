@@ -120,6 +120,14 @@ public class PaintTest extends ApplicationTest {
 
     }
 
+    @Test
+    public void should_delete_selected_and_empty_status_bar() {
+        should_select_rectange();
+        clickOn("Delete selection");
+
+        assertTextInStatusBar(Arrays.asList("0 forme(s)", "0 selected forme(s)"));
+    }
+
     private void assertTextInStatusBar(final List<String> expectedTextInStatusBar) {
         for (Iterator<Observer> it = app.getDrawingPane().getObservers(); it.hasNext(); ) {
             final Observer observer = it.next();

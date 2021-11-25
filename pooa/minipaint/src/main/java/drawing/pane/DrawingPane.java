@@ -64,6 +64,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     public void removeShape(final IShape shape) {
         shapes.remove(shape);
         shape.removeShapeFromPane(this);
+        selectionHandler.removeFromSelected(shape);
         updateObservers();
     }
 
