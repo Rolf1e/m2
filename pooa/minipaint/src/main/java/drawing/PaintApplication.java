@@ -1,7 +1,7 @@
 package drawing;
 
-import drawing.handlers.bar.ToolBar;
-import drawing.handlers.bar.observers.StatusBar;
+import drawing.bar.tool.ToolBar;
+import drawing.bar.status.StatusBar;
 import drawing.panes.DrawingPane;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -50,7 +50,7 @@ public class PaintApplication extends Application {
     }
 
     private void createToolBar(HBox hBox) {
-        final var toolBar = ToolBar.create(drawingPane);
+        final var toolBar = ToolBar.createWithButtons(drawingPane);
         hBox.getChildren()
                 .addAll(toolBar.getButtons());
     }

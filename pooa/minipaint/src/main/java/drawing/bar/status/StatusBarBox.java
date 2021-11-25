@@ -1,9 +1,9 @@
-package drawing.handlers.bar.observers;
+package drawing.bar.status;
 
 import javafx.scene.control.Label;
 import lombok.Getter;
 
-public class StatusBarBox {
+class StatusBarBox {
 
     @Getter
     private final Label label;

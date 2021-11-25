@@ -1,7 +1,7 @@
 package drawing.panes;
 
-import drawing.handlers.bar.observers.Observer;
-import drawing.handlers.bar.observers.ObserverParameters;
+import drawing.bar.status.observers.Observer;
+import drawing.bar.status.observers.ObserverParameters;
 import drawing.handlers.mouse.MouseMoveHandler;
 import drawing.handlers.selection.SelectionHandler;
 import drawing.shapes.IShape;

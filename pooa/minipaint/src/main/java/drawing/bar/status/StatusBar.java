@@ -1,5 +1,7 @@
-package drawing.handlers.bar.observers;
+package drawing.bar.status;
 
+import drawing.bar.status.observers.Observer;
+import drawing.bar.status.observers.ObserverParameters;
 import javafx.scene.layout.HBox;
 
 import java.util.Arrays;
