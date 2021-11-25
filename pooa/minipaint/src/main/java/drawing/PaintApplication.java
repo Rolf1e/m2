@@ -1,12 +1,12 @@
 package drawing;
 
-import drawing.handler.bar.StatusBarShapesObserver;
-import drawing.handler.button.ClearButtonHandler;
-import drawing.handler.button.DeleteButtonHandler;
-import drawing.handler.button.shapes.EllipseButtonHandler;
-import drawing.handler.button.shapes.RectangleButtonHandler;
-import drawing.handler.button.shapes.TriangleButtonHandler;
-import drawing.pane.DrawingPane;
+import drawing.handlers.bar.StatusBarShapesObserver;
+import drawing.handlers.buttons.ClearButtonHandler;
+import drawing.handlers.buttons.DeleteButtonHandler;
+import drawing.handlers.buttons.shapes.EllipseButtonHandler;
+import drawing.handlers.buttons.shapes.RectangleButtonHandler;
+import drawing.handlers.buttons.shapes.TriangleButtonHandler;
+import drawing.panes.DrawingPane;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;

@@ -1,4 +1,4 @@
-package drawing.handler.bar;
+package drawing.handlers.bar;
 
 public interface Observer {
 

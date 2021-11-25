@@ -1,4 +1,4 @@
-package drawing.handler.dto;
+package drawing.handlers.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

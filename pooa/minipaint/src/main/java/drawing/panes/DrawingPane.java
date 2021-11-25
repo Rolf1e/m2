@@ -1,10 +1,10 @@
-package drawing.pane;
+package drawing.panes;
 
-import drawing.handler.bar.Observer;
-import drawing.handler.bar.ObserverParameters;
-import drawing.handler.mouse.MouseMoveHandler;
-import drawing.handler.selection.SelectionHandler;
-import drawing.shape.IShape;
+import drawing.handlers.bar.Observer;
+import drawing.handlers.bar.ObserverParameters;
+import drawing.handlers.mouse.MouseMoveHandler;
+import drawing.handlers.selection.SelectionHandler;
+import drawing.shapes.IShape;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;

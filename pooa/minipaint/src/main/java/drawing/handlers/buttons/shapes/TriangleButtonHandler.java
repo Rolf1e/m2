@@ -1,10 +1,10 @@
-package drawing.handler.button.shapes;
+package drawing.handlers.buttons.shapes;
 
-import drawing.handler.dto.Point;
-import drawing.handler.dto.Triangle;
-import drawing.pane.DrawingPane;
-import drawing.shape.IShape;
-import drawing.shape.adapter.ShapeAdapter;
+import drawing.handlers.dto.Point;
+import drawing.handlers.dto.Triangle;
+import drawing.panes.DrawingPane;
+import drawing.shapes.IShape;
+import drawing.shapes.adapter.ShapeAdapter;
 
 public class TriangleButtonHandler extends ShapeButtonHandler {
 

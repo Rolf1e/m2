@@ -1,7 +1,7 @@
-package drawing.handler.selection;
+package drawing.handlers.selection;
 
-import drawing.pane.DrawingPane;
-import drawing.shape.IShape;
+import drawing.panes.DrawingPane;
+import drawing.shapes.IShape;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import lombok.Getter;

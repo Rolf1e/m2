@@ -1,6 +1,6 @@
-package drawing.shape.adapter;
+package drawing.shapes.adapter;
 
-import drawing.shape.IShape;
+import drawing.shapes.IShape;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 

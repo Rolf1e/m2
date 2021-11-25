@@ -1,4 +1,4 @@
-package drawing.handler.dto;
+package drawing.handlers.dto;
 
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;

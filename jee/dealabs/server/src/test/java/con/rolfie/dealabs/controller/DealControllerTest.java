@@ -2,6 +2,7 @@ package con.rolfie.dealabs.controller;
 
 import con.rolfie.dealabs.config.DealConfig;
 import con.rolfie.dealabs.config.UserConfig;
+import con.rolfie.dealabs.model.dto.input.DealTemperatureDto;
 import con.rolfie.dealabs.model.dto.input.NewDealDto;
 import con.rolfie.dealabs.service.deal.DealService;
 import org.junit.Assert;
@@ -109,4 +110,22 @@ public class DealControllerTest {
 
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
+
+    @Test
+    public void should_update_temperature_only_once() {
+        final var response = dealController.update(DealTemperatureDto.create(1L, "tigran", DealTemperatureDto.Direction.UP));
+
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        // We try update  UP again
+        final var secondResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", DealTemperatureDto.Direction.UP));
+
+        Assert.assertEquals(HttpStatus.I_AM_A_TEAPOT, secondResponse.getStatusCode());
+
+        // We try update DOWN
+        final var thirdResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", DealTemperatureDto.Direction.DOWN));
+        Assert.assertEquals(HttpStatus.OK, thirdResponse.getStatusCode());
+    }
+
+
 }

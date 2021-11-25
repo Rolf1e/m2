@@ -49,11 +49,9 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         final List<String> titles = items.stream()
                 .map(TodoItem::getTitle)
                 .collect(Collectors.toList());
-
 
         binding.todoList.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_checked, titles));
 

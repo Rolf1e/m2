@@ -1,9 +1,10 @@
 package con.rolfie.dealabs.controller;
 
 import con.rolfie.dealabs.exception.UserNotFoundException;
+import con.rolfie.dealabs.model.dto.input.DealTemperatureDto;
+import con.rolfie.dealabs.model.dto.input.NewDealDto;
 import con.rolfie.dealabs.model.dto.output.DealDetailsDto;
 import con.rolfie.dealabs.model.dto.output.DealDto;
-import con.rolfie.dealabs.model.dto.input.NewDealDto;
 import con.rolfie.dealabs.service.deal.DealService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,10 @@ public class DealController {
         return dealService.fetchDeal(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/deals/temperature")
+    public final ResponseEntity<String> update(@RequestBody final DealTemperatureDto temperature) {
     }
 
     @PostMapping(value = "/deals")

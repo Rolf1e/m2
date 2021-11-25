@@ -1,4 +1,4 @@
-package drawing.handler.bar;
+package drawing.handlers.bar;
 
 import javafx.scene.layout.HBox;
 

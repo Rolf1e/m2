@@ -1,7 +1,7 @@
-package drawing.handler.mouse;
+package drawing.handlers.mouse;
 
-import drawing.pane.DrawingPane;
-import drawing.shape.IShape;
+import drawing.panes.DrawingPane;
+import drawing.shapes.IShape;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 

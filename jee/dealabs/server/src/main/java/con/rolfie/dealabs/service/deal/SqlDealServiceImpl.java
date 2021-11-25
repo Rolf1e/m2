@@ -3,10 +3,10 @@ package con.rolfie.dealabs.service.deal;
 import con.rolfie.dealabs.exception.UserNotFoundException;
 import con.rolfie.dealabs.model.database.dao.DealRepository;
 import con.rolfie.dealabs.model.database.entity.DealDo;
-import con.rolfie.dealabs.model.database.entity.UserDo;
+import con.rolfie.dealabs.model.dto.input.DealTemperatureDto;
+import con.rolfie.dealabs.model.dto.input.NewDealDto;
 import con.rolfie.dealabs.model.dto.output.DealDetailsDto;
 import con.rolfie.dealabs.model.dto.output.DealDto;
-import con.rolfie.dealabs.model.dto.input.NewDealDto;
 import con.rolfie.dealabs.model.dto.output.UserDto;
 import con.rolfie.dealabs.service.user.UserService;
 import lombok.AccessLevel;
@@ -55,6 +55,11 @@ public class SqlDealServiceImpl implements DealService {
     public DealDto createAndSave(final NewDealDto newDeal) throws UserNotFoundException {
         final var byId = userService.findById(newDeal.getCreatorId());
         return DealDto.from(dealRepository.save(createFromInput(newDeal, byId)));
+    }
+
+    @Override
+    public boolean update(final DealTemperatureDto temperature) {
+        dealRepository.save()
     }
 
     private DealDo createFromInput(final NewDealDto newDeal,

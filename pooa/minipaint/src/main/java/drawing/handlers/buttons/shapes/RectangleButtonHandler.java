@@ -1,8 +1,8 @@
-package drawing.handler.button.shapes;
+package drawing.handlers.buttons.shapes;
 
-import drawing.pane.DrawingPane;
-import drawing.shape.IShape;
-import drawing.shape.adapter.ShapeAdapter;
+import drawing.panes.DrawingPane;
+import drawing.shapes.IShape;
+import drawing.shapes.adapter.ShapeAdapter;
 import javafx.scene.shape.Rectangle;
 
 /**

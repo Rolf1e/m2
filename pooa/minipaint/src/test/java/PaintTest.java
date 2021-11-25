@@ -1,8 +1,8 @@
 import drawing.PaintApplication;
-import drawing.handler.bar.Observer;
-import drawing.handler.bar.StatusBarShapesObserver;
-import drawing.handler.dto.Triangle;
-import drawing.shape.adapter.ShapeAdapter;
+import drawing.handlers.bar.Observer;
+import drawing.handlers.bar.StatusBarShapesObserver;
+import drawing.handlers.dto.Triangle;
+import drawing.shapes.adapter.ShapeAdapter;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;

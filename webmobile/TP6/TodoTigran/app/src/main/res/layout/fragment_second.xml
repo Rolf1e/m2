@@ -24,14 +24,14 @@
         <TextView
                 android:text="Add a new task"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView"/>
+                android:layout_height="wrap_content" android:id="@+id/defaultText"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:ems="10"
-                android:id="@+id/editTextTextPersonName"/>
+                android:id="@+id/inputText"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -39,10 +39,10 @@
             <Button
                     android:text="cancel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button" android:layout_weight="1"/>
+                    android:layout_height="wrap_content" android:id="@+id/cancelButton" android:layout_weight="1"/>
             <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button2" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:id="@+id/validateButton" android:layout_weight="1"
                     android:text="validate"/>
         </LinearLayout>
     </LinearLayout>
