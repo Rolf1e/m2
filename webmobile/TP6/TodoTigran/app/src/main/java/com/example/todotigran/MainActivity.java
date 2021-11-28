@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.todotigran.model.TodoItem;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadList() {
         final ListView listView = findViewById(R.id.todoList);
-        final List<String> titles = ItemsHolder.getInstance()
+        final List<String> titles = ItemsHolder.getInstance(this)
                 .getItems()
                 .stream()
                 .map(TodoItem::getTitle)
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.todoList);
         ItemsHolder.getInstance()
                 .delete(getSelectedItems(listView));
+
         recreate();
     }
 
