@@ -26,7 +26,6 @@ public class AddTodoActivity extends AppCompatActivity {
                 .toString();
 
         holder.addItem(TodoItem.newItem(text));
-        System.out.println(holder.getItems());
         finish();
     }
 }
