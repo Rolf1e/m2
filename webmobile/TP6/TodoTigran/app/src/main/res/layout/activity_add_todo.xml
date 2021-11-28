@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SecondFragment">
+        tools:context=".AddTodoActivity">
 
-    <TextView
-            android:id="@+id/textview_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-    />
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -31,7 +23,8 @@
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:ems="10"
-                android:id="@+id/inputText"/>
+                android:id="@+id/inputText"
+        />
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -39,12 +32,16 @@
             <Button
                     android:text="cancel"
                     android:layout_width="wrap_content"
+                    android:onClick="cancel"
                     android:layout_height="wrap_content" android:id="@+id/cancelButton" android:layout_weight="1"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/validateButton" android:layout_weight="1"
-                    android:text="validate"/>
+                    android:text="validate"
+                    android:onClick="validate"
+            />
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
