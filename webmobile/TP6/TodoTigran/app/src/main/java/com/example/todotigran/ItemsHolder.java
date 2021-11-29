@@ -41,16 +41,21 @@ public class ItemsHolder {
     }
 
     public synchronized void addItem(final TodoItem item) {
-        save(item);
         this.items.add(item);
+        save();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public synchronized void delete(final List<String> toDelete) {
+    public synchronized void delete() {
         items = items.stream()
-                .filter(item -> !toDelete.contains(item.getTitle()))
+                .filter(item -> !item.isSelected())
                 .collect(Collectors.toList());
-        System.out.println("removed " + toDelete);
+        save();
+    }
+
+    public void toggleSelectAt(final int index) {
+        Objects.requireNonNull(items.get(index))
+                .toggleSelect();
     }
 
     private static List<TodoItem> read(final Activity activity) {
@@ -73,13 +78,20 @@ public class ItemsHolder {
         return todos;
     }
 
-    private void save(final TodoItem item) {
+    private void save() {
         final File todoFile = new File(activity.getFilesDir(), TODO_TXT);
+        if (todoFile.exists()) {
+            todoFile.delete();
+        }
+
         try (final FileOutputStream outputStream = new FileOutputStream(todoFile, true);
              final OutputStreamWriter writer = new OutputStreamWriter(outputStream)
         ) {
-            writer.append(String.valueOf(item.getId())).append(',')
-                    .append(item.getTitle()).append('\n');
+            final ItemsHolder instance = ItemsHolder.getInstance();
+            for (final TodoItem item : instance.getItems()) {
+                writer.append(String.valueOf(item.getId())).append(',')
+                        .append(item.getTitle()).append('\n');
+            }
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,7 +101,4 @@ public class ItemsHolder {
         }
     }
 
-    private void delete(final TodoItem item) {
-
-    }
 }

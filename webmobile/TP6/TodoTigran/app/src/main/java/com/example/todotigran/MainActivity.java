@@ -5,10 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 .collect(Collectors.toList());
 
         listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_checked, titles));
+        listView.setOnItemClickListener((adapterView, view, i, l) -> ItemsHolder.getInstance().toggleSelectAt(i));
     }
 
     @Override
@@ -61,31 +59,9 @@ public class MainActivity extends AppCompatActivity {
     public void delete(final View view) {
         final ListView listView = findViewById(R.id.todoList);
         ItemsHolder.getInstance()
-                .delete(getSelectedItems(listView));
+                .delete();
 
         recreate();
     }
-
-    private List<String> getSelectedItems(final ListView listView) {
-        final SparseBooleanArray checkedItemPositions = listView.getCheckedItemPositions();
-
-        if (0 == checkedItemPositions.size()) {
-            return Collections.emptyList();
-        }
-
-        final List<String> selected = new ArrayList<>();
-        final ListAdapter adapter = listView.getAdapter();
-        final int size = adapter.getCount();
-
-        for (int i = 0; i < size; i++) {
-            final int key = checkedItemPositions.keyAt(i);
-            if (checkedItemPositions.get(key)) {
-                selected.add((String) adapter.getItem(key));
-            }
-        }
-
-        return selected;
-    }
-
 
 }
