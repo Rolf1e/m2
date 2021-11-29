@@ -1,24 +1,27 @@
 package com.example.todotigran.model;
 
 public class TodoItem {
-    private final String title;
-    private final boolean done;
 
-    public static TodoItem newItem(final String title) {
-        return new TodoItem(title, false);
+    private static int COUNT = 0;
+
+    private final int id;
+    private final String title;
+
+    public static synchronized TodoItem newItem(final String title) {
+        return new TodoItem(COUNT++, title);
     }
 
-    private TodoItem(final String title,
-                     final boolean done) {
+    private TodoItem(final int id,
+                     final String title) {
+        this.id = id;
         this.title = title;
-        this.done = done;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public boolean isDone() {
-        return done;
+    public int getId() {
+        return id;
     }
 }
