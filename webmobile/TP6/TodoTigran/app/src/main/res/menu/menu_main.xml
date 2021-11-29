@@ -3,4 +3,5 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.todotigran.MainActivity">
     <item android:title="Clear selected" android:id="@+id/clearButton"/>
+    <item android:title="Manual Save" android:id="@+id/saveButton"/>
 </menu>

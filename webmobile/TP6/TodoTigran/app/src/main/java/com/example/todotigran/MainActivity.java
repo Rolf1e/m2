@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.clearButton) {
             delete();
         }
+        if (item.getItemId() == R.id.saveButton) {
+            ItemsHolder.getInstance()
+                    .save();
+        }
 
         return super.onOptionsItemSelected(item);
     }

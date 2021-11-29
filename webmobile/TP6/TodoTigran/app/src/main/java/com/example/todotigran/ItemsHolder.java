@@ -78,7 +78,7 @@ public class ItemsHolder {
         return todos;
     }
 
-    private void save() {
+    public void save() {
         final File todoFile = new File(activity.getFilesDir(), TODO_TXT);
         if (todoFile.exists()) {
             todoFile.delete();
