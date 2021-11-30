@@ -3,8 +3,8 @@ package drawing.bar.tool;
 import drawing.commands.ClearCommand;
 import drawing.commands.DeleteCommand;
 import drawing.commands.groups.GroupCommand;
+import drawing.commands.groups.UnGroupCommand;
 import drawing.handlers.buttons.ButtonHandler;
-import drawing.handlers.buttons.groups.UnGroupButtonHandler;
 import drawing.handlers.buttons.shapes.EllipseButtonHandler;
 import drawing.handlers.buttons.shapes.RectangleButtonHandler;
 import drawing.handlers.buttons.shapes.TriangleButtonHandler;
@@ -55,7 +55,7 @@ public enum ToolBarButtonsConfig {
             case GROUP:
                 return ButtonHandler.create(GroupCommand.create(drawingPane));
             case UNGROUP:
-                return UnGroupButtonHandler.create(drawingPane);
+                return ButtonHandler.create(UnGroupCommand.create(drawingPane));
             default:
                 throw new IllegalStateException("Invalid config " + this);
         }
