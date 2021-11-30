@@ -17,26 +17,27 @@ class ButtonFactory {
     }
 
     public Button createJavaFxButtonWith(final ToolBarButtonsConfig config) {
-        final var style = config.getStyle();
-        final var button = buildButton(style);
+        final var button = buildButton(config);
         button.addEventFilter(config.getEvent(), config.getHandler(drawingPane));
         return button;
     }
 
-    private Button buildButton(Style style) {
+    private Button buildButton(final ToolBarButtonsConfig config) {
+        final Style style = config.getStyle();
         switch (style.getType()) {
             case TEXT_ONLY:
-                return new Button(style.getValue());
+                return new Button(config.getName());
             case ICON_ONLY:
-                return iconButton(style);
+                return iconButton(config.getName(), style);
             default:
                 throw new IllegalStateException("Invalid config");
         }
 
     }
 
-    private Button iconButton(final Style style) {
-        final var button = new Button();
+    private Button iconButton(final String name,
+                              final Style style) {
+        final var button = new Button(name);
         final var imageView = new ImageView(ResourcesUtils.loadResource(style.getValue()));
         button.setGraphic(imageView);
         return button;

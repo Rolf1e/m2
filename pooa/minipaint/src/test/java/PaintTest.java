@@ -1,8 +1,10 @@
 import drawing.PaintApplication;
-import drawing.bar.status.observers.Observer;
 import drawing.bar.status.StatusBar;
+import drawing.bar.status.observers.Observer;
 import drawing.handlers.dto.Triangle;
+import drawing.shapes.adapter.GroupShapeAdapter;
 import drawing.shapes.adapter.ShapeAdapter;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -43,11 +45,7 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_draw_circle() {
         // given:
-        clickOn("Circle");
-        moveBy(60, 60);
-
-        // when:
-        drag().dropBy(30, 30);
+        draw_circle();
         //press(MouseButton.PRIMARY); moveBy(30,30); release(MouseButton.PRIMARY);
 
         // then:
@@ -56,19 +54,31 @@ public class PaintTest extends ApplicationTest {
         assertFalse(it.hasNext());
     }
 
+    private void draw_circle() {
+        clickOn("Circle");
+        moveBy(60, 60);
+
+        // when:
+        drag().dropBy(30, 30);
+    }
+
     @Test
     public void should_draw_rectangle() {
         // given:
-        clickOn("Rectangle");
-        moveBy(0, 60);
-
-        // when:
-        drag().dropBy(70, 40);
+        draw_rectangle();
 
         // then:
         var it = app.getDrawingPane().getChildren().iterator();
         assertTrue(it.next() instanceof Rectangle);
         assertFalse(it.hasNext());
+    }
+
+    private void draw_rectangle() {
+        clickOn("Rectangle");
+        moveBy(0, 60);
+
+        // when:
+        drag().dropBy(70, 40);
     }
 
     @Test
@@ -120,14 +130,31 @@ public class PaintTest extends ApplicationTest {
 
     }
 
-//    @Test
-//    public void should_delete_selected_and_empty_status_bar() {
-    // TODO figure out how to click on image
-//        should_select_rectange();
-//        clickOn("Delete selection");
-//
-//        assertTextInStatusBar(Arrays.asList("0 forme(s)", "0 selected forme(s)"));
-//    }
+    @Test
+    public void should_delete_selected_and_empty_status_bar() {
+        should_select_rectange();
+        clickOn("Delete selection");
+
+        assertTextInStatusBar(Arrays.asList("0 forme(s)", "0 selected forme(s)"));
+    }
+
+    @Test
+    public void should_group_shapes() {
+        draw_rectangle();
+        draw_circle();
+
+        clickOn(".rectangle");
+
+        press(KeyCode.SHIFT)
+                .clickOn(".ellipse")
+                .release(KeyCode.SHIFT);
+
+        clickOn("Group");
+
+        final var shapes = app.getDrawingPane().getShapes();
+        Assert.assertEquals(GroupShapeAdapter.class, shapes.get(0).getClass());
+
+    }
 
     private void assertTextInStatusBar(final List<String> expectedTextInStatusBar) {
         for (Iterator<Observer> it = app.getDrawingPane().getObservers(); it.hasNext(); ) {

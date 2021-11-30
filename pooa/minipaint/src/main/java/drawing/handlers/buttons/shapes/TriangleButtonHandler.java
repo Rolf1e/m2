@@ -5,10 +5,12 @@ import drawing.handlers.dto.Triangle;
 import drawing.panes.DrawingPane;
 import drawing.shapes.IShape;
 import drawing.shapes.adapter.ShapeAdapter;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 
 public class TriangleButtonHandler extends ShapeButtonHandler {
 
-    public static TriangleButtonHandler create(final DrawingPane drawingPane) {
+    public static EventHandler<Event> create(final DrawingPane drawingPane) {
         return new TriangleButtonHandler(drawingPane);
     }
 
@@ -30,6 +32,5 @@ public class TriangleButtonHandler extends ShapeButtonHandler {
     private Point resolveLastPoint(final Point a, final Point b) {
         return Point.at(a.getX() - b.getX() / 2, a.getY() - b.getY() / 2);
     }
-
 
 }

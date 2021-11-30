@@ -13,7 +13,7 @@ public class ShapeAdapter implements IShape {
         return new ShapeAdapter(shape);
     }
 
-    private ShapeAdapter(Shape shape) {
+    private ShapeAdapter(final Shape shape) {
         this.shape = shape;
         this.selected = false;
     }
@@ -27,13 +27,10 @@ public class ShapeAdapter implements IShape {
     public void setSelected(final boolean selected) {
         this.selected = selected;
         if (selected) {
-            shape.getStyleClass()
-                    .add(".selected");
-            return;
+            shape.setStyle("-fx-stroke-width: 10;");
+        } else {
+            shape.setStyle("-fx-stroke-width: 3;");
         }
-
-        shape.getStyleClass()
-                .remove(".selected");
     }
 
     @Override
@@ -53,12 +50,12 @@ public class ShapeAdapter implements IShape {
     }
 
     @Override
-    public void addShapeToPane(final Pane pane) {
+    public void addTo(final Pane pane) {
         pane.getChildren().add(shape);
     }
 
     @Override
-    public void removeShapeFromPane(final Pane pane) {
+    public void removeFrom(final Pane pane) {
         pane.getChildren().remove(shape);
     }
 
