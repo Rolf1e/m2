@@ -11,7 +11,7 @@ public class GroupCommand implements Command {
 
     private final DrawingPane pane;
 
-    public static GroupCommand create(final DrawingPane pane) {
+    public static Command create(final DrawingPane pane) {
         return new GroupCommand(pane);
     }
 

@@ -14,7 +14,7 @@ public class UnGroupCommand implements Command {
 
     private final DrawingPane pane;
 
-    public static UnGroupCommand create(final DrawingPane pane) {
+    public static Command create(final DrawingPane pane) {
         return new UnGroupCommand(pane);
     }
 
