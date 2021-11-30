@@ -54,6 +54,10 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         observers.remove(observer);
     }
 
+    public void addShapes(final List<IShape> shapes) {
+        shapes.forEach(this::addShape);
+    }
+
     public void addShape(final IShape shape) {
         shapes.add(shape);
         shape.addTo(this);

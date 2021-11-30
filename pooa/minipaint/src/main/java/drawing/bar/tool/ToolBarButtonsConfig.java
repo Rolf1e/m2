@@ -1,12 +1,13 @@
 package drawing.bar.tool;
 
-import drawing.handlers.buttons.ClearButtonHandler;
-import drawing.handlers.buttons.DeleteButtonHandler;
+import drawing.commands.ClearCommand;
+import drawing.commands.DeleteCommand;
+import drawing.handlers.buttons.ButtonHandler;
+import drawing.handlers.buttons.groups.GroupButtonHandler;
 import drawing.handlers.buttons.groups.UnGroupButtonHandler;
 import drawing.handlers.buttons.shapes.EllipseButtonHandler;
 import drawing.handlers.buttons.shapes.RectangleButtonHandler;
 import drawing.handlers.buttons.shapes.TriangleButtonHandler;
-import drawing.handlers.buttons.groups.GroupButtonHandler;
 import drawing.panes.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,7 +43,7 @@ public enum ToolBarButtonsConfig {
     public final EventHandler<? super ActionEvent> getHandler(final DrawingPane drawingPane) {
         switch (this) {
             case CLEAR:
-                return ClearButtonHandler.create(drawingPane);
+                return ButtonHandler.create(ClearCommand.create(drawingPane));
             case RECTANGLE:
                 return RectangleButtonHandler.create(drawingPane);
             case CIRCLE:
@@ -50,7 +51,7 @@ public enum ToolBarButtonsConfig {
             case TRIANGLE:
                 return TriangleButtonHandler.create(drawingPane);
             case DELETE_SELECTION:
-                return DeleteButtonHandler.create(drawingPane);
+                return ButtonHandler.create(DeleteCommand.create(drawingPane));
             case GROUP:
                 return GroupButtonHandler.create(drawingPane);
             case UNGROUP:
