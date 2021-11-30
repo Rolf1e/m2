@@ -2,8 +2,8 @@ package drawing.bar.tool;
 
 import drawing.commands.ClearCommand;
 import drawing.commands.DeleteCommand;
+import drawing.commands.groups.GroupCommand;
 import drawing.handlers.buttons.ButtonHandler;
-import drawing.handlers.buttons.groups.GroupButtonHandler;
 import drawing.handlers.buttons.groups.UnGroupButtonHandler;
 import drawing.handlers.buttons.shapes.EllipseButtonHandler;
 import drawing.handlers.buttons.shapes.RectangleButtonHandler;
@@ -53,7 +53,7 @@ public enum ToolBarButtonsConfig {
             case DELETE_SELECTION:
                 return ButtonHandler.create(DeleteCommand.create(drawingPane));
             case GROUP:
-                return GroupButtonHandler.create(drawingPane);
+                return ButtonHandler.create(GroupCommand.create(drawingPane));
             case UNGROUP:
                 return UnGroupButtonHandler.create(drawingPane);
             default:
