@@ -12,17 +12,14 @@ public class DealTemperatureDto {
 
     private final Long dealId;
     private final String nickname;
-    private final Direction direction;
+    private final TemperatureDirection direction;
 
     @JsonCreator
     public static DealTemperatureDto create(@JsonProperty("deal_id") final Long dealId,
                                             @JsonProperty("nickname") final String nickname,
-                                            @JsonProperty("direction") final Direction direction) {
+                                            @JsonProperty("direction") final TemperatureDirection direction) {
 
         return new DealTemperatureDto(dealId, nickname, direction);
     }
 
-    public enum Direction {
-        UP, DOWN
-    }
 }

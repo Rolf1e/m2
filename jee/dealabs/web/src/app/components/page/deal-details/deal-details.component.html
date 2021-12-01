@@ -1,7 +1,9 @@
+<app-head-bar></app-head-bar>
 <div *ngIf="deal; else noDealFound">
   <p>{{ deal.title }}</p>
   <img src="{{ deal.imgUrl }}" alt="{{ deal.description}}" class="deal-img"/>
 </div>
+<app-temperature [temperature]="deal.temperature" [dealId]="deal.id" [nickname]="deal.creator"></app-temperature>
 <div *ngIf="(details | async)">
   <p>{{ (details | async)?.priceOld }}</p>
   <p>{{ (details | async)?.priceNew }}</p>

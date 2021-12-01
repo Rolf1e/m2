@@ -1,9 +1,12 @@
 <app-head-bar></app-head-bar>
 <div class="deal" *ngFor="let deal of deals | async">
   <img src="{{ deal.imgUrl }}" alt="{{ deal.description}}" class="deal-img"/>
-  <p> {{ deal.temperature }} </p>
   <p> {{ deal.title }} </p>
   <p> {{ deal.creator }} | <a href="{{ deal.shopLink }}"> {{ deal.shopName }} </a></p>
+
+
+  <app-temperature [temperature]="deal.temperature" [dealId]="deal.id" [nickname]="deal.creator"></app-temperature>
+
   <p> {{ deal.date }} </p>
   <a [title]="deal.title" [routerLink]="['/deals', deal.id]" [state]=" { data: deal } "> Details </a>
 </div>

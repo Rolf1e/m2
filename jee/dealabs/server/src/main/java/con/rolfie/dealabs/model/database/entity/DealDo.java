@@ -1,8 +1,6 @@
 package con.rolfie.dealabs.model.database.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "tbl_deal")
 @Data
-@NoArgsConstructor
 public class DealDo {
 
     @Id

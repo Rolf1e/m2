@@ -4,6 +4,7 @@ import con.rolfie.dealabs.config.DealConfig;
 import con.rolfie.dealabs.config.UserConfig;
 import con.rolfie.dealabs.model.dto.input.DealTemperatureDto;
 import con.rolfie.dealabs.model.dto.input.NewDealDto;
+import con.rolfie.dealabs.model.dto.input.TemperatureDirection;
 import con.rolfie.dealabs.service.deal.DealService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -38,7 +39,7 @@ public class DealControllerTest {
 
     @Test
     public void should_fetch_deals() {
-        final var response = dealController.fetchDeals();
+        final var response = dealController.fetchAll();
 
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
@@ -113,17 +114,17 @@ public class DealControllerTest {
 
     @Test
     public void should_update_temperature_only_once() {
-        final var response = dealController.update(DealTemperatureDto.create(1L, "tigran", DealTemperatureDto.Direction.UP));
+        final var response = dealController.update(DealTemperatureDto.create(1L, "tigran", TemperatureDirection.UP));
 
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
         // We try update  UP again
-        final var secondResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", DealTemperatureDto.Direction.UP));
+        final var secondResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", TemperatureDirection.UP));
 
         Assert.assertEquals(HttpStatus.I_AM_A_TEAPOT, secondResponse.getStatusCode());
 
         // We try update DOWN
-        final var thirdResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", DealTemperatureDto.Direction.DOWN));
+        final var thirdResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", TemperatureDirection.DOWN));
         Assert.assertEquals(HttpStatus.OK, thirdResponse.getStatusCode());
     }
 

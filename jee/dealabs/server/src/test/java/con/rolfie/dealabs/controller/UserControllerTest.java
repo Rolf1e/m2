@@ -46,7 +46,7 @@ public class UserControllerTest {
 
     @Test
     public void should_fetch_user() {
-        final var response = userController.fetchUser(1);
+        final var response = userController.fetchById(1);
 
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
@@ -59,7 +59,7 @@ public class UserControllerTest {
 
     @Test
     public void should_not_fetch_user() {
-        final var response = userController.fetchUser(100000);
+        final var response = userController.fetchById(100000);
 
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }

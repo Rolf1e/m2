@@ -34,6 +34,13 @@ public class SqlUserService implements UserService {
     }
 
     @Override
+    public UserDto findByNickName(final String nickname) throws UserNotFoundException {
+        return userRepository.findByNickname(nickname)
+                .map(UserDto::from)
+                .orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
     public UserDto createAndSave(final NewUserDto user) {
         return UserDto.from(userRepository.save(createFromInput(user)));
     }

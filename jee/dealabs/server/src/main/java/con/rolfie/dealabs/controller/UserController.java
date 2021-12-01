@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public final ResponseEntity<UserDto> fetchUser(@PathVariable("id") final long id) {
+    public final ResponseEntity<UserDto> fetchById(@PathVariable("id") final long id) {
         try {
             return ResponseEntity.ok(userService.findById(id));
         } catch (UserNotFoundException e) {

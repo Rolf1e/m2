@@ -3,7 +3,7 @@
 
     <div *ngIf="isLogged(); else loggedOut ">
         <p>@{{ this.getNickName() }}</p>
-        <p (click)="disconnect()"> Disconnect</p>
+        <button (click)="disconnect()"> Disconnect</button>
         <a routerLink='/deals/create'> + Post </a>
     </div>
 

@@ -1,0 +1,8 @@
+<div *ngIf="isLogged(); else noLogged">
+  <button (click)="plusOneDegree()">+1</button>
+  {{ temperature }} °
+  <button (click)="minusOneDegree()">-1</button>
+</div>
+<ng-template #noLogged>
+  <p>{{ temperature }}</p>
+</ng-template>

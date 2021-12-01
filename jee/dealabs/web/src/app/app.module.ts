@@ -12,6 +12,7 @@ import {RegisterFormComponent} from './components/page/register-form/register-fo
 import {HeadBarComponent} from './components/head-bar/head-bar.component';
 import {UserDetailsComponent} from './components/page/user-details/user-details.component';
 import {CookieService} from "ngx-cookie-service";
+import { TemperatureComponent } from './components/page/temperature/temperature.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import {CookieService} from "ngx-cookie-service";
         RegisterFormComponent,
         HeadBarComponent,
         UserDetailsComponent,
+        TemperatureComponent,
     ],
     imports: [
         BrowserModule,

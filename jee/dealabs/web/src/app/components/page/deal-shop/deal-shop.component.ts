@@ -28,4 +28,5 @@ export class DealShopComponent implements OnInit {
   get deals(): Observable<Deal[]> {
     return this._deals;
   }
+
 }

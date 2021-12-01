@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DealRepository extends JpaRepository<DealDo, Long> {
+
 }

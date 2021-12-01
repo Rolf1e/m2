@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserDo, Long> {
 
     Optional<UserDo> findByNicknameAndPassword(final String nickname, final String password);
+
+    Optional<UserDo> findByNickname(final String nickname);
+
 }

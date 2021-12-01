@@ -32,7 +32,7 @@ public class DealDto {
                 deal.getShopName(),
                 deal.getShopLink(),
                 deal.getTemperature(),
-                Objects.requireNonNull(deal.getCreator()).getFirstName(),
+                Objects.requireNonNull(deal.getCreator()).getNickname(),
                 deal.getDate(),
                 deal.getImgUrl(),
                 deal.getDescription()

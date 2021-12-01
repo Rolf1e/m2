@@ -1,5 +1,6 @@
 package con.rolfie.dealabs.service.deal;
 
+import con.rolfie.dealabs.exception.TemperatureException;
 import con.rolfie.dealabs.exception.UserNotFoundException;
 import con.rolfie.dealabs.model.database.entity.DealDo;
 import con.rolfie.dealabs.model.dto.input.DealTemperatureDto;
@@ -12,11 +13,13 @@ import java.util.Optional;
 
 public interface DealService {
 
-    List<DealDto> fetchOrderedDeals();
+    List<DealDto> findOrdered();
 
-    Optional<DealDto> fetchDeal(final long id);
+    Optional<DealDto> fetch(final long id);
 
     Optional<DealDetailsDto> fetchDetails(final long id);
+
+    Optional<Integer> fetchTemperature(final long id);
 
     /**
      * This method should checkout user informations and if it exists,
@@ -24,5 +27,5 @@ public interface DealService {
      */
     DealDto createAndSave(final NewDealDto newDeal) throws UserNotFoundException;
 
-    boolean update(final DealTemperatureDto temperature);
+    void update(final DealTemperatureDto temperature) throws TemperatureException;
 }
