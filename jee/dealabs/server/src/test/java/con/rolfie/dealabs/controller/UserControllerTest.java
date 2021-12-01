@@ -41,7 +41,7 @@ public class UserControllerTest {
 
         final var headers = response.getHeaders();
 
-        Assert.assertEquals(URI.create("http://localhost:8080/users/5"), headers.getLocation());
+        Assert.assertEquals(URI.create("/users/5"), headers.getLocation());
     }
 
     @Test

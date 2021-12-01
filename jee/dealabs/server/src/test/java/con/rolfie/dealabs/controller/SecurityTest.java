@@ -35,16 +35,16 @@ public class SecurityTest {
     @Test
     public void should_be_200() {
         Arrays.asList("/users/1")
-                .forEach(route -> checkStatusOnRoute(route, HttpStatus.OK, "tigran", "a"));
+                .forEach(route -> checkStatusOnRoute(route, HttpStatus.OK, "rolfie", "a"));
     }
 
 
     private void checkStatusOnRoute(final String route,
                                     final HttpStatus status,
-                                    final String username,
+                                    final String nickname,
                                     final String password) {
 
-        final var response = restTemplate.withBasicAuth(username, password)
+        final var response = restTemplate.withBasicAuth(nickname, password)
                 .getForEntity(route, Object.class);
 
         Assert.assertEquals(status, response.getStatusCode());

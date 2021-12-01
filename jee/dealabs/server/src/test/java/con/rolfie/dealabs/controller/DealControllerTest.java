@@ -77,7 +77,7 @@ public class DealControllerTest {
 
         final var deal = Objects.requireNonNull(response.getBody());
 
-        Assert.assertEquals("tigran", deal.getCreator());
+        Assert.assertEquals("rolfie", deal.getCreator());
         Assert.assertEquals(LocalDateTime.of(2021, 10, 12, 13, 57, 54), deal.getDate());
         Assert.assertEquals("G.Skill Trident Z Neo F4-4000C18D-32GTZN Module de mémoire 32 Go 2 x 16 Go DDR4 4000 MHzTypeDDR4 SDRAMCouleurNoir/Argent/RGBEAN4713294224156Référence du fabrica", deal.getDescription());
         Assert.assertEquals("https://static-pepper.dealabs.com/threads/raw/default/2220841_1/re/234x330/qt/60/2220841_1.jpg", deal.getImgUrl());
@@ -102,7 +102,7 @@ public class DealControllerTest {
 
         final var headers = response.getHeaders();
 
-        Assert.assertEquals(URI.create("http://localhost:8080/deals/6"), headers.getLocation());
+        Assert.assertEquals(URI.create("/deals/6"), headers.getLocation());
     }
 
     @Test
@@ -114,17 +114,17 @@ public class DealControllerTest {
 
     @Test
     public void should_update_temperature_only_once() {
-        final var response = dealController.update(DealTemperatureDto.create(1L, "tigran", TemperatureDirection.UP));
+        final var response = dealController.update(DealTemperatureDto.create(1L, "rolfie", TemperatureDirection.UP));
 
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
         // We try update  UP again
-        final var secondResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", TemperatureDirection.UP));
+        final var secondResponse = dealController.update(DealTemperatureDto.create(1L, "rolfie", TemperatureDirection.UP));
 
-        Assert.assertEquals(HttpStatus.I_AM_A_TEAPOT, secondResponse.getStatusCode());
+        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, secondResponse.getStatusCode());
 
         // We try update DOWN
-        final var thirdResponse = dealController.update(DealTemperatureDto.create(1L, "tigran", TemperatureDirection.DOWN));
+        final var thirdResponse = dealController.update(DealTemperatureDto.create(1L, "rolfie", TemperatureDirection.DOWN));
         Assert.assertEquals(HttpStatus.OK, thirdResponse.getStatusCode());
     }
 
