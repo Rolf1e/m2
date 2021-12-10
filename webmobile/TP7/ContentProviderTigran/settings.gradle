@@ -1,0 +1,2 @@
+rootProject.name = "ContentProviderTigran"
+include ':app'
