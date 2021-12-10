@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                         QUERY_PROJECTION,
                         "(locale IS NULL) or (locale=?)",
                         new String[]{Locale.getDefault().toString()},
-                        null
+                        UserDictionary.Words._ID + " DESC"
                 );
 
         final SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(
