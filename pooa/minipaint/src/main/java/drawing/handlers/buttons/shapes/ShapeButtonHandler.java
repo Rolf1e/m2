@@ -1,54 +1,61 @@
 package drawing.handlers.buttons.shapes;
 
+import drawing.commands.shapes.ShapeCommand;
+import drawing.commands.shapes.factory.ShapeFactory;
+import drawing.commands.shapes.factory.ShapeParameters;
+import drawing.commands.shapes.factory.ShapeType;
 import drawing.panes.DrawingPane;
-import drawing.shapes.IShape;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
-/**
- * Created by lewandowski on 20/12/2020.
- */
-public abstract class ShapeButtonHandler implements EventHandler<Event> {
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+public class ShapeButtonHandler implements EventHandler<Event> {
 
-    protected double originX;
-    protected double originY;
-    protected double destinationX;
-    protected double destinationY;
+    private final DrawingPane pane;
+    private final ShapeFactory shapeFactory;
+    private final ShapeType type;
 
-    private final DrawingPane drawingPane;
+    private double originX;
+    private double originY;
 
-    public ShapeButtonHandler(final DrawingPane drawingPane) {
-        this.drawingPane = drawingPane;
+    public static EventHandler<Event> create(final DrawingPane pane,
+                                             final ShapeType type) {
+        return new ShapeButtonHandler(pane, ShapeFactory.create(), type);
     }
 
     @Override
     public void handle(final Event event) {
 
         if (event instanceof ActionEvent) {
-            drawingPane.addEventHandler(MouseEvent.MOUSE_PRESSED, this);
+            pane.addEventHandler(MouseEvent.MOUSE_PRESSED, this);
         }
 
         if (event instanceof MouseEvent) {
             if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
-                drawingPane.addEventHandler(MouseEvent.MOUSE_RELEASED, this);
+                pane.addEventHandler(MouseEvent.MOUSE_RELEASED, this);
                 originX = ((MouseEvent) event).getX();
                 originY = ((MouseEvent) event).getY();
             }
 
             if (MouseEvent.MOUSE_RELEASED.equals(event.getEventType())) {
-                destinationX = ((MouseEvent) event).getX();
-                destinationY = ((MouseEvent) event).getY();
+                final var destinationX = ((MouseEvent) event).getX();
+                final var destinationY = ((MouseEvent) event).getY();
 
-                drawingPane.addShape(createShape());
+                final var command = ShapeCommand.from(
+                        pane,
+                        shapeFactory,
+                        type,
+                        ShapeParameters.create(originX, originY, destinationX, destinationY)
+                );
+                command.execute(); // create and add the shape to the pane
 
-                drawingPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, this);
-                drawingPane.removeEventHandler(MouseEvent.MOUSE_RELEASED, this);
+                pane.removeEventHandler(MouseEvent.MOUSE_PRESSED, this);
+                pane.removeEventHandler(MouseEvent.MOUSE_RELEASED, this);
             }
         }
     }
-
-    protected abstract IShape createShape();
-
 }

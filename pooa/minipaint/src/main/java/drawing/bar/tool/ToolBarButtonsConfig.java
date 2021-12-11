@@ -4,10 +4,10 @@ import drawing.commands.ClearCommand;
 import drawing.commands.DeleteCommand;
 import drawing.commands.groups.GroupCommand;
 import drawing.commands.groups.UnGroupCommand;
+import drawing.commands.shapes.factory.ShapeType;
 import drawing.handlers.buttons.ButtonHandler;
-import drawing.handlers.buttons.shapes.EllipseButtonHandler;
-import drawing.handlers.buttons.shapes.RectangleButtonHandler;
-import drawing.handlers.buttons.shapes.TriangleButtonHandler;
+import drawing.handlers.buttons.UndoHandler;
+import drawing.handlers.buttons.shapes.ShapeButtonHandler;
 import drawing.panes.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +22,8 @@ public enum ToolBarButtonsConfig {
     TRIANGLE("Triangle", Style.create(Style.Type.ICON_ONLY, "icons/triangle.png"), ActionEvent.ACTION),
     DELETE_SELECTION("Delete selection", Style.create(Style.Type.ICON_ONLY, "icons/delete.png"), ActionEvent.ACTION),
     GROUP("Group", Style.create(Style.Type.ICON_ONLY, "icons/group.png"), ActionEvent.ACTION),
-    UNGROUP("UnGroup", ActionEvent.ACTION);
+    UNGROUP("UnGroup", ActionEvent.ACTION),
+    UNDO("Undo", ActionEvent.ACTION);
 
     private final String name;
     private final Style style;
@@ -43,19 +44,21 @@ public enum ToolBarButtonsConfig {
     public final EventHandler<? super ActionEvent> getHandler(final DrawingPane drawingPane) {
         switch (this) {
             case CLEAR:
-                return ButtonHandler.create(ClearCommand.create(drawingPane));
+                return ButtonHandler.create(ClearCommand.create(drawingPane), drawingPane.getHistory());
             case RECTANGLE:
-                return RectangleButtonHandler.create(drawingPane);
+                return ShapeButtonHandler.create(drawingPane, ShapeType.RECTANGLE);
             case CIRCLE:
-                return EllipseButtonHandler.create(drawingPane);
+                return ShapeButtonHandler.create(drawingPane, ShapeType.ELLIPSE);
             case TRIANGLE:
-                return TriangleButtonHandler.create(drawingPane);
+                return ShapeButtonHandler.create(drawingPane, ShapeType.TRIANGLE);
             case DELETE_SELECTION:
-                return ButtonHandler.create(DeleteCommand.create(drawingPane));
+                return ButtonHandler.create(DeleteCommand.create(drawingPane), drawingPane.getHistory());
             case GROUP:
-                return ButtonHandler.create(GroupCommand.create(drawingPane));
+                return ButtonHandler.create(GroupCommand.create(drawingPane), drawingPane.getHistory());
             case UNGROUP:
-                return ButtonHandler.create(UnGroupCommand.create(drawingPane));
+                return ButtonHandler.create(UnGroupCommand.create(drawingPane), drawingPane.getHistory());
+            case UNDO:
+                return UndoHandler.create(drawingPane.getHistory());
             default:
                 throw new IllegalStateException("Invalid config " + this);
         }

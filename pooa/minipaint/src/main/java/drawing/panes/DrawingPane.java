@@ -2,12 +2,14 @@ package drawing.panes;
 
 import drawing.bar.status.observers.Observer;
 import drawing.bar.status.observers.ObserverParameters;
+import drawing.commands.CommandHistory;
 import drawing.handlers.mouse.MouseMoveHandler;
 import drawing.handlers.selection.SelectionHandler;
 import drawing.shapes.IShape;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,9 +21,12 @@ import java.util.List;
 public class DrawingPane extends Pane implements Iterable<IShape> {
 
     private final MouseMoveHandler mouseMoveHandler;
+    @Getter
     private final SelectionHandler selectionHandler;
     private final List<IShape> shapes;
     private final List<Observer> observers;
+    @Getter
+    private final CommandHistory history;
 
     public DrawingPane() {
         clipChildren();
@@ -29,6 +34,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         mouseMoveHandler = new MouseMoveHandler(this);
         selectionHandler = SelectionHandler.createAndRegisterEvents(this);
         observers = new ArrayList<>();
+        history = CommandHistory.newCommandHistory();
     }
 
     /**
@@ -63,6 +69,10 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         shape.addTo(this);
         final ObserverParameters parameters = getParameters();
         observers.forEach(observer -> observer.update(parameters));
+    }
+
+    public void addToSelection(final IShape shape) {
+
     }
 
     public void removeShape(final IShape shape) {

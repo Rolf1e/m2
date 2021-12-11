@@ -29,6 +29,10 @@ public class DeleteCommand implements Command {
 
     @Override
     public void undo() {
-        // TODO
+        final var selectionHandler = pane.getSelectionHandler();
+        selectedShapes.forEach(shape -> {
+            pane.addShape(shape);
+            selectionHandler.toggleSelection(shape);
+        });
     }
 }

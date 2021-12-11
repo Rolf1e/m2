@@ -60,7 +60,7 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
         }
     }
 
-    private void toggleSelection(final IShape shape) {
+    public void toggleSelection(final IShape shape) {
         if (isSelected(shape)) {
             removeFromSelected(shape);
         } else {
