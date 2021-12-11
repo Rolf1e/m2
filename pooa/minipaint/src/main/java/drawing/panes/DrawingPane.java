@@ -27,11 +27,11 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
 
     public DrawingPane() {
         clipChildren();
+        history = CommandHistory.newCommandHistory();
         shapes = new ArrayList<>();
         mouseMoveHandler = new MouseMoveHandler(this);
         selectionHandler = SelectionHandler.createAndRegisterEvents(this);
         observers = new ArrayList<>();
-        history = CommandHistory.newCommandHistory();
     }
 
     /**
