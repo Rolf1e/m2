@@ -1,5 +1,6 @@
-package drawing.handlers.buttons.shapes;
+package drawing.handlers.buttons;
 
+import drawing.commands.history.CommandHistory;
 import drawing.commands.shapes.ShapeCommand;
 import drawing.commands.shapes.factory.ShapeFactory;
 import drawing.commands.shapes.factory.ShapeParameters;
@@ -18,13 +19,14 @@ public class ShapeButtonHandler implements EventHandler<Event> {
     private final DrawingPane pane;
     private final ShapeFactory shapeFactory;
     private final ShapeType type;
+    private final CommandHistory history;
 
     private double originX;
     private double originY;
 
     public static EventHandler<Event> create(final DrawingPane pane,
                                              final ShapeType type) {
-        return new ShapeButtonHandler(pane, ShapeFactory.create(), type);
+        return new ShapeButtonHandler(pane, ShapeFactory.create(), type, pane.getHistory());
     }
 
     @Override
@@ -51,7 +53,8 @@ public class ShapeButtonHandler implements EventHandler<Event> {
                         type,
                         ShapeParameters.create(originX, originY, destinationX, destinationY)
                 );
-                command.execute(); // create and add the shape to the pane
+
+                history.execute(command); // create and add the shape to the pane
 
                 pane.removeEventHandler(MouseEvent.MOUSE_PRESSED, this);
                 pane.removeEventHandler(MouseEvent.MOUSE_RELEASED, this);

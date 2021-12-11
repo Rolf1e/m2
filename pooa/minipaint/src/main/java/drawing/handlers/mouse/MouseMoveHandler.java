@@ -5,9 +5,6 @@ import drawing.shapes.IShape;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-/**
- * Created by lewandowski on 20/12/2020.
- */
 public class MouseMoveHandler implements EventHandler<MouseEvent> {
 
     private final DrawingPane drawingPane;

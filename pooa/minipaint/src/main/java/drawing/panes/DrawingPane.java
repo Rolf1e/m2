@@ -2,7 +2,7 @@ package drawing.panes;
 
 import drawing.bar.status.observers.Observer;
 import drawing.bar.status.observers.ObserverParameters;
-import drawing.commands.CommandHistory;
+import drawing.commands.history.CommandHistory;
 import drawing.handlers.mouse.MouseMoveHandler;
 import drawing.handlers.selection.SelectionHandler;
 import drawing.shapes.IShape;
@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by lewandowski on 20/12/2020.
- */
 public class DrawingPane extends Pane implements Iterable<IShape> {
 
     private final MouseMoveHandler mouseMoveHandler;
@@ -69,10 +66,6 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         shape.addTo(this);
         final ObserverParameters parameters = getParameters();
         observers.forEach(observer -> observer.update(parameters));
-    }
-
-    public void addToSelection(final IShape shape) {
-
     }
 
     public void removeShape(final IShape shape) {

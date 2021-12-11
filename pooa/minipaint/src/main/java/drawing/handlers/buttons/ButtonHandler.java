@@ -1,7 +1,7 @@
 package drawing.handlers.buttons;
 
 import drawing.commands.Command;
-import drawing.commands.CommandHistory;
+import drawing.commands.history.CommandHistory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import lombok.AccessLevel;

@@ -1,5 +1,6 @@
-package drawing.commands;
+package drawing.commands.history;
 
+import drawing.commands.Command;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 

@@ -3,6 +3,7 @@ package drawing;
 import drawing.bar.tool.ToolBar;
 import drawing.bar.status.StatusBar;
 import drawing.panes.DrawingPane;
+import drawing.utils.ResourcesUtils;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,9 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-/**
- * Created by lewandowski on 20/12/2020.
- */
 public class PaintApplication extends Application {
 
     public static final int WIDTH = 800;
@@ -27,9 +25,7 @@ public class PaintApplication extends Application {
         root = new BorderPane();
         scene = new Scene(root, WIDTH, HEIGHT);
 
-        root.getStylesheets().add(
-                PaintApplication.class.getClassLoader().getResource("style/Paint.css").toExternalForm());
-
+        root.getStylesheets().add(ResourcesUtils.loadResource("style/Paint.css"));
         drawingPane = new DrawingPane();
         drawingPane.getStyleClass().add("drawingPane");
         root.setCenter(drawingPane);

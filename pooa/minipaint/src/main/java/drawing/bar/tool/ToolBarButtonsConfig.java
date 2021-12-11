@@ -7,7 +7,7 @@ import drawing.commands.groups.UnGroupCommand;
 import drawing.commands.shapes.factory.ShapeType;
 import drawing.handlers.buttons.ButtonHandler;
 import drawing.handlers.buttons.UndoHandler;
-import drawing.handlers.buttons.shapes.ShapeButtonHandler;
+import drawing.handlers.buttons.ShapeButtonHandler;
 import drawing.panes.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
