@@ -1,5 +1,6 @@
 package com.example.contentprovidertigran;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Switch;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
@@ -59,4 +61,14 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(simpleCursorAdapter);
     }
 
+    public void add(final View view) {
+        final Intent intent = new Intent(this, EditDictionnaryActivity.class);
+        startActivityForResult(intent, 2);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        recreate();
+    }
 }
