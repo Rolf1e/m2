@@ -33,4 +33,9 @@ public class ShapeCommand implements Command {
     public void undo() {
         pane.removeShape(createdShape);
     }
+
+    @Override
+    public Command duplicate() {
+        return new ShapeCommand(pane, createdShape);
+    }
 }

@@ -26,4 +26,9 @@ public class GroupCommand implements Command {
     public void undo() {
         // TODO
     }
+
+    @Override
+    public Command duplicate() {
+        return create(pane);
+    }
 }

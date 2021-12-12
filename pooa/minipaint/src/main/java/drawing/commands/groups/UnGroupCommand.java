@@ -34,4 +34,9 @@ public class UnGroupCommand implements Command {
     public void undo() {
 
     }
+
+    @Override
+    public Command duplicate() {
+        return create(pane);
+    }
 }

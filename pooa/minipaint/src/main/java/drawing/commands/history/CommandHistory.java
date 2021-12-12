@@ -17,13 +17,20 @@ public class CommandHistory {
 
     public void execute(final Command command) {
         command.execute();
-        commands.add(command);
+        commands.add(command.duplicate());
+        printStack();
+    }
+
+    private void printStack() {
+        System.out.println("History: " + commands);
     }
 
     public void undo() {
+        System.out.print("UNDO ");
         final var command = commands.lastElement();
         command.undo();
-        commands.remove(command);
+        commands.remove(commands.size() - 1);
+        printStack();
     }
 
 

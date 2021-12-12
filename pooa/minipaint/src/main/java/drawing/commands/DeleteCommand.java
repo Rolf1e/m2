@@ -35,4 +35,9 @@ public class DeleteCommand implements Command {
             selectionHandler.toggleSelection(shape);
         });
     }
+
+    @Override
+    public Command duplicate() {
+        return new DeleteCommand(pane, selectedShapes);
+    }
 }

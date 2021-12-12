@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 public class MouseMoveCommand implements Command {
 
     private final IShape shape;
-
     private final double oldOffsetX;
     private final double oldOffsetY;
 
@@ -28,5 +27,10 @@ public class MouseMoveCommand implements Command {
     @Override
     public void undo() {
         shape.offset(oldOffsetX, oldOffsetY);
+    }
+
+    @Override
+    public Command duplicate() {
+        return create(shape, oldOffsetX, oldOffsetY);
     }
 }
