@@ -13,6 +13,9 @@ import java.util.List;
 public class ClearCommand implements Command {
 
     private final DrawingPane pane;
+    /**
+     * Remember cleared shapes for undo
+     */
     private List<IShape> shapes;
 
     public static Command create(final DrawingPane pane) {

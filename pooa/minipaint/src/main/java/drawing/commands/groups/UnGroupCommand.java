@@ -7,6 +7,7 @@ import drawing.shapes.adapter.GroupShapeAdapter;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -14,8 +15,10 @@ public class UnGroupCommand implements Command {
 
     private final DrawingPane pane;
 
+    private final List<IShape> oldSelectedShapes;
+
     public static Command create(final DrawingPane pane) {
-        return new UnGroupCommand(pane);
+        return new UnGroupCommand(pane, new ArrayList<>());
     }
 
     @Override
@@ -26,13 +29,16 @@ public class UnGroupCommand implements Command {
                 pane.removeShape(shape);
                 final List<IShape> group = ((GroupShapeAdapter) shape).getGroup();
                 group.forEach(pane::addShape);
+                oldSelectedShapes.add(shape);
             }
         });
     }
 
     @Override
     public void undo() {
-
+        oldSelectedShapes.forEach(pane::addToSelected);
+        GroupCommand.create(pane)
+                .execute();
     }
 
     @Override

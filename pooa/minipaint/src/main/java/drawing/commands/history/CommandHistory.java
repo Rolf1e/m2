@@ -17,7 +17,7 @@ public class CommandHistory {
 
     public void execute(final Command command) {
         command.execute();
-        commands.add(command.duplicate());
+        commands.add(command.duplicate()); // We duplicate instance as some commands are shared at creation
         printStack();
     }
 
@@ -26,7 +26,6 @@ public class CommandHistory {
     }
 
     public void undo() {
-        System.out.print("UNDO ");
         final var command = commands.lastElement();
         command.undo();
         commands.remove(commands.size() - 1);

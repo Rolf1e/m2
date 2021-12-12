@@ -3,6 +3,7 @@ package drawing.shapes.adapter;
 import drawing.shapes.IShape;
 import javafx.scene.layout.Pane;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -10,14 +11,11 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class GroupShapeAdapter implements IShape {
 
+    @Getter
     private final List<IShape> group;
 
     public static IShape create(final List<IShape> group) {
         return new GroupShapeAdapter(group);
-    }
-
-    public List<IShape> getGroup() {
-        return group;
     }
 
     @Override

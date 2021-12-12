@@ -24,7 +24,8 @@ public class GroupCommand implements Command {
 
     @Override
     public void undo() {
-        // TODO
+        UnGroupCommand.create(pane)
+                .execute();
     }
 
     @Override
