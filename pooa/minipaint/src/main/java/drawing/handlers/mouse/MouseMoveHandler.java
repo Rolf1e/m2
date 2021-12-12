@@ -1,7 +1,9 @@
 package drawing.handlers.mouse;
 
+import drawing.commands.Command;
+import drawing.commands.MouseMoveCommand;
 import drawing.commands.history.CommandHistory;
-import drawing.commands.mouse.MouseMoveCommand;
+import drawing.handlers.dto.Coordinate;
 import drawing.panes.DrawingPane;
 import drawing.shapes.IShape;
 import javafx.event.EventHandler;
@@ -15,8 +17,8 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
     private double orgSceneX;
     private double orgSceneY;
 
-    private double oldOffsetX;
-    private double oldOffsetY;
+    private double initalX;
+    private double intialY;
 
     public MouseMoveHandler(final DrawingPane pane) {
         this.pane = pane;
@@ -30,7 +32,7 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
     public void handle(final MouseEvent event) {
         if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
             updateOrgSceneCoordinate(event);
-            updateOldOffsetCoordinate(event);
+            updateInitialCoordinate(event);
         }
 
         if (MouseEvent.MOUSE_DRAGGED.equals(event.getEventType())) {
@@ -44,9 +46,9 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
         }
     }
 
-    private void updateOldOffsetCoordinate(MouseEvent event) {
-        oldOffsetX = event.getSceneX();
-        oldOffsetY = event.getSceneY();
+    private void updateInitialCoordinate(MouseEvent event) {
+        initalX = event.getSceneX();
+        intialY = event.getSceneY();
     }
 
     private void executeCommandForHistory(final MouseEvent event) {
@@ -56,15 +58,20 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
 
     private void addToCommandHistory(final MouseEvent event,
                                      final IShape shape) {
-        history.execute(MouseMoveCommand.create(shape, oldOffsetX - event.getSceneX(), oldOffsetY - event.getSceneY()));
+
+        final Coordinate offsets = computeOffSet(event);
+        final Command command = MouseMoveCommand.create(
+                shape,
+                offsets,
+                Coordinate.at(initalX - event.getSceneX(), intialY - event.getSceneY())
+        );
+        history.execute(command);
     }
 
     private void translateWhenMouseDragged(final MouseEvent event) {
-        final var offsetX = event.getSceneX() - orgSceneX;
-        final var offsetY = event.getSceneY() - orgSceneY;
-
+        final Coordinate offsets = computeOffSet(event);
         pane.getSelectedShapes()
-                .forEach(shape -> updateOffSet(shape, offsetX, offsetY));
+                .forEach(shape -> MouseMoveCommand.updateOffSet(shape, offsets));
 
     }
 
@@ -73,10 +80,8 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
         orgSceneY = event.getSceneY();
     }
 
-    private void updateOffSet(final IShape shape,
-                              final double offsetX,
-                              final double offsetY) {
-        shape.offset(offsetX, offsetY);
+    public Coordinate computeOffSet(final MouseEvent event) {
+        return Coordinate.at(event.getSceneX() - orgSceneX, event.getSceneY() - orgSceneY);
     }
 
 }

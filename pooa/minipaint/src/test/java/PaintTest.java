@@ -158,15 +158,24 @@ public class PaintTest extends ApplicationTest {
 
     @Test
     public void should_undo_one_shape() {
-        draw_rectangle();
-        clickOn("Clear");
         draw_circle();
+        clickOn("Clear");
+        draw_rectangle();
         clickOn("Clear");
         clickOn("Undo");
 
-        final var shapes = app.getDrawingPane().getShapes();
+        var shapes = app.getDrawingPane().getShapes();
 
         Assert.assertEquals(1, shapes.size());
+
+        clickOn("Undo");
+
+        clickOn("Undo");
+
+        shapes = app.getDrawingPane().getShapes();
+
+        Assert.assertEquals(1, shapes.size());
+
     }
 
     private void assertTextInStatusBar(final List<String> expectedTextInStatusBar) {

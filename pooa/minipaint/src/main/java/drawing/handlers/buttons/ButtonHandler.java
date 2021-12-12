@@ -13,8 +13,8 @@ public class ButtonHandler implements EventHandler<ActionEvent> {
     private final Command command;
     private final CommandHistory history;
 
-    public static ButtonHandler create(final Command command,
-                                       final CommandHistory history) {
+    public static EventHandler<ActionEvent> create(final Command command,
+                                                   final CommandHistory history) {
         return new ButtonHandler(command, history);
     }
 

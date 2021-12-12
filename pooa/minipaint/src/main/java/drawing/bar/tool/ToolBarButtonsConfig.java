@@ -6,8 +6,9 @@ import drawing.commands.groups.GroupCommand;
 import drawing.commands.groups.UnGroupCommand;
 import drawing.commands.shapes.factory.ShapeType;
 import drawing.handlers.buttons.ButtonHandler;
-import drawing.handlers.buttons.UndoHandler;
+import drawing.handlers.buttons.RedoHandler;
 import drawing.handlers.buttons.ShapeButtonHandler;
+import drawing.handlers.buttons.UndoHandler;
 import drawing.panes.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +24,8 @@ public enum ToolBarButtonsConfig {
     DELETE_SELECTION("Delete selection", Style.create(Style.Type.ICON_ONLY, "icons/delete.png"), ActionEvent.ACTION),
     GROUP("Group", Style.create(Style.Type.ICON_ONLY, "icons/group.png"), ActionEvent.ACTION),
     UNGROUP("UnGroup", ActionEvent.ACTION),
-    UNDO("Undo", ActionEvent.ACTION);
+    UNDO("Undo", ActionEvent.ACTION),
+    REDO("Redo", ActionEvent.ACTION);
 
     private final String name;
     private final Style style;
@@ -59,6 +61,8 @@ public enum ToolBarButtonsConfig {
                 return ButtonHandler.create(UnGroupCommand.create(drawingPane), drawingPane.getHistory());
             case UNDO:
                 return UndoHandler.create(drawingPane.getHistory());
+            case REDO:
+                return RedoHandler.create(drawingPane.getHistory());
             default:
                 throw new IllegalStateException("Invalid config " + this);
         }

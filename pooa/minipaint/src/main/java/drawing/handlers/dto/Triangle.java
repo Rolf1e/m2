@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 
 public class Triangle extends Polygon {
 
-    public static Shape create(final Point a,
-                               final Point b,
-                               final Point c) {
+    public static Shape create(final Coordinate a,
+                               final Coordinate b,
+                               final Coordinate c) {
 
         final var points = Stream.of(a, b, c)
                 .map(point -> Arrays.asList(point.getX(), point.getY()))

@@ -1,6 +1,6 @@
 package drawing.commands.shapes.factory;
 
-import drawing.handlers.dto.Point;
+import drawing.handlers.dto.Coordinate;
 import drawing.handlers.dto.Triangle;
 import drawing.shapes.IShape;
 import drawing.shapes.adapter.ShapeAdapter;
@@ -31,8 +31,8 @@ public class ShapeFactory {
     }
 
     private IShape newTriangle(final ShapeParameters parameters) {
-        final var a = Point.at(parameters.getOriginX(), parameters.getOriginY());
-        final var b = Point.at(parameters.getDestinationX(), parameters.getDestinationY());
+        final var a = Coordinate.at(parameters.getOriginX(), parameters.getOriginY());
+        final var b = Coordinate.at(parameters.getDestinationX(), parameters.getDestinationY());
         final var triangle = Triangle.create(a, b, resolveLastPoint(a, b));
 
         triangle.getStyleClass()
@@ -40,8 +40,8 @@ public class ShapeFactory {
         return ShapeAdapter.create(triangle);
     }
 
-    private Point resolveLastPoint(final Point a, final Point b) {
-        return Point.at(a.getX() - b.getX() / 2, a.getY() - b.getY() / 2);
+    private Coordinate resolveLastPoint(final Coordinate a, final Coordinate b) {
+        return Coordinate.at(a.getX() - b.getX() / 2, a.getY() - b.getY() / 2);
     }
 
 
