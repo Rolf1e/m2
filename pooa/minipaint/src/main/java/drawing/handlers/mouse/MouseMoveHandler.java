@@ -32,7 +32,7 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
     public void handle(final MouseEvent event) {
         if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
             updateOrgSceneCoordinate(event);
-            updateInitialCoordinate(event);
+            updateInitialCoordinate(event); // To avoid pilling command each time of the offset update we only remember the first
         }
 
         if (MouseEvent.MOUSE_DRAGGED.equals(event.getEventType())) {
@@ -41,8 +41,7 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
         }
 
         if (MouseEvent.MOUSE_RELEASED.equals(event.getEventType())) {
-            // To avoid pilling command each time of the offset update we only remember the first
-            executeCommandForHistory(event);
+            executeCommandForHistory(event); // We use Command pattern to use history
         }
     }
 
