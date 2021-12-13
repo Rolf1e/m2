@@ -10,12 +10,13 @@ public class ShapeAdapter implements IShape {
     private boolean selected;
 
     public static IShape create(final Shape shape) {
-        return new ShapeAdapter(shape);
+        return new ShapeAdapter(shape, false);
     }
 
-    private ShapeAdapter(final Shape shape) {
+    private ShapeAdapter(final Shape shape,
+                         final boolean selected) {
         this.shape = shape;
-        this.selected = false;
+        this.selected = selected;
     }
 
     @Override
@@ -57,6 +58,14 @@ public class ShapeAdapter implements IShape {
     @Override
     public void removeFrom(final Pane pane) {
         pane.getChildren().remove(shape);
+    }
+
+    @Override
+    public IShape duplicate() {
+        final var union = Shape.union(shape, shape);
+        shape.getStyleClass()
+                .forEach(css -> union.getStyleClass().add(css));
+        return create(union);
     }
 
     @Override

@@ -14,4 +14,6 @@ public interface IShape {
     void addTo(Pane pane);
 
     void removeFrom(Pane pane);
+
+    IShape duplicate();
 }

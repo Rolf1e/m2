@@ -2,6 +2,7 @@ package drawing.bar.tool;
 
 import drawing.commands.ClearCommand;
 import drawing.commands.DeleteCommand;
+import drawing.commands.shapes.DuplicateCommand;
 import drawing.commands.groups.GroupCommand;
 import drawing.commands.groups.UnGroupCommand;
 import drawing.commands.shapes.factory.ShapeType;
@@ -25,7 +26,8 @@ public enum ToolBarButtonsConfig {
     GROUP("Group", Style.create(Style.Type.ICON_ONLY, "icons/group.png"), ActionEvent.ACTION),
     UNGROUP("UnGroup", ActionEvent.ACTION),
     UNDO("Undo", ActionEvent.ACTION),
-    REDO("Redo", ActionEvent.ACTION);
+    REDO("Redo", ActionEvent.ACTION),
+    DUPLICATE("Duplicate", Style.create(Style.Type.ICON_ONLY, "icons/duplicate.png"), ActionEvent.ACTION);
 
     private final String name;
     private final Style style;
@@ -63,6 +65,8 @@ public enum ToolBarButtonsConfig {
                 return UndoHandler.create(drawingPane.getHistory());
             case REDO:
                 return RedoHandler.create(drawingPane.getHistory());
+            case DUPLICATE:
+                return ButtonHandler.create(DuplicateCommand.create(drawingPane), drawingPane.getHistory());
             default:
                 throw new IllegalStateException("Invalid config " + this);
         }

@@ -164,18 +164,43 @@ public class PaintTest extends ApplicationTest {
         clickOn("Clear");
         clickOn("Undo");
 
-        var shapes = app.getDrawingPane().getShapes();
-
-        Assert.assertEquals(1, shapes.size());
+        assertNumberOfShapesInPane(app, 1);
 
         clickOn("Undo");
 
         clickOn("Undo");
 
-        shapes = app.getDrawingPane().getShapes();
+        assertNumberOfShapesInPane(app, 1);
+    }
 
-        Assert.assertEquals(1, shapes.size());
+    @Test
+    public void should_duplicate_form() {
+        draw_circle();
+        clickOn(".ellipse");
+        clickOn("Duplicate");
 
+        assertNumberOfShapesInPane(app, 2);
+    }
+
+    @Test
+    public void should_duplicate_group() {
+        draw_circle();
+        draw_rectangle();
+
+        clickOn(".rectangle");
+        press(KeyCode.SHIFT)
+                .clickOn(".ellipse")
+                .release(KeyCode.SHIFT);
+
+        clickOn("Duplicate");
+
+        assertNumberOfShapesInPane(app, 4);
+    }
+
+    private void assertNumberOfShapesInPane(final PaintApplication app,
+                                            final int expected) {
+        final var shapes = app.getDrawingPane().getShapes();
+        Assert.assertEquals(expected, shapes.size());
     }
 
     private void assertTextInStatusBar(final List<String> expectedTextInStatusBar) {

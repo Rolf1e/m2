@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class GroupShapeAdapter implements IShape {
@@ -48,5 +49,13 @@ public class GroupShapeAdapter implements IShape {
     @Override
     public void removeFrom(final Pane pane) {
         group.forEach(shape -> shape.removeFrom(pane));
+    }
+
+    @Override
+    public IShape duplicate() {
+        final var duplicated = group.stream()
+                .map(IShape::duplicate)
+                .collect(Collectors.toList());
+        return create(duplicated);
     }
 }
