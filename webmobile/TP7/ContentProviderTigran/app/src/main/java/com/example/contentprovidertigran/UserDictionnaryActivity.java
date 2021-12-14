@@ -32,8 +32,8 @@ public class UserDictionnaryActivity extends AppCompatActivity {
                 : UserDictionary.Words.WORD + " ASC";
 
         final String[] QUERY_PROJECTION = {
-                UserDictionary.Words._ID,
-                UserDictionary.Words.WORD
+                UserDictionary.Words.WORD,
+                UserDictionary.Words._ID
         };
         DictionnaryManager.create(this, UserDictionary.Words.CONTENT_URI)
                 .display(
@@ -51,9 +51,13 @@ public class UserDictionnaryActivity extends AppCompatActivity {
         startActivityForResult(intent, 2);
     }
 
+    public void delete(final View view) {
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         recreate();
     }
+
 }

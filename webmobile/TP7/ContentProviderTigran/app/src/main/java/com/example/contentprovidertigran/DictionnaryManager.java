@@ -34,12 +34,11 @@ public class DictionnaryManager {
 
         final SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(
                 context,
-                android.R.layout.two_line_list_item,
+                android.R.layout.simple_list_item_checked,
                 cursor,
                 projection,
                 new int[]{
                         android.R.id.text1,
-                        android.R.id.text2
                 },
                 0
         );
