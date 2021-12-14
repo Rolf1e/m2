@@ -1,12 +1,14 @@
 package com.example.contentprovidertigran;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.view.View;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class EditDictionnaryActivity extends AppCompatActivity {
+public class AddDictionnaryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +19,12 @@ public class EditDictionnaryActivity extends AppCompatActivity {
     public void push(final View view) {
         final EditText editText = findViewById(R.id.input_text);
         final String value = editText.getText().toString();
-        DictionnaryManager.create(this, UserDictionary.Words.CONTENT_URI)
-                .insert(UserDictionary.Words.WORD, value);
+        final Intent intent = this.getIntent();
+
+        final String dico = intent.getStringExtra("Dico");
+        final DictionnaryManager dictionnaryManager = DictionnaryManager.create(this, Uri.parse(dico));
+        dictionnaryManager.insert(UserDictionary.Words.WORD, value);
+
         finish();
     }
 }

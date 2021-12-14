@@ -55,6 +55,16 @@ public class DictionnaryManager {
                 .show();
     }
 
+    public void delete(final String where,
+                       final String[] whereArgs) {
+
+        final int deleted = context.getContentResolver()
+                .delete(contentUri, where, whereArgs);
+
+        Toast.makeText(context, "Deleting " + deleted + " items", Toast.LENGTH_SHORT)
+                .show();
+    }
+
     private Cursor query(
             final String[] projection,
             final String selection,
