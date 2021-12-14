@@ -7,46 +7,24 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <ListView
-            android:layout_width="match_parent"
-            android:id="@+id/listView"
-            android:layout_height="500dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/order_switch">
 
-    </ListView>
-    <Switch
-            android:text="Sort order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/order_switch"
-            android:textOff="ASC"
-            android:textOn="DESC"
-            android:onClick="reloadDictionnary"
-            android:minHeight="48dp" app:layout_constraintStart_toEndOf="@+id/listView"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listView"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout" app:layout_constraintStart_toStartOf="parent"/>
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="409dp"
-            android:layout_height="61dp" android:id="@+id/linearLayout"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/order_switch"
-            tools:layout_editor_absoluteX="2dp">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent">
         <Button
-                android:text="Delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/delete_button"
-                android:layout_weight="1"/>
+                android:text="Dictionnary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/dictionnary_button"
+                android:onClick="dictionnary"
+        />
         <Button
-                android:text="Add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/add_button"
-                android:layout_weight="1"
-                android:onClick="add"
+                android:text="Contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/contact_button"
+                android:onClick="contacts"
         />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
