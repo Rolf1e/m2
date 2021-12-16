@@ -1,4 +1,4 @@
-package com.example.contentprovidertigran;
+package com.example.contentprovidertigran.infra;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -45,15 +45,13 @@ public class DictionnaryManager {
         listView.setAdapter(simpleCursorAdapter);
     }
 
-    public void insert(final String field,
-                       final String value) {
-        final ContentValues contentValues = new ContentValues();
-        contentValues.put(field, value);
+    public void insert(final ContentValues contentValues) {
         context.getContentResolver()
                 .insert(contentUri, contentValues);
-        Toast.makeText(context, "Insert " + value, Toast.LENGTH_LONG)
+        Toast.makeText(context, "Inserted", Toast.LENGTH_LONG)
                 .show();
     }
+
 
     public void delete(final String where,
                        final String[] whereArgs) {

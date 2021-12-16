@@ -1,12 +1,13 @@
-package com.example.contentprovidertigran;
+package com.example.contentprovidertigran.user;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.view.View;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.contentprovidertigran.R;
+import com.example.contentprovidertigran.infra.DictionnaryManager;
 
 public class AddDictionnaryActivity extends AppCompatActivity {
 
@@ -19,11 +20,12 @@ public class AddDictionnaryActivity extends AppCompatActivity {
     public void push(final View view) {
         final EditText editText = findViewById(R.id.input_text);
         final String value = editText.getText().toString();
-        final Intent intent = this.getIntent();
 
-        final String dico = intent.getStringExtra("Dico");
-        final DictionnaryManager dictionnaryManager = DictionnaryManager.create(this, Uri.parse(dico));
-        dictionnaryManager.insert(UserDictionary.Words.WORD, value);
+        final DictionnaryManager dictionnaryManager = DictionnaryManager.create(this, UserDictionary.Words.CONTENT_URI);
+
+        final ContentValues contentValues = new ContentValues();
+        contentValues.put(UserDictionary.Words.WORD, value);
+        dictionnaryManager.insert(contentValues);
 
         finish();
     }

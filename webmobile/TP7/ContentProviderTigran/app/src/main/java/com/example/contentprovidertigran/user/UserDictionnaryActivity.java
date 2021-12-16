@@ -1,4 +1,4 @@
-package com.example.contentprovidertigran;
+package com.example.contentprovidertigran.user;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.contentprovidertigran.R;
+import com.example.contentprovidertigran.infra.DictionnaryManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +60,6 @@ public class UserDictionnaryActivity extends AppCompatActivity {
 
     public void add(final View view) {
         final Intent intent = new Intent(this, AddDictionnaryActivity.class);
-        intent.putExtra("Dico", UserDictionary.Words.CONTENT_URI.toString());
         startActivityForResult(intent, 2);
     }
 
