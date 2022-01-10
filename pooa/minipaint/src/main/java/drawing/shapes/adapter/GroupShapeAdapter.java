@@ -1,6 +1,7 @@
 package drawing.shapes.adapter;
 
 import drawing.shapes.IShape;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -57,5 +58,15 @@ public class GroupShapeAdapter implements IShape {
                 .map(IShape::duplicate)
                 .collect(Collectors.toList());
         return create(duplicated);
+    }
+
+    @Override
+    public ObservableValue<Number> translateXProperty() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue<Number> translateYProperty() {
+        return null;
     }
 }

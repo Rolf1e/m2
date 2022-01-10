@@ -1,6 +1,7 @@
 package drawing.shapes.adapter;
 
 import drawing.shapes.IShape;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
@@ -66,6 +67,16 @@ public class ShapeAdapter implements IShape {
         shape.getStyleClass()
                 .forEach(css -> union.getStyleClass().add(css));
         return create(union);
+    }
+
+    @Override
+    public ObservableValue<Number> translateXProperty() {
+        return shape.translateXProperty();
+    }
+
+    @Override
+    public ObservableValue<Number> translateYProperty() {
+        return shape.translateYProperty();
     }
 
     @Override

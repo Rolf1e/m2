@@ -1,5 +1,6 @@
 package drawing.shapes;
 
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 
 public interface IShape {
@@ -16,4 +17,8 @@ public interface IShape {
     void removeFrom(Pane pane);
 
     IShape duplicate();
+
+    ObservableValue<Number> translateXProperty();
+
+    ObservableValue<Number> translateYProperty();
 }

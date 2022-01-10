@@ -1,8 +1,9 @@
 package drawing.shapes.decorators;
 
-import drawing.bar.status.TextBox;
 import drawing.shapes.IShape;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -10,11 +11,15 @@ import lombok.RequiredArgsConstructor;
 public class TextDecorator implements IShape {
 
     private final IShape wrappee;
-    private final TextBox textBox;
+    private final Text textBox;
 
-    public static IShape create(final IShape wrappee,
-                                final String text) {
-        return new TextDecorator(wrappee, TextBox.createWithBaseText(text));
+    public static IShape from(final IShape wrappee,
+                              final String text) {
+
+        final var label = new Text(text);
+        label.translateXProperty().bind(wrappee.translateXProperty());
+        label.translateYProperty().bind(wrappee.translateYProperty());
+        return new TextDecorator(wrappee, label);
     }
 
     @Override
@@ -38,27 +43,34 @@ public class TextDecorator implements IShape {
                        final double y) {
 
         wrappee.offset(x, y);
-        final var label = textBox.getLabel();
-        label.setTranslateX(label.getTranslateX() + x);
-        label.setTranslateY(label.getTranslateY() + y);
     }
 
     @Override
     public void addTo(final Pane pane) {
         wrappee.addTo(pane);
         pane.getChildren()
-                .add(textBox.getLabel());
+                .add(textBox);
     }
 
     @Override
     public void removeFrom(final Pane pane) {
         wrappee.removeFrom(pane);
         pane.getChildren()
-                .remove(textBox.getLabel());
+                .remove(textBox);
     }
 
     @Override
     public IShape duplicate() {
         return wrappee.duplicate();
+    }
+
+    @Override
+    public ObservableValue<Number> translateXProperty() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue<Number> translateYProperty() {
+        return null;
     }
 }
