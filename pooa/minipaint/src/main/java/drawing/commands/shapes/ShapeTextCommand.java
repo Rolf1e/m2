@@ -33,11 +33,12 @@ public class ShapeTextCommand implements Command {
 
     @Override
     public void execute() {
+        oldShapes.clear();
         oldShapes.addAll(pane.getSelectedShapes());
 
         oldShapes.forEach(shape -> {
             pane.removeShape(shape);
-            final var withText = TextDecorator.create(shape, text);
+            final var withText = TextDecorator.from(shape, text);
             shapesWithText.add(withText);
             pane.addShape(withText);
         });
@@ -47,6 +48,7 @@ public class ShapeTextCommand implements Command {
     @Override
     public void undo() {
         shapesWithText.forEach(pane::removeShape);
+        shapesWithText.clear();
         oldShapes.forEach(pane::addShape);
     }
 
