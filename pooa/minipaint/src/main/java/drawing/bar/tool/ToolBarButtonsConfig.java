@@ -2,14 +2,15 @@ package drawing.bar.tool;
 
 import drawing.commands.ClearCommand;
 import drawing.commands.DeleteCommand;
-import drawing.commands.shapes.DuplicateCommand;
 import drawing.commands.groups.GroupCommand;
 import drawing.commands.groups.UnGroupCommand;
+import drawing.commands.shapes.ShapeDuplicateCommand;
+import drawing.commands.shapes.ShapeTextCommand;
 import drawing.commands.shapes.factory.ShapeType;
 import drawing.handlers.buttons.ButtonHandler;
 import drawing.handlers.buttons.RedoHandler;
-import drawing.handlers.buttons.ShapeButtonHandler;
 import drawing.handlers.buttons.UndoHandler;
+import drawing.handlers.buttons.shapes.ShapeButtonHandler;
 import drawing.panes.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,7 +28,8 @@ public enum ToolBarButtonsConfig {
     UNGROUP("UnGroup", ActionEvent.ACTION),
     UNDO("Undo", ActionEvent.ACTION),
     REDO("Redo", ActionEvent.ACTION),
-    DUPLICATE("Duplicate", Style.create(Style.Type.ICON_ONLY, "icons/duplicate.png"), ActionEvent.ACTION);
+    DUPLICATE("Duplicate", Style.create(Style.Type.ICON_ONLY, "icons/duplicate.png"), ActionEvent.ACTION),
+    ADD_TEXT("Add text", ActionEvent.ACTION);
 
     private final String name;
     private final Style style;
@@ -66,7 +68,9 @@ public enum ToolBarButtonsConfig {
             case REDO:
                 return RedoHandler.create(drawingPane.getHistory());
             case DUPLICATE:
-                return ButtonHandler.create(DuplicateCommand.create(drawingPane), drawingPane.getHistory());
+                return ButtonHandler.create(ShapeDuplicateCommand.create(drawingPane), drawingPane.getHistory());
+            case ADD_TEXT:
+                return ButtonHandler.create(ShapeTextCommand.create(drawingPane, "TEXT"), drawingPane.getHistory());
             default:
                 throw new IllegalStateException("Invalid config " + this);
         }

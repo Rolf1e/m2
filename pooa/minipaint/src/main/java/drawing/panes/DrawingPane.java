@@ -14,6 +14,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class DrawingPane extends Pane implements Iterable<IShape> {
 
@@ -40,7 +41,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
      * as JavaFX does not currently provide any built-in way to clip children.
      */
     void clipChildren() {
-        final Rectangle outputClip = new Rectangle();
+        final var outputClip = new Rectangle();
         this.setClip(outputClip);
 
         this.layoutBoundsProperty().addListener((ov, oldValue, newValue) -> {
@@ -68,11 +69,12 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     public void addShape(final IShape shape) {
         shapes.add(shape);
         shape.addTo(this);
-        final ObserverParameters parameters = getParameters();
+        final var parameters = getParameters();
         observers.forEach(observer -> observer.update(parameters));
     }
 
     public void removeShape(final IShape shape) {
+        Objects.requireNonNull(shape);
         shapes.remove(shape);
         shape.removeFrom(this);
         selectionHandler.removeFromSelected(shape);
@@ -86,7 +88,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     }
 
     public void updateObservers() {
-        final ObserverParameters parameters = getParameters();
+        final var parameters = getParameters();
         observers.forEach(observer -> observer.update(parameters));
     }
 

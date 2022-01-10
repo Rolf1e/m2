@@ -11,16 +11,16 @@ public class StatusBar extends HBox implements Observer {
 
     private static final String BASE_TEXT_SELECTED = " selected forme(s)";
     private static final String BASE_TEXT = " forme(s)";
-    private final StatusBarBox shapes;
-    private final StatusBarBox selectedShapes;
+    private final TextBox shapes;
+    private final TextBox selectedShapes;
 
     public static StatusBar createEmpty() {
         return new StatusBar();
     }
 
     private StatusBar() {
-        this.shapes = StatusBarBox.createWithBaseText(BASE_TEXT);
-        this.selectedShapes = StatusBarBox.createWithBaseText(BASE_TEXT_SELECTED);
+        this.shapes = TextBox.createWithBaseText(BASE_TEXT);
+        this.selectedShapes = TextBox.createWithBaseText(BASE_TEXT_SELECTED);
         getChildren().addAll(shapes.getLabel(), selectedShapes.getLabel());
     }
 

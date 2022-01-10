@@ -1,4 +1,4 @@
-package drawing.handlers.buttons;
+package drawing.handlers.buttons.shapes;
 
 import drawing.commands.history.CommandHistory;
 import drawing.commands.shapes.ShapeCommand;

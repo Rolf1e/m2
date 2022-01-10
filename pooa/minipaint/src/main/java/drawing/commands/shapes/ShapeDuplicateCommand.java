@@ -11,20 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class DuplicateCommand implements Command {
+public class ShapeDuplicateCommand implements Command {
 
     private final DrawingPane pane;
     private final List<IShape> duplicated;
 
     public static Command create(final DrawingPane pane) {
-        return new DuplicateCommand(pane, new ArrayList<>());
+        return new ShapeDuplicateCommand(pane, new ArrayList<>());
     }
 
     @Override
     public void execute() {
         pane.getSelectedShapes()
                 .forEach(shape -> {
-                    final IShape duplicate = shape.duplicate();
+                    final var duplicate = shape.duplicate();
                     pane.addShape(duplicate);
                     duplicated.add(duplicate);
                 });
@@ -40,6 +40,6 @@ public class DuplicateCommand implements Command {
 
     @Override
     public Command duplicate() {
-        return new DuplicateCommand(pane, duplicated);
+        return new ShapeDuplicateCommand(pane, duplicated);
     }
 }

@@ -3,17 +3,17 @@ package drawing.bar.status;
 import javafx.scene.control.Label;
 import lombok.Getter;
 
-class StatusBarBox {
+public class TextBox {
 
     @Getter
     private final Label label;
     private final String baseText;
 
-    public static StatusBarBox createWithBaseText(final String baseText) {
-        return new StatusBarBox(baseText);
+    public static TextBox createWithBaseText(final String baseText) {
+        return new TextBox(baseText);
     }
 
-    private StatusBarBox(final String baseText) {
+    private TextBox(final String baseText) {
         this.baseText = baseText;
         this.label = new Label(baseText);
     }
