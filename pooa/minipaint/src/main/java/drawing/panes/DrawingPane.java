@@ -28,11 +28,11 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
 
     public DrawingPane() {
         clipChildren();
-        history = CommandHistory.newCommandHistory();
+        observers = new ArrayList<>();
         shapes = new ArrayList<>();
+        history = CommandHistory.newCommandHistory(this);
         mouseMoveHandler = new MouseMoveHandler(this);
         selectionHandler = SelectionHandler.createAndRegisterEvents(this);
-        observers = new ArrayList<>();
     }
 
     /**
@@ -110,6 +110,8 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     }
 
     private ObserverParameters getParameters() {
-        return ObserverParameters.create(shapes.size(), getSelectedShapes().size());
+        return ObserverParameters.getInstance()
+                .setShapesSize(shapes.size())
+                .setSelectedShapesSize(getSelectedShapes().size());
     }
 }

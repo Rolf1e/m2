@@ -11,6 +11,7 @@ public class StatusBar extends HBox implements Observer {
 
     private static final String BASE_TEXT_SELECTED = " selected forme(s)";
     private static final String BASE_TEXT = " forme(s)";
+
     private final TextBox shapes;
     private final TextBox selectedShapes;
 
@@ -26,8 +27,8 @@ public class StatusBar extends HBox implements Observer {
 
     @Override
     public void update(final ObserverParameters parameters) {
-        shapes.update(parameters.getShapesSize());
-        selectedShapes.update(parameters.getSelectedShapesSize());
+        shapes.update(String.valueOf(parameters.getShapesSize()));
+        selectedShapes.update(String.valueOf(parameters.getSelectedShapesSize()));
     }
 
     public List<String> getText() {

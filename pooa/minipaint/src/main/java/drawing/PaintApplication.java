@@ -1,7 +1,8 @@
 package drawing;
 
-import drawing.bar.tool.ToolBar;
+import drawing.bar.status.ErrorBar;
 import drawing.bar.status.StatusBar;
+import drawing.bar.tool.ToolBar;
 import drawing.panes.DrawingPane;
 import drawing.utils.ResourcesUtils;
 import javafx.application.Application;
@@ -30,33 +31,37 @@ public class PaintApplication extends Application {
         drawingPane.getStyleClass().add("drawingPane");
         root.setCenter(drawingPane);
 
-        HBox hBox = new HBox();
-        createToolBar(hBox);
+        final var top = new HBox();
+        createToolBar(top);
 
-        hBox.setPadding(new Insets(5));
-        hBox.setSpacing(5.0);
-        hBox.getStyleClass().add("toolbar");
-        root.setTop(hBox);
+        top.setPadding(new Insets(5));
+        top.setSpacing(5.0);
+        top.getStyleClass().add("toolbar");
+        root.setTop(top);
 
-        createStatusBar();
+        final var bottom = new HBox();
+        createStatusBar(bottom);
+        root.setBottom(bottom);
 
         primaryStage.setTitle("Drawing");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void createToolBar(HBox hBox) {
+    private void createToolBar(final HBox hBox) {
         final var toolBar = ToolBar.createWithButtons(drawingPane);
         hBox.getChildren()
                 .addAll(toolBar.getButtons());
     }
 
-    private void createStatusBar() {
+    private void createStatusBar(final HBox hBox) {
         final var statusBar = StatusBar.createEmpty();
         statusBar.getStyleClass()
                 .add("status_bar");
-        root.setBottom(statusBar);
-
+        final var errorBar = ErrorBar.createEmpty();
+        statusBar.getStyleClass()
+                .add("error_bar");
+        hBox.getChildren().addAll(statusBar, errorBar);
         drawingPane.addObserver(statusBar);
     }
 

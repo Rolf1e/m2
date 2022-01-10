@@ -18,8 +18,8 @@ public class TextBox {
         this.label = new Label(baseText);
     }
 
-    public void update(final int size) {
-        label.setText(size + baseText);
+    public void update(final String text) {
+        label.setText(text + baseText);
     }
 
     public String getText() {
