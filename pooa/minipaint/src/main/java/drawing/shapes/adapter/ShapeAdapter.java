@@ -10,6 +10,9 @@ public class ShapeAdapter implements IShape {
     private final Shape shape;
     private boolean selected;
 
+    private double positionX;
+    private double positionY;
+
     public static IShape create(final Shape shape) {
         return new ShapeAdapter(shape, false);
     }
@@ -54,6 +57,10 @@ public class ShapeAdapter implements IShape {
     @Override
     public void addTo(final Pane pane) {
         pane.getChildren().add(shape);
+
+        final var bounds = shape.getBoundsInParent();
+        positionX = bounds.getCenterX();
+        positionY = bounds.getCenterY();
     }
 
     @Override
@@ -70,13 +77,15 @@ public class ShapeAdapter implements IShape {
     }
 
     @Override
-    public ObservableValue<Number> translateXProperty() {
-        return shape.translateXProperty();
+    public ObservableValue<Number> translateCenterX() {
+        return shape.translateXProperty()
+                .add(positionX);
     }
 
     @Override
-    public ObservableValue<Number> translateYProperty() {
-        return shape.translateYProperty();
+    public ObservableValue<Number> translateCenterY() {
+        return shape.translateYProperty()
+                .add(positionY);
     }
 
     @Override

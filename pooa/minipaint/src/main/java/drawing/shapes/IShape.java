@@ -18,7 +18,7 @@ public interface IShape {
 
     IShape duplicate();
 
-    ObservableValue<Number> translateXProperty();
+    ObservableValue<Number> translateCenterX();
 
-    ObservableValue<Number> translateYProperty();
+    ObservableValue<Number> translateCenterY();
 }

@@ -61,12 +61,12 @@ public class GroupShapeAdapter implements IShape {
     }
 
     @Override
-    public ObservableValue<Number> translateXProperty() {
+    public ObservableValue<Number> translateCenterX() {
         return null;
     }
 
     @Override
-    public ObservableValue<Number> translateYProperty() {
+    public ObservableValue<Number> translateCenterY() {
         return null;
     }
 }

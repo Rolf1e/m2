@@ -17,8 +17,8 @@ public class TextDecorator implements IShape {
                               final String text) {
 
         final var label = new Text(text);
-        label.translateXProperty().bind(wrappee.translateXProperty());
-        label.translateYProperty().bind(wrappee.translateYProperty());
+        label.translateXProperty().bind(wrappee.translateCenterX());
+        label.translateYProperty().bind(wrappee.translateCenterY());
         return new TextDecorator(wrappee, label);
     }
 
@@ -65,12 +65,12 @@ public class TextDecorator implements IShape {
     }
 
     @Override
-    public ObservableValue<Number> translateXProperty() {
+    public ObservableValue<Number> translateCenterX() {
         return null;
     }
 
     @Override
-    public ObservableValue<Number> translateYProperty() {
+    public ObservableValue<Number> translateCenterY() {
         return null;
     }
 }
