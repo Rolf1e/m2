@@ -21,6 +21,6 @@ public class ErrorBar extends HBox implements Observer {
 
     @Override
     public void update(final ObserverParameters parameters) {
-        text.update(ERROR_TEXT + parameters.getError());
+        text.update(parameters.getError());
     }
 }

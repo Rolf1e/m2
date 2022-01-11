@@ -3,6 +3,7 @@ package drawing.bar.tool;
 import drawing.commands.ClearCommand;
 import drawing.commands.DeleteCommand;
 import drawing.commands.groups.GroupCommand;
+import drawing.commands.groups.LineCommand;
 import drawing.commands.groups.UnGroupCommand;
 import drawing.commands.shapes.ShapeDuplicateCommand;
 import drawing.commands.shapes.ShapeTextCommand;
@@ -29,7 +30,8 @@ public enum ToolBarButtonsConfig {
     UNDO("Undo", ActionEvent.ACTION),
     REDO("Redo", ActionEvent.ACTION),
     DUPLICATE("Duplicate", Style.create(Style.Type.ICON_ONLY, "icons/duplicate.png"), ActionEvent.ACTION),
-    ADD_TEXT("Add text", ActionEvent.ACTION);
+    ADD_TEXT("Add text", ActionEvent.ACTION),
+    LINK_SHAPES("Links 2 shpaes", ActionEvent.ACTION);
 
     private final String name;
     private final Style style;
@@ -71,6 +73,8 @@ public enum ToolBarButtonsConfig {
                 return ButtonHandler.create(ShapeDuplicateCommand.create(drawingPane), drawingPane.getHistory());
             case ADD_TEXT:
                 return ButtonHandler.create(ShapeTextCommand.create(drawingPane, "TEXT"), drawingPane.getHistory());
+            case LINK_SHAPES:
+                return ButtonHandler.create(LineCommand.create(drawingPane), drawingPane.getHistory());
             default:
                 throw new IllegalStateException("Invalid config " + this);
         }

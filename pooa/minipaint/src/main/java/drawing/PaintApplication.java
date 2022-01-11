@@ -63,6 +63,7 @@ public class PaintApplication extends Application {
                 .add("error_bar");
         hBox.getChildren().addAll(statusBar, errorBar);
         drawingPane.addObserver(statusBar);
+        drawingPane.addObserver(errorBar);
     }
 
     public DrawingPane getDrawingPane() {
