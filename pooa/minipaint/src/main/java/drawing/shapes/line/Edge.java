@@ -3,7 +3,9 @@ package drawing.shapes.line;
 import drawing.shapes.IShape;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -12,19 +14,28 @@ public class Edge implements IShape {
 
     private final IShape from;
     private final IShape to;
-    private final Line line;
+    private final Path shape;
 
     private boolean selected;
 
     public static IShape from(final IShape from,
                               final IShape to) {
 
-        final var line = new Line();
-        line.startXProperty().bind(from.translateCenterX());
-        line.startYProperty().bind(from.translateCenterY());
-        line.endXProperty().bind(to.translateCenterX());
-        line.endYProperty().bind(to.translateCenterY());
-        return new Edge(from, to, line);
+        final var shape = new Path();
+
+        final var moveTo = new MoveTo();
+
+        final var lineToStart = new LineTo();
+
+        moveTo.xProperty().bind(from.translateCenterX());
+        moveTo.yProperty().bind(from.translateCenterY());
+        lineToStart.xProperty().bind(to.translateCenterX());
+        lineToStart.yProperty().bind(to.translateCenterY());
+
+        shape.getElements().add(moveTo);
+        shape.getElements().add(lineToStart);
+
+        return new Edge(from, to, shape);
     }
 
     @Override
@@ -38,9 +49,9 @@ public class Edge implements IShape {
         from.setSelected(selected);
         to.setSelected(selected);
         if (selected) {
-            line.setStyle("-fx-stroke-width: 5;");
+            shape.setStyle("-fx-stroke-width: 5;");
         } else {
-            line.setStyle("-fx-stroke-width: 3;");
+            shape.setStyle("-fx-stroke-width: 3;");
         }
     }
 
@@ -52,7 +63,7 @@ public class Edge implements IShape {
 
     private boolean onLine(final double x,
                            final double y) {
-        return line.getBoundsInParent()
+        return shape.getBoundsInParent()
                 .contains(x, y);
     }
 
@@ -65,13 +76,13 @@ public class Edge implements IShape {
     @Override
     public void addTo(final Pane pane) {
         pane.getChildren()
-                .add(line);
+                .add(shape);
     }
 
     @Override
     public void removeFrom(final Pane pane) {
         pane.getChildren()
-                .remove(line);
+                .remove(shape);
     }
 
     @Override
