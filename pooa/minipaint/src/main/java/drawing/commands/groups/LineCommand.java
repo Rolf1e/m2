@@ -4,6 +4,7 @@ import drawing.commands.Command;
 import drawing.panes.DrawingPane;
 import drawing.shapes.IShape;
 import drawing.shapes.line.Edge;
+import drawing.shapes.strategies.LineStrategy;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -37,7 +38,7 @@ public class LineCommand implements Command {
             System.out.println("Draw line");
             from = selected.get(0);
             to = selected.get(1);
-            edge = Edge.from(from, to);
+            edge = Edge.from(from, to, LineStrategy.create());
             pane.addShape(edge);
         }
 

@@ -1,10 +1,9 @@
 package drawing.shapes.line;
 
+import drawing.shapes.EdgeStrategy;
 import drawing.shapes.IShape;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -15,27 +14,15 @@ public class Edge implements IShape {
     private final IShape from;
     private final IShape to;
     private final Path shape;
+    private final EdgeStrategy edgeStrategy;
 
     private boolean selected;
 
     public static IShape from(final IShape from,
-                              final IShape to) {
+                              final IShape to,
+                              final EdgeStrategy edgeStrategy) {
 
-        final var shape = new Path();
-
-        final var moveTo = new MoveTo();
-
-        final var lineToStart = new LineTo();
-
-        moveTo.xProperty().bind(from.translateCenterX());
-        moveTo.yProperty().bind(from.translateCenterY());
-        lineToStart.xProperty().bind(to.translateCenterX());
-        lineToStart.yProperty().bind(to.translateCenterY());
-
-        shape.getElements().add(moveTo);
-        shape.getElements().add(lineToStart);
-
-        return new Edge(from, to, shape);
+        return new Edge(from, to, edgeStrategy.buildPath(from, to), edgeStrategy);
     }
 
     @Override
@@ -87,7 +74,7 @@ public class Edge implements IShape {
 
     @Override
     public IShape duplicate() {
-        return from(from.duplicate(), to.duplicate());
+        return from(from.duplicate(), to.duplicate(), edgeStrategy);
     }
 
     @Override
