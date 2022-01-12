@@ -1,14 +1,21 @@
 pipeline {
     agent any 
+    environment {
+      DEALABS_PROJECT_PATH = 'jee/dealabs/server'
+    }
     stages {
         stage('Build') {
             steps {
-               sh 'mvn clean compile'
+              dir("$DEALABS_PROJECT_PATH") {
+                 sh 'mvn clean compile'
+              }
             }
         }
         stage('Test') {
             steps {
-               sh 'mvn clean test'
+              dir("$DEALABS_PROJECT_PATH") {
+                 sh 'mvn clean test'
+              }
             }
         }
     }
