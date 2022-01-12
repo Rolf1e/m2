@@ -1,7 +1,7 @@
 package drawing.panes;
 
 import drawing.bar.status.observers.Observer;
-import drawing.bar.status.observers.ObserverParameters;
+import drawing.bar.status.observers.ObserverParametersHandler;
 import drawing.commands.history.CommandHistory;
 import drawing.handlers.mouse.MouseMoveHandler;
 import drawing.handlers.selection.SelectionHandler;
@@ -109,8 +109,8 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         return new ArrayList<>(selectionHandler.getSelectedShapes());
     }
 
-    private ObserverParameters getParameters() {
-        return ObserverParameters.getInstance()
+    private ObserverParametersHandler getParameters() {
+        return ObserverParametersHandler.getInstance()
                 .setShapesSize(shapes.size())
                 .setSelectedShapesSize(getSelectedShapes().size());
     }

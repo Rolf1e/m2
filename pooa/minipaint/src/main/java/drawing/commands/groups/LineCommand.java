@@ -2,9 +2,9 @@ package drawing.commands.groups;
 
 import drawing.commands.Command;
 import drawing.panes.DrawingPane;
+import drawing.shapes.strategies.infra.EdgeStrategyHandler;
 import drawing.shapes.IShape;
 import drawing.shapes.line.Edge;
-import drawing.shapes.strategies.LineStrategy;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -12,33 +12,36 @@ import lombok.RequiredArgsConstructor;
 public class LineCommand implements Command {
 
     private final DrawingPane pane;
+    private final EdgeStrategyHandler strategyHandler;
 
     private IShape from;
     private IShape to;
     private IShape edge;
 
-    public static Command create(final DrawingPane pane) {
-        return new LineCommand(pane);
+    public static Command create(final DrawingPane pane,
+                                 final EdgeStrategyHandler strategyHandler) {
+        return new LineCommand(pane, strategyHandler);
     }
 
     private LineCommand(final DrawingPane pane,
                         final IShape from,
                         final IShape to,
-                        final IShape edge) {
+                        final IShape edge,
+                        final EdgeStrategyHandler strategyHandler) {
         this.pane = pane;
         this.from = from;
         this.to = to;
         this.edge = edge;
+        this.strategyHandler = strategyHandler;
     }
 
     @Override
     public void execute() {
         final var selected = pane.getSelectedShapes();
         if (2 == selected.size()) {
-            System.out.println("Draw line");
             from = selected.get(0);
             to = selected.get(1);
-            edge = Edge.from(from, to, LineStrategy.create());
+            edge = Edge.from(from, to, strategyHandler.getStrategy());
             pane.addShape(edge);
         }
 
@@ -52,6 +55,6 @@ public class LineCommand implements Command {
 
     @Override
     public Command duplicate() {
-        return new LineCommand(pane, from, to, edge);
+        return new LineCommand(pane, from, to, edge, strategyHandler);
     }
 }

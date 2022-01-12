@@ -1,7 +1,10 @@
 package drawing.bar.tool;
 
+import drawing.bar.tool.conf.ToolBarButtonsConfig;
+import drawing.bar.tool.conf.ToolBarComboBoxConfig;
 import drawing.panes.DrawingPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,8 @@ public class ToolBar {
 
     @Getter
     private final List<Button> buttons;
+    @Getter
+    private final List<ComboBox<String>> linesType;
 
     /**
      * Create the toolbar with the button config from {@link ToolBarButtonsConfig}
@@ -25,7 +30,17 @@ public class ToolBar {
         final var buttons = Arrays.stream(ToolBarButtonsConfig.values())
                 .map(factory::createJavaFxButtonWith)
                 .collect(Collectors.toList());
-        return new ToolBar(buttons);
+
+        final var linesType = Arrays.stream(ToolBarComboBoxConfig.values())
+                .map(config -> {
+                    final var comboBox = config.getComboxBox();
+                    ToolBarComboBoxConfig.addEventListener(comboBox, config.getListener(drawingPane));
+                    return comboBox;
+                })
+                .collect(Collectors.toList());
+
+
+        return new ToolBar(buttons, linesType);
     }
 
 }

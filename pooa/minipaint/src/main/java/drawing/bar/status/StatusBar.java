@@ -1,7 +1,7 @@
 package drawing.bar.status;
 
 import drawing.bar.status.observers.Observer;
-import drawing.bar.status.observers.ObserverParameters;
+import drawing.bar.status.observers.ObserverParametersHandler;
 import javafx.scene.layout.HBox;
 
 import java.util.Arrays;
@@ -26,7 +26,7 @@ public class StatusBar extends HBox implements Observer {
     }
 
     @Override
-    public void update(final ObserverParameters parameters) {
+    public void update(final ObserverParametersHandler parameters) {
         shapes.update(String.valueOf(parameters.getShapesSize()));
         selectedShapes.update(String.valueOf(parameters.getSelectedShapesSize()));
     }

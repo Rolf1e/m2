@@ -7,10 +7,14 @@ import drawing.panes.DrawingPane;
 import drawing.utils.ResourcesUtils;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaintApplication extends Application {
 
@@ -50,8 +54,10 @@ public class PaintApplication extends Application {
 
     private void createToolBar(final HBox hBox) {
         final var toolBar = ToolBar.createWithButtons(drawingPane);
+        final List<Node> nodes = new ArrayList<>(toolBar.getButtons());
+        nodes.addAll(toolBar.getLinesType());
         hBox.getChildren()
-                .addAll(toolBar.getButtons());
+                .addAll(nodes);
     }
 
     private void createStatusBar(final HBox hBox) {

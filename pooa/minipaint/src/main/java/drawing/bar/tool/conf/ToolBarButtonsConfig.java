@@ -1,5 +1,6 @@
-package drawing.bar.tool;
+package drawing.bar.tool.conf;
 
+import drawing.bar.tool.Style;
 import drawing.commands.ClearCommand;
 import drawing.commands.DeleteCommand;
 import drawing.commands.groups.GroupCommand;
@@ -13,6 +14,7 @@ import drawing.handlers.buttons.RedoHandler;
 import drawing.handlers.buttons.UndoHandler;
 import drawing.handlers.buttons.shapes.ShapeButtonHandler;
 import drawing.panes.DrawingPane;
+import drawing.shapes.strategies.infra.EdgeStrategyHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -74,7 +76,7 @@ public enum ToolBarButtonsConfig {
             case ADD_TEXT:
                 return ButtonHandler.create(ShapeTextCommand.create(drawingPane, "TEXT"), drawingPane.getHistory());
             case LINK_SHAPES:
-                return ButtonHandler.create(LineCommand.create(drawingPane), drawingPane.getHistory());
+                return ButtonHandler.create(LineCommand.create(drawingPane, EdgeStrategyHandler.getInstance()), drawingPane.getHistory());
             default:
                 throw new IllegalStateException("Invalid config " + this);
         }

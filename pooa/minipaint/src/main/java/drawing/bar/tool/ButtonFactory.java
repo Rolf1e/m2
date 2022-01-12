@@ -1,5 +1,6 @@
 package drawing.bar.tool;
 
+import drawing.bar.tool.conf.ToolBarButtonsConfig;
 import drawing.panes.DrawingPane;
 import drawing.utils.ResourcesUtils;
 import javafx.scene.control.Button;

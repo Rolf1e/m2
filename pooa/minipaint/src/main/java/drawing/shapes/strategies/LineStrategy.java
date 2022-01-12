@@ -1,6 +1,5 @@
 package drawing.shapes.strategies;
 
-import drawing.shapes.EdgeStrategy;
 import drawing.shapes.IShape;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;

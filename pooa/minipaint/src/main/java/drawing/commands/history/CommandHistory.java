@@ -1,6 +1,6 @@
 package drawing.commands.history;
 
-import drawing.bar.status.observers.ObserverParameters;
+import drawing.bar.status.observers.ObserverParametersHandler;
 import drawing.commands.Command;
 import drawing.panes.DrawingPane;
 import lombok.AccessLevel;
@@ -25,7 +25,7 @@ public class CommandHistory {
             command.execute();
             commands.add(command.duplicate()); // We duplicate instance as some commands are shared at creation
         } catch (final Exception e) {
-            ObserverParameters.getInstance()
+            ObserverParametersHandler.getInstance()
                     .setError(e.getMessage());
             pane.updateObservers();
         }
@@ -42,7 +42,7 @@ public class CommandHistory {
             lastCommand = command;
             commands.remove(command);
         } catch (final Exception e) {
-            ObserverParameters.getInstance()
+            ObserverParametersHandler.getInstance()
                     .setError(e.getMessage());
             pane.updateObservers();
         }

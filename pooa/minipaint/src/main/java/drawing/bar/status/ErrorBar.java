@@ -1,7 +1,7 @@
 package drawing.bar.status;
 
 import drawing.bar.status.observers.Observer;
-import drawing.bar.status.observers.ObserverParameters;
+import drawing.bar.status.observers.ObserverParametersHandler;
 import javafx.scene.layout.HBox;
 
 public class ErrorBar extends HBox implements Observer {
@@ -20,7 +20,7 @@ public class ErrorBar extends HBox implements Observer {
     }
 
     @Override
-    public void update(final ObserverParameters parameters) {
+    public void update(final ObserverParametersHandler parameters) {
         text.update(parameters.getError());
     }
 }

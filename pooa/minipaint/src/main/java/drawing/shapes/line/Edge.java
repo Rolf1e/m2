@@ -1,11 +1,12 @@
 package drawing.shapes.line;
 
-import drawing.shapes.EdgeStrategy;
+import drawing.shapes.strategies.EdgeStrategy;
 import drawing.shapes.IShape;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -14,7 +15,8 @@ public class Edge implements IShape {
     private final IShape from;
     private final IShape to;
     private final Path shape;
-    private final EdgeStrategy edgeStrategy;
+    @Getter
+    private EdgeStrategy edgeStrategy;
 
     private boolean selected;
 
@@ -22,7 +24,8 @@ public class Edge implements IShape {
                               final IShape to,
                               final EdgeStrategy edgeStrategy) {
 
-        return new Edge(from, to, edgeStrategy.buildPath(from, to), edgeStrategy);
+        return new Edge(from, to, edgeStrategy.buildPath(from, to))
+                .setEdgeStrategy(edgeStrategy);
     }
 
     @Override
@@ -45,11 +48,6 @@ public class Edge implements IShape {
     @Override
     public boolean isOn(final double x,
                         final double y) {
-        return from.isOn(x, y) || to.isOn(x, y) || onLine(x, y);
-    }
-
-    private boolean onLine(final double x,
-                           final double y) {
         return shape.getBoundsInParent()
                 .contains(x, y);
     }
@@ -85,5 +83,10 @@ public class Edge implements IShape {
     @Override
     public ObservableValue<Number> translateCenterY() {
         return null;
+    }
+
+    public Edge setEdgeStrategy(final EdgeStrategy edgeStrategy) {
+        this.edgeStrategy = edgeStrategy;
+        return this;
     }
 }

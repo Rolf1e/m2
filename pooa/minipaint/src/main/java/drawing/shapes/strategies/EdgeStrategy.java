@@ -1,5 +1,6 @@
-package drawing.shapes;
+package drawing.shapes.strategies;
 
+import drawing.shapes.IShape;
 import javafx.scene.shape.Path;
 
 public interface EdgeStrategy {
