@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
               dir("$DEALABS_PROJECT_PATH") {
-                 sh '~/software/apache-maven-3.6.3/bin/mvn clean compile'
+                 sh 'mvn clean compile'
               }
             }
         }
