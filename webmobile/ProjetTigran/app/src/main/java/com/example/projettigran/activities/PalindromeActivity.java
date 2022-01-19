@@ -8,11 +8,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.projettigran.R;
 import com.example.projettigran.domain.StringManipulations;
-
-import java.util.Optional;
+import com.example.projettigran.services.DisplayColorsService;
+import com.example.projettigran.services.ScheduleTaskService;
 
 public class PalindromeActivity extends AppCompatActivity {
 
+    private final ScheduleTaskService scheduleTaskService;
+
+    public PalindromeActivity() {
+        super();
+        this.scheduleTaskService = ScheduleTaskService.create(DisplayColorsService.create());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,6 @@ public class PalindromeActivity extends AppCompatActivity {
         if (extractText.isEmpty()) {
             Toast.makeText(this, "You need to clean first !", Toast.LENGTH_SHORT)
                     .show();
-
         } else {
             final TextView reversePalindromeView = findViewById(R.id.palindrome_reverse_textView);
             reversePalindromeView.setText(StringManipulations.reverse(extractText));
@@ -43,6 +48,20 @@ public class PalindromeActivity extends AppCompatActivity {
     }
 
     public void compare(final View view) {
+        final TextView palindromeView = findViewById(R.id.palindrome_textView);
+        final String normalText = Activities.extractText(palindromeView);
 
+        final TextView reversePalindromeView = findViewById(R.id.palindrome_reverse_textView);
+        final String reversedText = Activities.extractText(reversePalindromeView);
+
+        final int normalTextSize = normalText.length();
+        if (normalTextSize != reversedText.length()) {
+            Toast.makeText(this, "Texts should be the same size", Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
+        scheduleTaskService.schedule(normalText, reversedText, palindromeView, reversePalindromeView);
     }
+
 }
