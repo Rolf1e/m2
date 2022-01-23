@@ -2,8 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="@string/item_random_palindrome"
-        android:id="@+id/item_random_palindrome" />
+          android:id="@+id/item_random_palindrome"/>
+
+    <item android:title="@string/random_sentence"
+          android:id="@+id/item_random_sentence"/>
 
     <item android:title="@string/question_palindrome"
-        android:id="@+id/question_palindrome" />
+          android:id="@+id/question_palindrome"/>
 </menu>

@@ -6,4 +6,5 @@
     <string name="palindrome">Palindrome</string>
     <string name="item_random_palindrome">Palindrome aléatoire</string>
     <string name="question_palindrome">Qu\'est ce qu\'un palindrome ?</string>
+    <string name="random_sentence">Phrase aléatoire</string>
 </resources>

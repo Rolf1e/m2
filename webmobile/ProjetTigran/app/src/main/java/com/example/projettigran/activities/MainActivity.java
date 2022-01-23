@@ -1,9 +1,8 @@
 package com.example.projettigran.activities;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.example.projettigran.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,8 +14,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void palindrome(final View view) {
-        final Intent intent = new Intent(this, PalindromeActivity.class);
-        startActivityForResult(intent, 1);
+        Activities.redirect(this, PalindromeActivity.class, 1);
     }
 
 

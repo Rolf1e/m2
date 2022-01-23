@@ -1,11 +1,21 @@
 package com.example.projettigran.activities;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Objects;
 
 public class Activities {
+
+    public static void redirect(final Activity from,
+                                final Class<?> to,
+                                final int requestCode) {
+        final Intent intent = new Intent(from, to);
+        from.startActivityForResult(intent, requestCode);
+    }
 
     public static String extractText(final EditText editText) {
         return Objects.requireNonNull(editText.getText())
