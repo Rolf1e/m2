@@ -2,7 +2,10 @@ package com.example.projettigran.services;
 
 import android.os.CountDownTimer;
 import android.widget.TextView;
+import com.example.projettigran.domain.ComparisonResult;
 import com.example.projettigran.domain.PalindromeTimer;
+
+import java.util.List;
 
 public class ScheduleTaskService {
 
@@ -16,12 +19,12 @@ public class ScheduleTaskService {
         this.displayColorsService = displayColorsService;
     }
 
-    public CountDownTimer schedule(final String word1,
-                                   final String word2,
+    public CountDownTimer schedule(final List<ComparisonResult> colorsToApply,
                                    final TextView palindromeView,
                                    final TextView reversePalindromeView) {
 
-        return PalindromeTimer.create(word1, word2, palindromeView, reversePalindromeView, displayColorsService)
+        return PalindromeTimer.create(colorsToApply, palindromeView, reversePalindromeView, displayColorsService)
                 .start();
     }
+
 }

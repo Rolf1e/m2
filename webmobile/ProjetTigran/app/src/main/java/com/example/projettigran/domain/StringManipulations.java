@@ -19,6 +19,7 @@ public class StringManipulations {
                 .replaceAll("ë", "e")
                 .replaceAll("ç", "c")
                 .replaceAll("à", "a")
+                .replaceAll("â", "a")
                 .replaceAll("ô", "o")
                 .replaceAll("ù", "u")
                 .replaceAll("î", "i")

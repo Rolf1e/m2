@@ -13,9 +13,14 @@ import com.example.projettigran.component.infra.IOFileOperations;
 import com.example.projettigran.component.PopUpWindowFactory;
 import com.example.projettigran.component.RandomPalindromeReader;
 import com.example.projettigran.component.infra.ResourceHandler;
+import com.example.projettigran.domain.CharacterComparator;
+import com.example.projettigran.domain.ComparisonResult;
 import com.example.projettigran.domain.StringManipulations;
 import com.example.projettigran.services.DisplayColorsService;
 import com.example.projettigran.services.ScheduleTaskService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PalindromeActivity extends AppCompatActivity {
 
@@ -144,7 +149,22 @@ public class PalindromeActivity extends AppCompatActivity {
             return;
         }
 
-        scheduleTaskService.schedule(normalText, reversedText, palindromeView, reversePalindromeView);
+        final List<ComparisonResult> colorsToApply = compare(normalText, reversedText);
+        scheduleTaskService.schedule(colorsToApply, palindromeView, reversePalindromeView);
+    }
+
+    private List<ComparisonResult> compare(final String normal,
+                                           final String reversed) {
+
+        final List<ComparisonResult> colorsToApply = new ArrayList<>(normal.length());
+        for (int i = 0; i < normal.length(); i++) {
+            final ComparisonResult compare = CharacterComparator.compare(normal.charAt(i), reversed.charAt(i));
+            colorsToApply.add(compare);
+            if (ComparisonResult.RED.equals(compare)) {
+                break;
+            }
+        }
+        return colorsToApply;
     }
 
 }

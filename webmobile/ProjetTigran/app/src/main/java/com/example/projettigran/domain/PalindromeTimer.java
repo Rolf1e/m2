@@ -6,38 +6,35 @@ import android.widget.TextView;
 import com.example.projettigran.services.DisplayColorsService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class PalindromeTimer extends CountDownTimer {
 
     private static final long ONE_SECOND = 1000;
 
-    private final String word1;
-    private final String word2;
+    private final List<ComparisonResult> colorsToApply;
     private final TextView palindromeView;
     private final TextView reversePalindromeView;
     private final DisplayColorsService displayColorsService;
 
-
-    public static CountDownTimer create(final String word1,
-                                        final String word2,
+    public static CountDownTimer create(final List<ComparisonResult> colorsToApply,
                                         final TextView palindromeView,
                                         final TextView reversePalindromeView,
                                         final DisplayColorsService displayColorsService) {
 
-        return new PalindromeTimer(word1, word2, palindromeView, reversePalindromeView, displayColorsService);
+        return new PalindromeTimer(colorsToApply, palindromeView, reversePalindromeView, displayColorsService);
     }
 
-
-    private PalindromeTimer(final String word1,
-                            final String word2,
+    private PalindromeTimer(final List<ComparisonResult> colorsToApply,
                             final TextView palindromeView,
                             final TextView reversePalindromeView,
                             final DisplayColorsService displayColorsService) {
 
-        super(word1.length() * ONE_SECOND, ONE_SECOND);
-        this.word1 = word1;
-        this.word2 = word2;
+        super(colorsToApply.size() * ONE_SECOND, ONE_SECOND);
+        this.colorsToApply = colorsToApply;
         this.palindromeView = palindromeView;
         this.reversePalindromeView = reversePalindromeView;
         this.displayColorsService = displayColorsService;
@@ -45,18 +42,15 @@ public class PalindromeTimer extends CountDownTimer {
 
     @Override
     public void onTick(final long l) {
-        final int until = Math.toIntExact((word1.length() * ONE_SECOND - l) / ONE_SECOND) + 1;
-        final List<ComparisonResult> colorsToApply = new ArrayList<>(until);
-        for (int i = 0; i < until; i++) {
-            final ComparisonResult compare = CharacterComparator.compare(word1.charAt(i), word2.charAt(i));
-            colorsToApply.add(compare);
-            if (ComparisonResult.RED.equals(compare)) {
-                break;
-            }
-        }
+        final int until = Math.toIntExact((colorsToApply.size() * ONE_SECOND - l) / ONE_SECOND) + 1;
+
+        final List<ComparisonResult> colors = IntStream.range(0, until)
+                .boxed()
+                .map(colorsToApply::get)
+                .collect(Collectors.toList());
 
         final int size = colorsToApply.size();
-        if (colorsToApply.contains(ComparisonResult.RED)) {
+        if (colors.contains(ComparisonResult.RED)) {
             displayColorsService.displayRed(palindromeView, Pair.create(size - 1, size));
             displayColorsService.displayRed(reversePalindromeView, Pair.create(size - 1, size));
             cancel();
