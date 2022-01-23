@@ -17,9 +17,18 @@ public class StringManipulations {
                 .replaceAll("è", "e")
                 .replaceAll("ê", "e")
                 .replaceAll("ë", "e")
+                .replaceAll("ç", "c")
+                .replaceAll("à", "a")
+                .replaceAll("ô", "o")
+                .replaceAll("ù", "u")
+                .replaceAll("î", "i")
+                .replaceAll("ï", "i")
                 .replaceAll("\\s", "")
                 .replaceAll(",", "")
-                .replaceAll("'", "");
+                .replaceAll("'", "")
+                .replaceAll("\\?", "")
+                .replaceAll("-", "")
+                .replaceAll("!", "");
     }
 
     private StringManipulations() {

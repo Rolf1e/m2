@@ -4,4 +4,6 @@
     <string name="reverse">Reverse</string>
     <string name="compare">Compare</string>
     <string name="palindrome">Palindrome</string>
+    <string name="item_random_palindrome">Palindrome aléatoire</string>
+    <string name="question_palindrome">Qu\'est ce qu\'un palindrome ?</string>
 </resources>

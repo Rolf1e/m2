@@ -1,10 +1,14 @@
 package com.example.projettigran.activities;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.projettigran.R;
 import com.example.projettigran.domain.StringManipulations;
@@ -21,10 +25,13 @@ public class PalindromeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palindrome);
     }
+
+
+    // Buttons
 
     public void clean(final View view) {
         final EditText enterPalindrome = findViewById(R.id.enter_palindrome_editText);
