@@ -122,10 +122,15 @@ toute la phrase depuis le début à chaque chagement).
 La classe `RegisterActivity` et `ShowFileSentenceActivity` jouent des roles
 importants.
 
+![Register screen](images/register_palindrome.png)
+
 `ShowFileSentenceActivity` permet d'affichier via une `ListView` le contenu. Il
 y a un composant `ResourceHandler` derriere qui permet de de lire dans le
 dossier `res/raw`. Il effectue l'interaction entre les resources d'android et
 le code. Cela permet de pouvoir avoir nos fichiers modifiables initialises avec nos donnees.
+
+![ListView of file content](images/display_file_content.png)
+
 
 Afin de pouvoir persister les nouveaux palindromes de l'utilisateur,
 `IOFileOperations` permet d'enregister dans l' `internal storage` du telephone.
