@@ -42,15 +42,16 @@ public class PalindromeTimer extends CountDownTimer {
 
     @Override
     public void onTick(final long l) {
+        // We want to apply the color on the correct letters
         final int until = Math.toIntExact((colorsToApply.size() * ONE_SECOND - l) / ONE_SECOND) + 1;
 
-        final List<ComparisonResult> colors = IntStream.range(0, until)
+        final List<ComparisonResult> colorsToBeAppliedAtTime = IntStream.range(0, until)
                 .boxed()
                 .map(colorsToApply::get)
                 .collect(Collectors.toList());
 
-        final int size = colorsToApply.size();
-        if (colors.contains(ComparisonResult.RED)) {
+        final int size = colorsToBeAppliedAtTime.size();
+        if (colorsToBeAppliedAtTime.contains(ComparisonResult.RED)) {
             displayColorsService.displayRed(palindromeView, Pair.create(size - 1, size));
             displayColorsService.displayRed(reversePalindromeView, Pair.create(size - 1, size));
             cancel();
