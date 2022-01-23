@@ -3,11 +3,13 @@ package com.example.projettigran.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.projettigran.R;
 import com.example.projettigran.component.PalindromeWriter;
 import com.example.projettigran.component.infra.IOFileOperations;
 import com.example.projettigran.component.infra.ResourceHandler;
+import com.example.projettigran.domain.FastPalindromeChecker;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,7 +32,12 @@ public class RegisterActivity extends AppCompatActivity {
     public void add_palindrome(final View view) {
         final EditText sentenceInput = findViewById(R.id.sentence_input);
         final String sentence = Activities.extractText(sentenceInput);
-        addContentToEndOfFile(PalindromeActivity.PALINDROME_FILE, sentence);
+        if (FastPalindromeChecker.checkIsPalindrome(sentence)) {
+            addContentToEndOfFile(PalindromeActivity.PALINDROME_FILE, sentence);
+        } else {
+            Toast.makeText(this, "This is not a palindrome !", Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     public void add_sentence(final View view) {
