@@ -9,4 +9,13 @@
 
     <item android:title="@string/question_palindrome"
           android:id="@+id/question_palindrome"/>
+
+    <item android:title="@string/perec_palindrome_wiki"
+          android:id="@+id/perec_palindrome_wiki"/>
+
+    <item android:title="Voir le palindrome de Perec"
+          android:id="@+id/perec_palindrome"/>
+
+    <item android:title="@string/a_propos"
+          android:id="@+id/a_propos"/>
 </menu>

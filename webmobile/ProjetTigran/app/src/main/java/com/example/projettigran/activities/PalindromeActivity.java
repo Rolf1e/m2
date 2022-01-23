@@ -1,37 +1,67 @@
 package com.example.projettigran.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.projettigran.R;
+import com.example.projettigran.component.PalindromeWriter;
+import com.example.projettigran.component.infra.IOFileOperations;
 import com.example.projettigran.component.PopUpWindowFactory;
-import com.example.projettigran.component.RandomPalindromeLoader;
-import com.example.projettigran.component.ResourceLoader;
+import com.example.projettigran.component.RandomPalindromeReader;
+import com.example.projettigran.component.infra.ResourceHandler;
 import com.example.projettigran.domain.StringManipulations;
 import com.example.projettigran.services.DisplayColorsService;
 import com.example.projettigran.services.ScheduleTaskService;
 
 public class PalindromeActivity extends AppCompatActivity {
 
+    public final static String PALINDROME_FILE = "palindrome.txt";
+    public final static String NON_PALINDROME_FILE = "non_palindrome.txt";
+
+    private static final String WIKIPEDIA_PALINDROMES = "https://fr.wikipedia.org/wiki/Palindrome";
+    private static final String PALINDROME_PEREC_WIKIPEDIA = "https://fr.wikipedia.org/wiki/La_Cl%C3%B4ture_(Perec)";
+    private static final String PALINDROME_PEREC = "https://jeretiens.net/palindrome-de-georges-perec-au-moulin-dande/";
+
     private final ScheduleTaskService scheduleTaskService;
     private final PopUpWindowFactory windowFactory;
-    private RandomPalindromeLoader randomPalindromeLoader;
+    private RandomPalindromeReader randomPalindromeReader;
+    private PalindromeWriter palindromeWriter;
+
+    private boolean loadData;
 
     public PalindromeActivity() {
         super();
         this.scheduleTaskService = ScheduleTaskService.create(DisplayColorsService.create());
         this.windowFactory = PopUpWindowFactory.create();
+        this.loadData = true;
     }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palindrome);
-        final ResourceLoader resourceLoader = ResourceLoader.from(this);
-        this.randomPalindromeLoader = RandomPalindromeLoader.create(resourceLoader);
+
+        final IOFileOperations ioFileOperations = IOFileOperations.getInstance();
+        this.randomPalindromeReader = RandomPalindromeReader.create(ioFileOperations);
+
+        final ResourceHandler resourceHandler = ResourceHandler.from(this);
+        this.palindromeWriter = PalindromeWriter.create(resourceHandler, ioFileOperations);
+        if (loadData) {
+            loadSentences();
+        }
     }
+
+    private void loadSentences() {
+        palindromeWriter.loadAndWriteIntoFile(this, PALINDROME_FILE, R.raw.palindrome);
+        palindromeWriter.loadAndWriteIntoFile(this, NON_PALINDROME_FILE, R.raw.palindrome, R.raw.non_palindrome);
+        loadData = false;
+    }
+
+    // MENU
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
@@ -43,7 +73,7 @@ public class PalindromeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int itemId = item.getItemId();
-        if (R.id.question_palindrome == itemId) {
+        if (R.id.a_propos == itemId) {
             final LayoutInflater layoutInflater = LayoutInflater.from(this);
             final View customView = layoutInflater.inflate(R.layout.popup, null);
             final LinearLayout location = findViewById(R.id.linear_layout_palindrome);
@@ -51,22 +81,34 @@ public class PalindromeActivity extends AppCompatActivity {
 
             System.out.println("HELLO");
         } else if (R.id.item_random_palindrome == itemId) {
-            loadRandomSentenceFromFile(R.raw.palindrome);
+            loadRandomSentenceFromFile(PALINDROME_FILE);
         } else if (R.id.item_random_sentence == itemId) {
-            loadRandomSentenceFromFile(R.raw.palindrome, R.raw.non_palindrome);
+            loadRandomSentenceFromFile(PALINDROME_FILE, NON_PALINDROME_FILE);
+        } else if (R.id.question_palindrome == itemId) {
+            onBrowseClick(WIKIPEDIA_PALINDROMES);
+        } else if (R.id.perec_palindrome_wiki == itemId) {
+            onBrowseClick(PALINDROME_PEREC_WIKIPEDIA);
+        } else if (R.id.perec_palindrome == itemId) {
+            onBrowseClick(PALINDROME_PEREC);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadRandomSentenceFromFile(final Object... identifiers) {
+    private void onBrowseClick(final String url) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(Intent.createChooser(intent, "Browse with"));
+    }
+
+    private void loadRandomSentenceFromFile(final String... identifiers) {
         final EditText enterPalindrome = findViewById(R.id.enter_palindrome_editText);
-        randomPalindromeLoader.fetchRandomSentence(this, identifiers)
+        randomPalindromeReader.fetchRandomSentence(this, identifiers)
                 .ifPresent(enterPalindrome::setText);
     }
 
 
     // Buttons
+
     public void clean(final View view) {
         final EditText enterPalindrome = findViewById(R.id.enter_palindrome_editText);
         final String text = StringManipulations.cleaningUpString(Activities.extractText(enterPalindrome));

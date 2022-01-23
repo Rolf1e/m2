@@ -7,4 +7,11 @@
     <string name="item_random_palindrome">Palindrome aléatoire</string>
     <string name="question_palindrome">Qu\'est ce qu\'un palindrome ?</string>
     <string name="random_sentence">Phrase aléatoire</string>
+    <string name="a_propos">A propos ...</string>
+    <string name="perec_palindrome_wiki">La palindrome de Perec</string>
+    <string name="add_a_sentence">Add a sentence</string>
+    <string name="add_a_palindrome">Add a palindrome</string>
+    <string name="show_files_content">Show files content</string>
+    <string name="show_sentences">Show sentences</string>
+    <string name="show_palindromes">Show palindromes</string>
 </resources>

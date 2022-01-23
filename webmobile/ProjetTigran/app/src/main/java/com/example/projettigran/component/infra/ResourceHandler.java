@@ -1,4 +1,4 @@
-package com.example.projettigran.component;
+package com.example.projettigran.component.infra;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -11,15 +11,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ResourceLoader {
+public class ResourceHandler {
 
     private final Resources resources;
 
-    public static ResourceLoader from(final Context context) {
-        return new ResourceLoader(context.getResources());
+    public static ResourceHandler from(final Context context) {
+        return new ResourceHandler(context.getResources());
     }
 
-    private ResourceLoader(final Resources resources) {
+    private ResourceHandler(final Resources resources) {
         this.resources = resources;
     }
 

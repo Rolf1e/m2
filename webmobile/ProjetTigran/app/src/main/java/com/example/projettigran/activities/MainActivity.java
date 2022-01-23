@@ -17,5 +17,9 @@ public class MainActivity extends AppCompatActivity {
         Activities.redirect(this, PalindromeActivity.class, 1);
     }
 
+    public void register(final View view) {
+        Activities.redirect(this, RegisterActivity.class, 1);
+    }
+
 
 }
