@@ -3,15 +3,20 @@ package com.example.projettigran.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.*;
-import android.widget.*;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.projettigran.R;
 import com.example.projettigran.component.PalindromeWriter;
-import com.example.projettigran.component.infra.IOFileOperations;
-import com.example.projettigran.component.PopUpWindowFactory;
+import com.example.projettigran.component.PopUpDialog;
 import com.example.projettigran.component.RandomPalindromeReader;
+import com.example.projettigran.component.infra.IOFileOperations;
 import com.example.projettigran.component.infra.ResourceHandler;
 import com.example.projettigran.domain.CharacterComparator;
 import com.example.projettigran.domain.ComparisonResult;
@@ -32,16 +37,13 @@ public class PalindromeActivity extends AppCompatActivity {
     private static final String PALINDROME_PEREC = "https://jeretiens.net/palindrome-de-georges-perec-au-moulin-dande/";
 
     private final ScheduleTaskService scheduleTaskService;
-    private final PopUpWindowFactory windowFactory;
     private RandomPalindromeReader randomPalindromeReader;
     private PalindromeWriter palindromeWriter;
-
     private boolean loadData;
 
     public PalindromeActivity() {
         super();
         this.scheduleTaskService = ScheduleTaskService.create(DisplayColorsService.create());
-        this.windowFactory = PopUpWindowFactory.create();
         this.loadData = true;
     }
 
@@ -79,12 +81,7 @@ public class PalindromeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int itemId = item.getItemId();
         if (R.id.a_propos == itemId) {
-            final LayoutInflater layoutInflater = LayoutInflater.from(this);
-            final View customView = layoutInflater.inflate(R.layout.popup, null);
-            final LinearLayout location = findViewById(R.id.linear_layout_palindrome);
-            final PopupWindow popUp = windowFactory.manufactor(location, customView);
-
-            System.out.println("HELLO");
+            popUpWindow();
         } else if (R.id.item_random_palindrome == itemId) {
             loadRandomSentenceFromFile(PALINDROME_FILE);
         } else if (R.id.item_random_sentence == itemId) {
@@ -98,6 +95,11 @@ public class PalindromeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void popUpWindow() {
+        final PopUpDialog popUpDialog = new PopUpDialog();
+        popUpDialog.show(getSupportFragmentManager(), "test");
     }
 
     private void onBrowseClick(final String url) {

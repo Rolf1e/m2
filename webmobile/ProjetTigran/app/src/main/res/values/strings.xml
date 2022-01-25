@@ -14,4 +14,6 @@
     <string name="show_files_content">Show files content</string>
     <string name="show_sentences">Show sentences</string>
     <string name="show_palindromes">Show palindromes</string>
+    <string name="copyright">Copyright Tigran SLAMA</string>
+    <string name="version_and_date">Version 1.0 du 24/01/2022</string>
 </resources>
