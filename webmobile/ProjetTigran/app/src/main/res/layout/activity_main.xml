@@ -4,12 +4,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.MainActivity">
+        tools:context=".component.activities.MainActivity">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
         <Button
                 android:text="@string/palindrome"
                 android:layout_width="match_parent"
@@ -23,6 +24,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/register_palindrome_button"
                 android:onClick="register"
+        />
+        <Button
+                android:text="Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_button"
+                android:onClick="login"
         />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

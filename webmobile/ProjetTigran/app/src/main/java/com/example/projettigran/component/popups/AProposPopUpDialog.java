@@ -1,4 +1,4 @@
-package com.example.projettigran.component;
+package com.example.projettigran.component.popups;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,7 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.projettigran.R;
 
-public class PopUpDialog extends AppCompatDialogFragment {
+
+public class AProposPopUpDialog extends AppCompatDialogFragment {
+
+    public static AppCompatDialogFragment create() {
+        return new AProposPopUpDialog();
+    }
+
+    private AProposPopUpDialog() {
+    }
 
     @NonNull
     @Override
@@ -18,7 +26,7 @@ public class PopUpDialog extends AppCompatDialogFragment {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         final LayoutInflater inflater = getLayoutInflater();
-        final View view = inflater.inflate(R.layout.popup, null);
+        final View view = inflater.inflate(R.layout.popup_a_propos, null);
         builder.setTitle("A propos de ...")
                 .setView(view)
                 .setPositiveButton("ok", (dialog, which) -> {

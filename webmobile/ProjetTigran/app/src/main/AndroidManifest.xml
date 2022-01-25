@@ -12,16 +12,16 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.ProjetTigran">
         <activity
-                android:name=".activities.ShowFileSentenceActivity"
+                android:name=".component.activities.ShowFileSentenceActivity"
                 android:exported="true"/>
         <activity
-                android:name=".activities.RegisterActivity"
+                android:name=".component.activities.RegisterActivity"
                 android:exported="true"/>
         <activity
-                android:name=".activities.PalindromeActivity"
+                android:name=".component.activities.PalindromeActivity"
                 android:exported="true"/>
         <activity
-                android:name=".activities.MainActivity"
+                android:name=".component.activities.MainActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

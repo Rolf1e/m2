@@ -1,4 +1,4 @@
-package com.example.projettigran.activities;
+package com.example.projettigran.component.activities;
 
 import android.os.Bundle;
 import android.view.View;

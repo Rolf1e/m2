@@ -7,7 +7,7 @@ import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
 import android.util.Pair;
 import android.widget.TextView;
-import com.example.projettigran.activities.Activities;
+import com.example.projettigran.component.activities.Activities;
 
 public class DisplayColorsService {
 

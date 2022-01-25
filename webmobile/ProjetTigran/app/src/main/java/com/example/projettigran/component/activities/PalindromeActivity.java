@@ -1,4 +1,4 @@
-package com.example.projettigran.activities;
+package com.example.projettigran.component.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,9 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.projettigran.R;
 import com.example.projettigran.component.PalindromeWriter;
-import com.example.projettigran.component.PopUpDialog;
+import com.example.projettigran.component.popups.AProposPopUpDialog;
 import com.example.projettigran.component.RandomPalindromeReader;
 import com.example.projettigran.component.infra.IOFileOperations;
 import com.example.projettigran.component.infra.ResourceHandler;
@@ -99,8 +100,8 @@ public class PalindromeActivity extends AppCompatActivity {
     }
 
     private void popUpWindow() {
-        final PopUpDialog popUpDialog = new PopUpDialog();
-        popUpDialog.show(getSupportFragmentManager(), "test");
+        final AppCompatDialogFragment aProposPopUpDialog = AProposPopUpDialog.create();
+        aProposPopUpDialog.show(getSupportFragmentManager(), "");
     }
 
     private void onBrowseClick(final String url) {

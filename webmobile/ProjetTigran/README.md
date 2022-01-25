@@ -85,6 +85,7 @@ public class PalindromeTimer extends CountDownTimer {
     public void onTick(final long l) {
         final int until = Math.toIntExact((colorsToApply.size() * ONE_SECOND - l) / ONE_SECOND) + 1;
 
+        progressBar.setProgress(until, true);
         final List<ComparisonResult> colorsToBeAppliedAtTime = IntStream.range(0, until)
                 .boxed()
                 .map(colorsToApply::get)
@@ -133,7 +134,8 @@ Recupere les phrases dans resources et en choisit une aleatoire.
 
 #### Popup window
 
-Ce composant marche grace à `PopUpDialog`. Elle utilise le built-in d'Android pour faire apparaît le layout `popup.xml`.
+Ce composant marche grace à `AProposPopUpDialog`. Elle utilise le built-in d'Android pour faire apparaît le
+layout `popup.xml`.
 
 #### Generation aleatoire de phrases
 

@@ -1,4 +1,4 @@
-package com.example.projettigran.activities;
+package com.example.projettigran.component.activities;
 
 import android.app.Activity;
 import android.content.Context;

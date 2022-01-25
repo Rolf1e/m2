@@ -1,4 +1,4 @@
-package com.example.projettigran.activities;
+package com.example.projettigran.component.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,9 +6,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.projettigran.R;
-import com.example.projettigran.component.PalindromeWriter;
 import com.example.projettigran.component.infra.IOFileOperations;
-import com.example.projettigran.component.infra.ResourceHandler;
 import com.example.projettigran.domain.FastPalindromeChecker;
 
 public class RegisterActivity extends AppCompatActivity {
