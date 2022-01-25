@@ -1,6 +1,7 @@
 package com.example.projettigran.services;
 
 import android.os.CountDownTimer;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.projettigran.domain.ComparisonResult;
 import com.example.projettigran.domain.PalindromeTimer;
@@ -21,9 +22,10 @@ public class ScheduleTaskService {
 
     public CountDownTimer schedule(final List<ComparisonResult> colorsToApply,
                                    final TextView palindromeView,
-                                   final TextView reversePalindromeView) {
+                                   final TextView reversePalindromeView,
+                                   final ProgressBar progressBar) {
 
-        return PalindromeTimer.create(colorsToApply, palindromeView, reversePalindromeView, displayColorsService)
+        return PalindromeTimer.create(colorsToApply, palindromeView, reversePalindromeView, displayColorsService, progressBar)
                 .start();
     }
 

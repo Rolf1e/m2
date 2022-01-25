@@ -20,24 +20,20 @@ Elle possède un champ de saisie de texte et trois boutons: `Clean`, `Reverse`, 
 ![Set up comparaison](images/clean_reverse_palindrome.png)
 
 Après avoir rempli correctement le champ, l'utilisateur peut appuyer sur
-`Clean` qui permet de nettoyer la phrase de sa ponctuation, majuscules,
-accents, etc afin de faciliter le travail.
+`Clean` qui permet de nettoyer la phrase de sa ponctuation, majuscules, accents, etc afin de faciliter le travail.
 
 #### *Dans le code*:
 
 La classe délègue à la fonction `StringManipulation#cleaningUpString(String)`
-le nettoyage de la chaîne. Elle remplace ou retire les lettres pouvqnt poser
-problème.
+le nettoyage de la chaîne. Elle remplace ou retire les lettres pouvqnt poser problème.
 
 Le bouton `Reverse` permet d'afficher le résultat de la phrase entrée dans le sens inverse.
 
 #### *Dans le code*:
 
-La classe délègue à la fonction `StringManipulation#reverse(String)` qui
-retourne la phrase grâce à `StringBuilder`.
+La classe délègue à la fonction `StringManipulation#reverse(String)` qui retourne la phrase grâce à `StringBuilder`.
 
-L'utilisateur peut ensuite appuyer sur `Compare` afin de vérifier si la phrase
-entrée est un palindrome.
+L'utilisateur peut ensuite appuyer sur `Compare` afin de vérifier si la phrase entrée est un palindrome.
 
 Dans le cas d'un palindrome, la chaîne deviendra complètement verte.
 
@@ -49,8 +45,8 @@ Sinon la comparaison s'arrête en changeant de couleur sur la lettre problèmati
 
 #### *Dans le code*:
 
-On vérifie d'abord que les deux chaînes soient de même taille afin d'éviter des
-effets indésirables en accédant les éléments de Strings.
+On vérifie d'abord que les deux chaînes soient de même taille afin d'éviter des effets indésirables en accédant les
+éléments de Strings.
 
 ```java
 public class PalindromeActivity extends AppCompatActivity {
@@ -75,11 +71,10 @@ public class PalindromeActivity extends AppCompatActivity {
 
 Permet d'obtenir le résultat de comparaison des deux phrases.
 
-Puis, afin de réaliser une animation fluide, le choix d'utiliser un task
-scheduler à été pris. À l'aide de `PalindromeTimer` qui étend `CountDownTimer`
-d'Android. Cette classe permet de préparer un scheduler du temps de la taille
-du résultat `super(colorsToApply.size() * ONE_SECOND, ONE_SECOND);` qui
-s'execute toutes les secondes.
+Puis, afin de réaliser une animation fluide, le choix d'utiliser un task scheduler à été pris. À l'aide
+de `PalindromeTimer` qui étend `CountDownTimer`
+d'Android. Cette classe permet de préparer un scheduler du temps de la taille du
+résultat `super(colorsToApply.size() * ONE_SECOND, ONE_SECOND);` qui s'execute toutes les secondes.
 
 ```java
 public class PalindromeTimer extends CountDownTimer {
@@ -113,32 +108,39 @@ public class PalindromeTimer extends CountDownTimer {
 
 L'affichage de la couleur sur la chaîne est faite par
 `DisplayColorsService#displayGreen(TextView, Pair<Integer, Integer>)` et
-`DisplayColorsService#displayRed(TextView, Pair<Integer, Integer>)` . Ces
-méthodes affiche respectivement du vert et du vert, rouge. (Il faut repeindre
-toute la phrase depuis le début à chaque chagement). 
+`DisplayColorsService#displayRed(TextView, Pair<Integer, Integer>)` . Ces méthodes affiche respectivement du vert et du
+vert, rouge. (Il faut repeindre toute la phrase depuis le début à chaque chagement).
 
 ### II. Gestion des fichiers contenant des phrases
 
-La classe `RegisterActivity` et `ShowFileSentenceActivity` jouent des roles
-importants.
+La classe `RegisterActivity` et `ShowFileSentenceActivity` jouent des roles importants.
 
 ![Register screen](images/register_palindrome.png)
 
-`ShowFileSentenceActivity` permet d'affichier via une `ListView` le contenu. Il
-y a un composant `ResourceHandler` derriere qui permet de de lire dans le
-dossier `res/raw`. Il effectue l'interaction entre les resources d'android et
-le code. Cela permet de pouvoir avoir nos fichiers modifiables initialises avec nos donnees.
+`ShowFileSentenceActivity` permet d'affichier via une `ListView` le contenu. Il y a un composant `ResourceHandler`
+derriere qui permet de de lire dans le dossier `res/raw`. Il effectue l'interaction entre les resources d'android et le
+code. Cela permet de pouvoir avoir nos fichiers modifiables initialises avec nos donnees.
 
 ![ListView of file content](images/display_file_content.png)
 
-
 Afin de pouvoir persister les nouveaux palindromes de l'utilisateur,
-`IOFileOperations` permet d'enregister dans l' `internal storage` du telephone.
-On y effectue des operations de lecture et ecriture.
+`IOFileOperations` permet d'enregister dans l' `internal storage` du telephone. On y effectue des operations de lecture
+et ecriture.
+
+Recupere les phrases dans resources et en choisit une aleatoire.
+
+### III. Le menu
+
+#### Popup window
+
+Ce composant marche grace à `PopUpDialog`. Elle utilise le built-in d'Android pour faire apparaît le layout `popup.xml`.
+
+#### Generation aleatoire de phrases
 
 Le fait de pouvoir avoir des phrases aleatoires est gere dans `RandomPalindromeReader`.
 
 ```java
+public class Class {
     public Optional<String> fetchRandomSentence(final Context context,
                                                 final String... identifiers) {
 
@@ -149,8 +151,5 @@ Le fait de pouvoir avoir des phrases aleatoires est gere dans `RandomPalindromeR
 
         return Optional.ofNullable(sentences.get(randomNumber(0, sentences.size())));
     }
+}
 ```
-
-Recupere les phrases dans resources et en choisit une aleatoire.
-
-

@@ -26,6 +26,14 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp" android:id="@+id/palindrome_reverse_textView"/>
+        <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:progress="0"
+                android:max="100"
+        />
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

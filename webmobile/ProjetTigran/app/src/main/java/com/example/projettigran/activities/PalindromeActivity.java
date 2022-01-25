@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -122,6 +123,9 @@ public class PalindromeActivity extends AppCompatActivity {
 
         final TextView palindromeView = findViewById(R.id.palindrome_textView);
         palindromeView.setText(text);
+
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setProgress(0);
     }
 
     public void reverse(final View view) {
@@ -152,7 +156,9 @@ public class PalindromeActivity extends AppCompatActivity {
         }
 
         final List<ComparisonResult> colorsToApply = compare(normalText, reversedText);
-        scheduleTaskService.schedule(colorsToApply, palindromeView, reversePalindromeView);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setMax(normalTextSize);
+        scheduleTaskService.schedule(colorsToApply, palindromeView, reversePalindromeView, progressBar);
     }
 
     private List<ComparisonResult> compare(final String normal,

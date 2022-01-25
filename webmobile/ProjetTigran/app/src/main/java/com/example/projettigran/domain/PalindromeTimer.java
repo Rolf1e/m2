@@ -2,6 +2,7 @@ package com.example.projettigran.domain;
 
 import android.os.CountDownTimer;
 import android.util.Pair;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.projettigran.services.DisplayColorsService;
 
@@ -19,25 +20,29 @@ public class PalindromeTimer extends CountDownTimer {
     private final TextView palindromeView;
     private final TextView reversePalindromeView;
     private final DisplayColorsService displayColorsService;
+    private final ProgressBar progressBar;
 
     public static CountDownTimer create(final List<ComparisonResult> colorsToApply,
                                         final TextView palindromeView,
                                         final TextView reversePalindromeView,
-                                        final DisplayColorsService displayColorsService) {
+                                        final DisplayColorsService displayColorsService,
+                                        final ProgressBar progressBar) {
 
-        return new PalindromeTimer(colorsToApply, palindromeView, reversePalindromeView, displayColorsService);
+        return new PalindromeTimer(colorsToApply, palindromeView, reversePalindromeView, displayColorsService, progressBar);
     }
 
     private PalindromeTimer(final List<ComparisonResult> colorsToApply,
                             final TextView palindromeView,
                             final TextView reversePalindromeView,
-                            final DisplayColorsService displayColorsService) {
+                            final DisplayColorsService displayColorsService,
+                            final ProgressBar progressBar) {
 
         super(colorsToApply.size() * ONE_SECOND, ONE_SECOND);
         this.colorsToApply = colorsToApply;
         this.palindromeView = palindromeView;
         this.reversePalindromeView = reversePalindromeView;
         this.displayColorsService = displayColorsService;
+        this.progressBar = progressBar;
     }
 
     @Override
@@ -45,6 +50,7 @@ public class PalindromeTimer extends CountDownTimer {
         // We want to apply the color on the correct letters
         final int until = Math.toIntExact((colorsToApply.size() * ONE_SECOND - l) / ONE_SECOND) + 1;
 
+        progressBar.setProgress(until, true);
         final List<ComparisonResult> colorsToBeAppliedAtTime = IntStream.range(0, until)
                 .boxed()
                 .map(colorsToApply::get)
