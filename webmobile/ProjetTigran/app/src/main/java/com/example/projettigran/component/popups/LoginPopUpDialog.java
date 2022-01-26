@@ -10,21 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.projettigran.R;
+import com.example.projettigran.component.LoginHolder;
 import com.example.projettigran.component.activities.Activities;
-import com.example.projettigran.component.activities.LoginActicity;
 
 public class LoginPopUpDialog extends AppCompatDialogFragment {
 
     private static final String PASSWORD = "perec";
 
-    private final LoginActicity activity;
+    private final LoginHolder loginHolder;
 
-    public static AppCompatDialogFragment create(final LoginActicity loginActicity) {
-        return new LoginPopUpDialog(loginActicity);
-    }
-
-    private LoginPopUpDialog(final LoginActicity loginActicity) {
-        this.activity = loginActicity;
+    public LoginPopUpDialog() {
+        this.loginHolder = LoginHolder.getInstance();
     }
 
     @NonNull
@@ -45,7 +41,7 @@ public class LoginPopUpDialog extends AppCompatDialogFragment {
     private void checkLogin(View view) {
         final EditText passwordEditText = view.findViewById(R.id.password_editText);
         final String password = Activities.extractText(passwordEditText);
-        activity.setLogged(PASSWORD.equals(password));
+        loginHolder.setLogged(PASSWORD.equals(password));
     }
 
 }

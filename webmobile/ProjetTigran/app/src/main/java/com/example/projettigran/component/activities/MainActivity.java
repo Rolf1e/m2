@@ -6,14 +6,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.projettigran.R;
+import com.example.projettigran.component.LoginHolder;
 import com.example.projettigran.component.popups.LoginPopUpDialog;
 
-public class MainActivity extends AppCompatActivity implements LoginActicity {
+public class MainActivity extends AppCompatActivity {
 
-    private boolean logged;
+    private final LoginHolder loginHolder;
 
     public MainActivity() {
-        this.logged = false;
+        this.loginHolder = LoginHolder.getInstance();
     }
 
     @Override
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements LoginActicity {
     }
 
     public void register(final View view) {
-        if (!logged) {
+        if (!loginHolder.isLogged()) {
             Toast.makeText(this, "You need to be logged in !", Toast.LENGTH_SHORT)
                     .show();
         } else {
@@ -40,12 +41,9 @@ public class MainActivity extends AppCompatActivity implements LoginActicity {
     }
 
     private void popUpWindow() {
-        final AppCompatDialogFragment loginPopUp = LoginPopUpDialog.create(this);
+        final AppCompatDialogFragment loginPopUp = new LoginPopUpDialog();
         loginPopUp.show(getSupportFragmentManager(), "");
     }
 
-    @Override
-    public void setLogged(final boolean logged) {
-        this.logged = logged;
-    }
+
 }

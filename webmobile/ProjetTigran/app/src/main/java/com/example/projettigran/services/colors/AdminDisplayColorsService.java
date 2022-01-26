@@ -1,4 +1,4 @@
-package com.example.projettigran.services;
+package com.example.projettigran.services.colors;
 
 import android.graphics.Color;
 import android.text.Spannable;
@@ -9,15 +9,34 @@ import android.util.Pair;
 import android.widget.TextView;
 import com.example.projettigran.component.activities.Activities;
 
-public class DisplayColorsService {
+public class AdminDisplayColorsService implements DisplayColorsService {
+
+    private static final long ONE_SECOND = 1000;
 
     public static DisplayColorsService create() {
-        return new DisplayColorsService();
+        return new AdminDisplayColorsService();
     }
 
-    private DisplayColorsService() {
+    private AdminDisplayColorsService() {
     }
 
+    @Override
+    public int progressBarMultiplier() {
+        return 1;
+    }
+
+    @Override
+    public int getUntil(final int size,
+                        final long l) {
+        return Math.toIntExact((size * ONE_SECOND - l) / ONE_SECOND) + 1;
+    }
+
+    @Override
+    public Pair<Long, Long> ruleForTimer(final int colors) {
+        return Pair.create(colors * ONE_SECOND, ONE_SECOND);
+    }
+
+    @Override
     public void displayGreen(final TextView textView,
                              final Pair<Integer, Integer> greenCoordinates) {
 
@@ -26,6 +45,7 @@ public class DisplayColorsService {
         textView.setText(word);
     }
 
+    @Override
     public void displayRed(final TextView textView,
                            final Pair<Integer, Integer> redCoordinates) {
 
@@ -34,4 +54,5 @@ public class DisplayColorsService {
         word.setSpan(new BackgroundColorSpan(Color.RED), redCoordinates.first, redCoordinates.second, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         textView.setText(word);
     }
+
 }

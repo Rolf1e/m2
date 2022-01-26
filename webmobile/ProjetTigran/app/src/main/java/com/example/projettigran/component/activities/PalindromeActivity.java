@@ -15,18 +15,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.projettigran.R;
+import com.example.projettigran.component.LoginHolder;
 import com.example.projettigran.component.PalindromeWriter;
-import com.example.projettigran.component.popups.AProposPopUpDialog;
 import com.example.projettigran.component.RandomPalindromeReader;
 import com.example.projettigran.component.infra.IOFileOperations;
 import com.example.projettigran.component.infra.ResourceHandler;
+import com.example.projettigran.component.popups.AProposPopUpDialog;
+import com.example.projettigran.component.popups.LoginPopUpDialog;
 import com.example.projettigran.domain.CharacterComparator;
 import com.example.projettigran.domain.ComparisonResult;
 import com.example.projettigran.domain.StringManipulations;
-import com.example.projettigran.services.DisplayColorsService;
 import com.example.projettigran.services.ScheduleTaskService;
+import com.example.projettigran.services.colors.AdminDisplayColorsService;
+import com.example.projettigran.services.colors.DisplayColorsService;
+import com.example.projettigran.services.colors.TestDisplayColorsService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PalindromeActivity extends AppCompatActivity {
@@ -38,21 +44,29 @@ public class PalindromeActivity extends AppCompatActivity {
     private static final String PALINDROME_PEREC_WIKIPEDIA = "https://fr.wikipedia.org/wiki/La_Cl%C3%B4ture_(Perec)";
     private static final String PALINDROME_PEREC = "https://jeretiens.net/palindrome-de-georges-perec-au-moulin-dande/";
 
-    private final ScheduleTaskService scheduleTaskService;
+    private final LoginHolder loginHolder;
+    private final DisplayColorsService adminDisplayColorsService;
+    private final DisplayColorsService testDisplayColorService;
     private RandomPalindromeReader randomPalindromeReader;
     private PalindromeWriter palindromeWriter;
     private boolean loadData;
 
     public PalindromeActivity() {
         super();
-        this.scheduleTaskService = ScheduleTaskService.create(DisplayColorsService.create());
+        this.adminDisplayColorsService = AdminDisplayColorsService.create();
+        this.testDisplayColorService = TestDisplayColorsService.create();
+        this.loginHolder = LoginHolder.getInstance();
         this.loadData = true;
     }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_palindrome);
+        if (loginHolder.isLogged()) {
+            setContentView(R.layout.activity_palindrome_logged);
+        } else {
+            setContentView(R.layout.activity_palindrome_logged_out);
+        }
 
         final IOFileOperations ioFileOperations = IOFileOperations.getInstance();
         this.randomPalindromeReader = RandomPalindromeReader.create(ioFileOperations);
@@ -83,7 +97,7 @@ public class PalindromeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int itemId = item.getItemId();
         if (R.id.a_propos == itemId) {
-            popUpWindow();
+            popUpWindowApropos();
         } else if (R.id.item_random_palindrome == itemId) {
             loadRandomSentenceFromFile(PALINDROME_FILE);
         } else if (R.id.item_random_sentence == itemId) {
@@ -94,12 +108,21 @@ public class PalindromeActivity extends AppCompatActivity {
             onBrowseClick(PALINDROME_PEREC_WIKIPEDIA);
         } else if (R.id.perec_palindrome == itemId) {
             onBrowseClick(PALINDROME_PEREC);
+        } else if (R.id.login_menu == itemId) {
+            if (!loginHolder.isLogged()) {
+                popUpLogin();
+            }
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void popUpWindow() {
+    private void popUpLogin() {
+        final AppCompatDialogFragment loginPopUp = new LoginPopUpDialog();
+        loginPopUp.show(getSupportFragmentManager(), "");
+    }
+
+    private void popUpWindowApropos() {
         final AppCompatDialogFragment aProposPopUpDialog = AProposPopUpDialog.create();
         aProposPopUpDialog.show(getSupportFragmentManager(), "");
     }
@@ -159,8 +182,46 @@ public class PalindromeActivity extends AppCompatActivity {
         final List<ComparisonResult> colorsToApply = compare(normalText, reversedText);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setMax(normalTextSize);
-        scheduleTaskService.schedule(colorsToApply, palindromeView, reversePalindromeView, progressBar);
+
+        final ScheduleTaskService scheduleTaskService = ScheduleTaskService.create(adminDisplayColorsService);
+        scheduleTaskService.schedule(
+                this,
+                colorsToApply,
+                Arrays.asList(palindromeView, reversePalindromeView),
+                progressBar
+        );
     }
+
+    public void compareTest(final View view) {
+        final EditText enterPalindrome = findViewById(R.id.enter_palindrome_editText);
+        final String text = StringManipulations.cleaningUpString(Activities.extractText(enterPalindrome));
+
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setProgress(0);
+
+        final TextView palindromeView = findViewById(R.id.palindrome_textView);
+        palindromeView.setText(text);
+
+        final String reversedText = StringManipulations.reverse(text);
+        final int normalTextSize = text.length();
+        if (normalTextSize != reversedText.length()) {
+            Toast.makeText(this, "Texts should be the same size", Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
+        final List<ComparisonResult> colorsToApply = compare(text, reversedText);
+        progressBar.setMax(normalTextSize);
+
+        final ScheduleTaskService scheduleTaskService = ScheduleTaskService.create(testDisplayColorService);
+        scheduleTaskService.schedule(
+                this,
+                colorsToApply,
+                Collections.singleton(palindromeView),
+                progressBar
+        );
+    }
+
 
     private List<ComparisonResult> compare(final String normal,
                                            final String reversed) {
