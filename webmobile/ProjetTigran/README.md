@@ -137,6 +137,16 @@ Recupere les phrases dans resources et en choisit une aleatoire.
 Ce composant marche grace à `AProposPopUpDialog`. Elle utilise le built-in d'Android pour faire apparaît le
 layout `popup.xml`.
 
+```java
+public class Class {
+    private void popUpWindow() {
+        final AppCompatDialogFragment aProposPopUpDialog = AProposPopUpDialog.create();
+        aProposPopUpDialog.show(getSupportFragmentManager(), "");
+    }
+}
+```
+Faire apparaitre une popup
+
 #### Generation aleatoire de phrases
 
 Le fait de pouvoir avoir des phrases aleatoires est gere dans `RandomPalindromeReader`.
