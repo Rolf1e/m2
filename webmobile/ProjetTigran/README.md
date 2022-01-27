@@ -145,6 +145,7 @@ public class Class {
     }
 }
 ```
+
 Faire apparaitre une popup
 
 #### Generation aleatoire de phrases
@@ -165,3 +166,18 @@ public class Class {
     }
 }
 ```
+
+### IV. Modes
+
+#### Admin mode
+
+![Set up comparaison](images/clean_reverse_palindrome.png)
+Il faut etre connecte pour pouvoir avoir la decomposition en trois boutons.
+
+#### Test mode
+
+Par defaut, l'utilisateur peut seulement entrer une phrase et la comparer.
+![Test mode](images/test_mode.png)
+
+Le processus n'est pas different que pour l'affichage administrateur sauf pour la coloration des
+lettres. `TestDisplayColorService` est utilisé pour réaliser cela. Elle colore les lettres de chaque extremites.
