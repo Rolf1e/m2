@@ -177,6 +177,7 @@ Il faut etre connecte pour pouvoir avoir la decomposition en trois boutons.
 #### Test mode
 
 Par defaut, l'utilisateur peut seulement entrer une phrase et la comparer.
+
 ![Test mode](images/test_mode.png)
 
 Le processus n'est pas different que pour l'affichage administrateur sauf pour la coloration des
