@@ -27,12 +27,12 @@ public class TestDisplayColorsService implements DisplayColorsService {
 
     @Override
     public int getUntil(int size, long l) {
-        return Math.toIntExact((size * ONE_SECOND - l) /  ONE_SECOND) + 1;
+        return Math.toIntExact(((size * ONE_SECOND - l) / ONE_SECOND) / 2) + 1;
     }
 
     @Override
     public Pair<Long, Long> ruleForTimer(int colors) {
-        return Pair.create(colors / 2 * ONE_SECOND, ONE_SECOND);
+        return Pair.create(colors * ONE_SECOND, ONE_SECOND / 2);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TestDisplayColorsService implements DisplayColorsService {
 
         final Spannable word = SpannableString.valueOf(Activities.extractText(textView));
         final BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(Color.GREEN);
-        word.setSpan(backgroundColorSpan, 0, greenCoordinates.second, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        word.setSpan(backgroundColorSpan, greenCoordinates.first, greenCoordinates.second, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         final int length = word.length();
         final int left = length - (greenCoordinates.second - greenCoordinates.first);
         word.setSpan(new BackgroundColorSpan(Color.BLUE), left, length, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
