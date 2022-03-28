@@ -5,6 +5,7 @@ import FilterButton from "./components/FilterButton";
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { TodoRepository } from './repositories/todo_repo';
+import Stack from "@mui/material/Stack";
 
 const FILTER_MAP = {
   All: () => true,
@@ -105,13 +106,9 @@ function App(props) {
         {filterList}
       </div>
       <h2 id="list-heading">{headingText}</h2>
-      <ul
-        role="list"
-        className="todo-list stack-large stack-exception"
-        aria-labelledby="list-heading"
-      >
+      <Stack spacing={2}>
         {taskList}
-      </ul>
+      </Stack>
     </div>
   );
 }

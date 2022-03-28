@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from '@mui/material/Button';
+import Item from '@mui/material/Stack';
 
 function Todo(props) {
   const [isEditing, setEditing] = useState(false);
@@ -47,7 +49,7 @@ function Todo(props) {
   );
 
   const viewTemplate = (
-    <div className="stack-small">
+    <Item>
       <div className="c-cb">
         <input
           id={props.id}
@@ -60,23 +62,21 @@ function Todo(props) {
         </label>
       </div>
       <div className="btn-group">
-        <button
+        <Button
           type="button"
-          className="btn"
           onClick={() => setEditing(true)}
         >
           Edit <span className="visually-hidden">{props.name}</span>
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          className="btn btn__danger"
+        <Button
+          color="error"
           onClick={() => props.deleteTask(props.id)}
         >
           Delete <span className="visually-hidden">{props.name}</span>
-        </button>
+        </Button>
       </div>
-    </div>
+    </Item>
   );
 
   return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
