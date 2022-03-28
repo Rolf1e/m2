@@ -2,8 +2,9 @@ import './App.css';
 import Todo from "./components/Todo";
 import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import { TodoRepository } from './repositories/todo_repo';
 
 const FILTER_MAP = {
   All: () => true,
@@ -15,11 +16,12 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App(props) {
 
-  const [tasks, setTasks] = useState(props.tasks);
+  const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('All');
 
   function addTask(name) {
     const newTask = { id: "todo-" + nanoid(), name: name, completed: false };
+    TodoRepository.insert(newTask);
     setTasks([...tasks, newTask]);
   }
 
@@ -36,8 +38,18 @@ function App(props) {
     setTasks(updatedTasks);
   }
 
+  function loadTodos() {
+     return TodoRepository.get_all();
+  }
+
+  useEffect(() => {
+    setTasks(loadTodos())
+  }, []);
+
+
   function deleteTask(id) {
     const remainingTasks = tasks.filter(task => id !== task.id);
+    TodoRepository.delete(id);
     setTasks(remainingTasks);
   }
 
