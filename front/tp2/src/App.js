@@ -57,11 +57,15 @@ function App(props) {
     const editedTaskList = tasks.map(task => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
-        //
-        return { ...task, name: newName }
+        TodoRepository.delete(id);
+        const newTask = { ...task, name: newName };
+        TodoRepository.insert(newTask);
+        return newTask;
+        
       }
       return task;
     });
+
     setTasks(editedTaskList);
   }
 
