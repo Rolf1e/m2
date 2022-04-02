@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { TodoRepository } from './repositories/todo_repo';
 import Stack from "@mui/material/Stack";
+import Item from "@mui/material/Stack";
+import { ButtonGroup } from '@mui/material';
 
 const FILTER_MAP = {
   All: () => true,
@@ -15,15 +17,19 @@ const FILTER_MAP = {
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
-function App(props) {
+function App() {
 
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('All');
 
-  function addTask(name) {
-    const newTask = { id: "todo-" + nanoid(), name: name, completed: false };
-    TodoRepository.insert(newTask);
-    setTasks([...tasks, newTask]);
+  function addTask(name, description) {
+    if (name !== "" && description !== "") {
+      const newTask = { id: "todo-" + nanoid(), name: name, description: description, completed: false };
+      TodoRepository.insert(newTask);
+      setTasks([...tasks, newTask]);
+    } else {
+      alert('Invalid task name');
+    }
   }
 
   function toggleTaskCompleted(id) {
@@ -40,7 +46,7 @@ function App(props) {
   }
 
   function loadTodos() {
-     return TodoRepository.get_all();
+    return TodoRepository.get_all();
   }
 
   useEffect(() => {
@@ -62,7 +68,7 @@ function App(props) {
         const newTask = { ...task, name: newName };
         TodoRepository.insert(newTask);
         return newTask;
-        
+
       }
       return task;
     });
@@ -76,6 +82,7 @@ function App(props) {
       <Todo
         id={task.id}
         name={task.name}
+        description={task.description}
         completed={task.completed}
         key={task.id}
         toggleTaskCompleted={toggleTaskCompleted}
@@ -100,11 +107,19 @@ function App(props) {
 
   return (
     <div className="todoapp stack-large">
-      <h1>TodoMatic</h1>
-      <Form addTask={addTask} />
-      <div className="filters btn-group stack-exception">
-        {filterList}
-      </div>
+      <h1>Todo list</h1>
+      <Stack>
+        <Item>
+          <Form addTask={addTask}/>
+        </Item>
+        <Item>
+          <div>
+            <p>Filter options:</p>
+            <ButtonGroup> {filterList} </ButtonGroup>
+          </div>
+        </Item>
+      </Stack>
+
       <h2 id="list-heading">{headingText}</h2>
       <Stack spacing={2}>
         {taskList}

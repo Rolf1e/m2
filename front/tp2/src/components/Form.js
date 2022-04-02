@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 function Form(props) {
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
-  function handleChange(e) {
+  function handleChangeName(e) {
     setName(e.target.value);
+  }
+
+  function handleChangeDescription(e) {
+    setDescription(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.addTask(name);
+    props.addTask(name, description);
     setName('')
+    setDescription('')
   }
 
   return (
@@ -22,16 +29,27 @@ function Form(props) {
           What needs to be done?
         </label>
       </h2>
-      <TextField
-        id="new-todo-input"
-        name="text"
-        autoComplete="off"
-        value={name}
-        onChange={handleChange}
-      />
-      <Button type="submit" size="large">
-        Add
-      </Button>
+      <Box components="form">
+        <TextField
+          id="new-todo-input"
+          name="text"
+          label="Name"
+          autoComplete="off"
+          value={name}
+          onChange={handleChangeName}
+        />
+        <TextField
+          id="new-todo-input"
+          name="text"
+          label="Description"
+          autoComplete="off"
+          value={description}
+          onChange={handleChangeDescription}
+        />
+        <Button type="submit" size="large">
+          Add
+        </Button>
+      </Box>
     </form>
   );
 }
