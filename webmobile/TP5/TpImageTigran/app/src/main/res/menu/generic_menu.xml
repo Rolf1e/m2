@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="horizontal"
+          android:id="@+id/item_horizontal"/>
+
+    <item android:title="vertical"
+          android:id="@+id/item_vertical"/>
+
+    <item android:title="inverser les couleurs"
+          android:id="@+id/item_invert_colors"/>
+
+    <item android:title="niveau de gris"
+          android:id="@+id/item_gris"/>
+
+    <item android:title="rotate horaire"
+          android:id="@+id/item_rotate"/>
+
+    <item android:title="rotate anti horaire"
+          android:id="@+id/item_anti_rotate"/>
+
+    <item android:title="restaurer"
+          android:id="@+id/item_restore"/>
+</menu>
